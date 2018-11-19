@@ -1,13 +1,13 @@
 <?php
 
-namespace Stevebauman\Translation;
+namespace Crystoline\Translation;
 
 use ErrorException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
-use Stevebauman\Translation\Contracts\Client as ClientInterface;
-use Stevebauman\Translation\Contracts\Translation as TranslationInterface;
+use Crystoline\Translation\Contracts\Client as ClientInterface;
+use Crystoline\Translation\Contracts\Translation as TranslationInterface;
 use UnexpectedValueException;
 
 class Translation implements TranslationInterface
@@ -186,8 +186,14 @@ class Translation implements TranslationInterface
      */
     public function getLocale()
     {
-        if ($this->request->hasCookie('locale')) {
+        if ($this->request->hasHeader('locale')) {
+            return $this->request->header('locale');
+        } elseif ($this->request->hasCookie('locale')) {
             return $this->request->cookie('locale');
+        } elseif ($this->request->session()->has('locale')) {
+            return $this->request->session()->get('locale');
+        }elseif ($locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2) and in_array($locale, config('translation.locales'))){
+            return $locale;
         } else {
             return $this->getConfigDefaultLocale();
         }

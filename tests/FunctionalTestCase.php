@@ -1,9 +1,9 @@
 <?php
 
-namespace Stevebauman\Translation\Tests;
+namespace Crystoline\Translation\Tests;
 
 use Orchestra\Testbench\TestCase;
-use Stevebauman\Translation\TranslationServiceProvider;
+use Crystoline\Translation\TranslationServiceProvider;
 
 class FunctionalTestCase extends TestCase
 {
@@ -60,6 +60,6 @@ class FunctionalTestCase extends TestCase
      */
     protected function getPackageAliases($app)
     {
-        return ['Translation' => \Stevebauman\Translation\Facades\Translation::class];
+        return ['Translation' => \Crystoline\Translation\Facades\Translation::class];
     }
 }

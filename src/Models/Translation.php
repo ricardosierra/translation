@@ -1,9 +1,9 @@
 <?php
 
-namespace Stevebauman\Translation\Models;
+namespace Crystoline\Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Stevebauman\Translation\Traits\TranslationTrait;
+use Crystoline\Translation\Traits\TranslationTrait;
 
 class Translation extends Model
 {

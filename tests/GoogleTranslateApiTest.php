@@ -1,12 +1,12 @@
 <?php
 
-namespace Stevebauman\Translation\Tests;
+namespace Crystoline\Translation\Tests;
 
 use GuzzleHttp\ClientInterface as Guzzle;
 use Mockery as m;
 use Psr\Http\Message\ResponseInterface;
-use Stevebauman\Translation\Clients\GoogleTranslateApi;
-use Stevebauman\Translation\Contracts\Client;
+use Crystoline\Translation\Clients\GoogleTranslateApi;
+use Crystoline\Translation\Contracts\Client;
 
 class GoogleTranslateApiTest extends FunctionalTestCase
 {

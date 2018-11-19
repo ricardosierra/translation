@@ -1,9 +1,9 @@
 <?php
 
-namespace Stevebauman\Translation\Models;
+namespace Crystoline\Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Stevebauman\Translation\Traits\LocaleTrait;
+use Crystoline\Translation\Traits\LocaleTrait;
 
 class Locale extends Model
 {

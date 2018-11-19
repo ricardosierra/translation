@@ -22,7 +22,7 @@ return [
         |
         */
 
-        'locale' => Stevebauman\Translation\Models\Locale::class,
+        'locale' => Crystoline\Translation\Models\Locale::class,
 
         /*
         |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
         |
         */
 
-        'translation' => Stevebauman\Translation\Models\Translation::class,
+        'translation' => Crystoline\Translation\Models\Translation::class,
 
     ],
 
@@ -53,11 +53,11 @@ return [
         |--------------------------------------------------------------------------
         |
         |  The translation client providing translation service, must implement
-        |  Stevebauman\Translation\Contracts\Client.
+        |  Crystoline\Translation\Contracts\Client.
         |
         */
 
-        'client' => Stevebauman\Translation\Clients\GoogleTranslate::class,
+        'client' => Crystoline\Translation\Clients\GoogleTranslate::class,
 
         /*
         |--------------------------------------------------------------------------

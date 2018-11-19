@@ -1,9 +1,13 @@
 {
-    "name": "stevebauman/translation",
-    "description": "An easy automatic database driven translator for Laravel 5",
+    "name": "crystoline/translation",
+    "description": "An easy automatic database driven translator for Laravel 5.*",
     "tags": ["lang", "translation", "translate", "localization", "localize", "laravel"],
     "license": "MIT",
     "authors": [
+      {
+        "name": "Kunle Adekoya",
+        "email": "crfystoline@gmail.com"
+      },
         {
             "name": "Steve Bauman",
             "email": "steven_bauman@outlook.com"
@@ -26,22 +30,22 @@
     },
     "autoload": {
         "psr-4": {
-            "Stevebauman\\Translation\\": "src/"
+            "Crystoline\\Translation\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Stevebauman\\Translation\\Tests\\": "tests/"
+            "Crystoline\\Translation\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",
     "extra": {
         "laravel": {
             "providers": [
-                "Stevebauman\\Translation\\TranslationServiceProvider"
+                "Crystoline\\Translation\\TranslationServiceProvider"
             ],
             "aliases": {
-              "Translation": "Stevebauman\\Translation\\Facades\\Translation"
+              "Translation": "Crystoline\\Translation\\Facades\\Translation"
             }
         }
     }

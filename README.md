@@ -76,15 +76,15 @@ Require the translation package
 
 Add the service provider to your `config/app.php` config file
 
-    'Stevebauman\Translation\TranslationServiceProvider',
+    'Crystoline\Translation\TranslationServiceProvider',
     
 Add the facade to your aliases in your `config/app.php` config file
 
-    'Translation' => 'Stevebauman\Translation\Facades\Translation',
+    'Translation' => 'Crystoline\Translation\Facades\Translation',
     
 Publish the migrations
 
-    php artisan vendor:publish --provider="Stevebauman\Translation\TranslationServiceProvider"
+    php artisan vendor:publish --provider="Crystoline\Translation\TranslationServiceProvider"
     
 Run the migrations
 
@@ -187,7 +187,7 @@ You must provide you're own way of updating translations (controllers/views etc)
 As of `v1.3.4` you can now inject the `Translation` contract into your controllers without the use of a facade:
 
 ```php
-use Stevebauman\Translation\Contracts\Translation;
+use Crystoline\Translation\Contracts\Translation;
 
 class BlogController extends Controller
 {
@@ -229,7 +229,7 @@ you must create them and implement their trait. Here's an example:
 
 The Locale Model:
     
-    use Stevebauman\Translation\Traits\LocaleTrait;
+    use Crystoline\Translation\Traits\LocaleTrait;
     use Illuminate\Database\Eloquent\Model;
     
     class Locale extends Model
@@ -266,7 +266,7 @@ The Locale Model:
 
 The Translation Model:
 
-    use Stevebauman\Translation\Traits\TranslationTrait;
+    use Crystoline\Translation\Traits\TranslationTrait;
     use Illuminate\Database\Eloquent\Model;
     
     class Translation extends Model
@@ -349,7 +349,7 @@ the locale middleware:
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         
         // Insert Locale Middleware
-        'locale' => \Stevebauman\Translation\Middleware\LocaleMiddleware::class
+        'locale' => \Crystoline\Translation\Middleware\LocaleMiddleware::class
     ];
 
 Now, in your `app/Http/routes.php` file, insert the middleware and the following Translation method in the route

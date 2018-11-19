@@ -1,11 +1,11 @@
 <?php
 
-namespace Stevebauman\Translation\Clients;
+namespace Crystoline\Translation\Clients;
 
 use ErrorException;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Contracts\Foundation\Application;
-use Stevebauman\Translation\Contracts\Client;
+use Crystoline\Translation\Contracts\Client;
 
 class GoogleTranslateApi implements Client
 {
