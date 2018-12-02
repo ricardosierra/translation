@@ -138,15 +138,16 @@ class Translation implements TranslationInterface
             // If foreign key integrity constrains fail, we have a caching issue
             if (!$runOnce) {
                 // If this has not been run before, proceed
-
+                //if($toLocale)
                 // Burst locale cache
+
                 $this->removeCacheLocale($toLocale->code);
 
                 // Burst translation cache
                 $this->removeCacheTranslation($this->translationModel->firstOrNew([
-                        $toLocale->getForeignKey() => $toLocale->getKey(),
-                        'translation'              => $text,
-                    ])
+                    $toLocale->getForeignKey() => $toLocale->getKey(),
+                    'translation'              => $text,
+                ])
                 );
 
                 // Attempt translation 1 more time
@@ -186,11 +187,13 @@ class Translation implements TranslationInterface
      */
     public function getLocale()
     {
-        if ($this->request->hasHeader('locale')) {
-            return $this->request->header('locale');
+        if($this->request->request->has('locale')){
+            return strtolower($this->request->input('locale'));
+        }elseif ($this->request->hasHeader('locale')) {
+            return  strtolower($this->request->header('locale'));
         } elseif ($this->request->hasCookie('locale')) {
             return $this->request->cookie('locale');
-        } elseif ($this->request->session()->has('locale')) {
+        } elseif ($this->request->hasSession() and $this->request->session()->has('locale')) {
             return $this->request->session()->get('locale');
         }elseif ($locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2) and in_array($locale, config('translation.locales'))){
             return $locale;
