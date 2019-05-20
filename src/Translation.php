@@ -113,7 +113,7 @@ class Translation implements TranslationInterface
             // we won't call the getLocale method as it retrieves and sets the default
             // session locale. If it has not been provided, we'll get the
             // default locale, and set it on the current session.
-            if ($toLocale) {
+            if ($toLocale != '') {
                 $toLocale = $this->firstOrCreateLocale($toLocale);
             } else {
                 $toLocale = $this->firstOrCreateLocale($this->getLocale());
@@ -193,17 +193,20 @@ class Translation implements TranslationInterface
         } catch (Exception $e) {
             if($this->request->request->has('locale')){
                 return strtolower($this->request->input('locale'));
-            }elseif ($this->request->hasHeader('locale')) {
-                return  strtolower($this->request->header('locale'));
-            } elseif ($this->request->hasCookie('locale')) {
-                return $this->request->cookie('locale');
-            } elseif ($this->request->hasSession() and $this->request->session()->has('locale')) {
-                return $this->request->session()->get('locale');
-            }elseif ($locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2) and in_array($locale, config('translation.locales'))){
-                return $locale;
-            } else {
-                return $this->getConfigDefaultLocale();
             }
+            if ($this->request->hasHeader('locale')) {
+                return  strtolower($this->request->header('locale'));
+            } 
+            if ($this->request->hasCookie('locale')) {
+                return $this->request->cookie('locale');
+            } 
+            if ($this->request->hasSession() and $this->request->session()->has('locale')) {
+                return $this->request->session()->get('locale');
+            }
+            if ($locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2) and in_array($locale, config('translation.locales'))){
+                return $locale;
+            }
+            return $this->getConfigDefaultLocale();
         }
     }
 
@@ -411,7 +414,7 @@ class Translation implements TranslationInterface
      *
      * @param Model $translation
      */
-    protected function removeCacheTranslation(Model $translation)
+    public function removeCacheTranslation(Model $translation)
     {
         $id = $this->getTranslationCacheId($translation->locale, $translation->translation);
 
@@ -648,5 +651,25 @@ class Translation implements TranslationInterface
         }
 
         return true;
+    }
+
+    /**
+     * Detects the Default Locale Based on
+     */
+
+    public function detectLocale($request){
+        if (!$request->hasCookie('locale')) {
+            $locale = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+
+            if (in_array($locale, config('translation.locales'))) {
+                $request->cookies->set('locale', $locale);
+            }
+        } else {
+            $locale = $request->cookie('locale');
+        }
+
+        $this->setLocale($locale);
+
+        return $locale;
     }
 }
