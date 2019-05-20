@@ -75,11 +75,11 @@ Require the translation package
     composer require ricardosierra/translation
 
 
-Add the service provider to your `config/app.php` config file (Laravel 5.4 and lower)
+Add the service provider to your `config/app.php` config file (Laravel 5.8 and lower)
 
     'RicardoSierra\Translation\TranslationServiceProvider',
     
-Add the facade to your aliases in your `config/app.php` config file (Laravel 5.4 and lower)
+Add the facade to your aliases in your `config/app.php` config file (Laravel 5.8 and lower)
 
     'Translation' => 'RicardoSierra\Translation\Facades\Translation',
     
