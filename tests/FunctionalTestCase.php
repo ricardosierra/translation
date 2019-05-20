@@ -1,9 +1,9 @@
 <?php
 
-namespace Crystoline\Translation\Tests;
+namespace RicardoSierra\Translation\Tests;
 
 use Orchestra\Testbench\TestCase;
-use Crystoline\Translation\TranslationServiceProvider;
+use RicardoSierra\Translation\TranslationServiceProvider;
 
 class FunctionalTestCase extends TestCase
 {
@@ -59,7 +59,7 @@ class FunctionalTestCase extends TestCase
      */
     protected function getPackageAliases($app)
     {
-        return ['Translation' => \Crystoline\Translation\Facades\Translation::class];
+        return ['Translation' => \RicardoSierra\Translation\Facades\Translation::class];
     }
 
     protected function loadMigrationsFrom($paths) {

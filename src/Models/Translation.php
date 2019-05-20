@@ -1,9 +1,9 @@
 <?php
 
-namespace Crystoline\Translation\Models;
+namespace RicardoSierra\Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Crystoline\Translation\Traits\TranslationTrait;
+use RicardoSierra\Translation\Traits\TranslationTrait;
 
 class Translation extends Model
 {

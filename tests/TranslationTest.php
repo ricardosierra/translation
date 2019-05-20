@@ -1,11 +1,11 @@
 <?php
 
-namespace Crystoline\Translation\Tests;
+namespace RicardoSierra\Translation\Tests;
 
 use Illuminate\Support\Facades\Cache;
-use Crystoline\Translation\Facades\Translation;
-use Crystoline\Translation\Models\Locale as LocaleModel;
-use Crystoline\Translation\Models\Translation as TranslationModel;
+use RicardoSierra\Translation\Facades\Translation;
+use RicardoSierra\Translation\Models\Locale as LocaleModel;
+use RicardoSierra\Translation\Models\Translation as TranslationModel;
 
 class TranslationTest extends FunctionalTestCase
 {
@@ -152,12 +152,12 @@ class TranslationTest extends FunctionalTestCase
 
     public function testTranslationIsResolvedFromContract()
     {
-        $contract = 'Crystoline\Translation\Contracts\Translation';
+        $contract = 'RicardoSierra\Translation\Contracts\Translation';
 
         $translation = $this->app->make($contract);
 
         $this->assertInstanceOf($contract, $translation);
-        $this->assertInstanceOf('Crystoline\Translation\Translation', $translation);
+        $this->assertInstanceOf('RicardoSierra\Translation\Translation', $translation);
     }
 
     public function testTranslationsAreNotRecreatedAfterAutoTranslateAndCacheIsDisabled()

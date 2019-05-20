@@ -1,10 +1,10 @@
 # Laravel Translation
 
-[![Travis CI](https://img.shields.io/travis/stevebauman/translation.svg?style=flat-square)](https://travis-ci.org/stevebauman/translation)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/stevebauman/translation.svg?style=flat-square)](https://scrutinizer-ci.com/g/stevebauman/translation/?branch=master)
-[![Latest Stable Version](https://img.shields.io/packagist/v/stevebauman/translation.svg?style=flat-square)](https://packagist.org/packages/stevebauman/translation)
-[![Total Downloads](https://img.shields.io/packagist/dt/stevebauman/translation.svg?style=flat-square)](https://packagist.org/packages/stevebauman/translation)
-[![License](https://img.shields.io/packagist/l/stevebauman/translation.svg?style=flat-square)](https://packagist.org/packages/stevebauman/translation)
+[![Travis CI](https://img.shields.io/travis/ricardosierra/translation.svg?style=flat-square)](https://travis-ci.org/ricardosierra/translation)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/ricardosierra/translation.svg?style=flat-square)](https://scrutinizer-ci.com/g/ricardosierra/translation/?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/ricardosierra/translation.svg?style=flat-square)](https://packagist.org/packages/ricardosierra/translation)
+[![Total Downloads](https://img.shields.io/packagist/dt/ricardosierra/translation.svg?style=flat-square)](https://packagist.org/packages/ricardosierra/translation)
+[![License](https://img.shields.io/packagist/l/ricardosierra/translation.svg?style=flat-square)](https://packagist.org/packages/ricardosierra/translation)
 
 ## Description
 
@@ -72,20 +72,20 @@ path:
 
 Require the translation package 
 
-    composer require stevebauman/translation
+    composer require ricardosierra/translation
 
 
 Add the service provider to your `config/app.php` config file (Laravel 5.4 and lower)
 
-    'Crystoline\Translation\TranslationServiceProvider',
+    'RicardoSierra\Translation\TranslationServiceProvider',
     
 Add the facade to your aliases in your `config/app.php` config file (Laravel 5.4 and lower)
 
-    'Translation' => 'Crystoline\Translation\Facades\Translation',
+    'Translation' => 'RicardoSierra\Translation\Facades\Translation',
     
 Publish the migrations
 
-    php artisan vendor:publish --provider="Crystoline\Translation\TranslationServiceProvider"
+    php artisan vendor:publish --provider="RicardoSierra\Translation\TranslationServiceProvider"
     
 Run the migrations
 
@@ -190,7 +190,7 @@ As of `v1.3.4` you can now inject the `Translation` contract into your controlle
 ```php
 <?php
     
-use Crystoline\Translation\Contracts\Translation;
+use RicardoSierra\Translation\Contracts\Translation;
 use App\Http\Controllers\Controller;
 use App\Http\Blog;
 
@@ -236,7 +236,7 @@ The Locale Model:
 
 ```php
 <?php    
-    use Crystoline\Translation\Traits\LocaleTrait;
+    use RicardoSierra\Translation\Traits\LocaleTrait;
     use Illuminate\Database\Eloquent\Model;
     
     class Locale extends Model
@@ -276,7 +276,7 @@ The Translation Model:
 
 ```php
 <?php
-    use Crystoline\Translation\Traits\TranslationTrait;
+    use RicardoSierra\Translation\Traits\TranslationTrait;
     use Illuminate\Database\Eloquent\Model;
     
     class Translation extends Model
@@ -367,7 +367,7 @@ the locale middleware:
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         
         // Insert Locale Middleware
-        'locale' => \Crystoline\Translation\Middleware\LocaleMiddleware::class
+        'locale' => \RicardoSierra\Translation\Middleware\LocaleMiddleware::class
     ];
 
 

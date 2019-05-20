@@ -1,13 +1,13 @@
 <?php
 
-namespace Crystoline\Translation;
+namespace RicardoSierra\Translation;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Crystoline\Translation\Contracts\Translation as TranslationInterface;
+use RicardoSierra\Translation\Contracts\Translation as TranslationInterface;
 
 class TranslationServiceProvider extends ServiceProvider
 {

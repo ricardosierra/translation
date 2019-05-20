@@ -1,13 +1,13 @@
 <?php
 
-namespace Crystoline\Translation;
+namespace RicardoSierra\Translation;
 
 use ErrorException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
-use Crystoline\Translation\Contracts\Client as ClientInterface;
-use Crystoline\Translation\Contracts\Translation as TranslationInterface;
+use RicardoSierra\Translation\Contracts\Client as ClientInterface;
+use RicardoSierra\Translation\Contracts\Translation as TranslationInterface;
 use UnexpectedValueException;
 use Exception;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Crystoline\Translation\Middleware;
+namespace RicardoSierra\Translation\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Crystoline\Translation\Facades\Translation;
+use RicardoSierra\Translation\Facades\Translation;
 
 class LocaleMiddleware
 {

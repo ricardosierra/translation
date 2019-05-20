@@ -22,7 +22,7 @@ return [
         |
         */
 
-        'locale' => Crystoline\Translation\Models\Locale::class,
+        'locale' => RicardoSierra\Translation\Models\Locale::class,
 
         /*
         |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
         |
         */
 
-        'translation' => Crystoline\Translation\Models\Translation::class,
+        'translation' => RicardoSierra\Translation\Models\Translation::class,
 
     ],
 
@@ -53,11 +53,11 @@ return [
         |--------------------------------------------------------------------------
         |
         |  The translation client providing translation service, must implement
-        |  Crystoline\Translation\Contracts\Client.
+        |  RicardoSierra\Translation\Contracts\Client.
         |
         */
 
-        'client' => Crystoline\Translation\Clients\GoogleTranslate::class,
+        'client' => RicardoSierra\Translation\Clients\GoogleTranslate::class,
 
         /*
         |--------------------------------------------------------------------------

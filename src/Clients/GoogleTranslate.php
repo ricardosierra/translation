@@ -1,8 +1,8 @@
 <?php
 
-namespace Crystoline\Translation\Clients;
+namespace RicardoSierra\Translation\Clients;
 
-use Crystoline\Translation\Contracts\Client;
+use RicardoSierra\Translation\Contracts\Client;
 use Stichoza\GoogleTranslate\TranslateClient;
 
 class GoogleTranslate implements Client

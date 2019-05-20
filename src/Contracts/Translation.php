@@ -1,6 +1,6 @@
 <?php
 
-namespace Crystoline\Translation\Contracts;
+namespace RicardoSierra\Translation\Contracts;
 
 use Illuminate\Contracts\Foundation\Application;
 use InvalidArgumentException;

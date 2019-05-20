@@ -1,6 +1,6 @@
 <?php
 
-namespace Crystoline\Translation\Traits;
+namespace RicardoSierra\Translation\Traits;
 
 trait LocaleTrait
 {
