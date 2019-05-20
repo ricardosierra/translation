@@ -1,6 +1,6 @@
 <?php
 
-namespace Stevebauman\Translation\Facades;
+namespace Crystoline\Translation\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

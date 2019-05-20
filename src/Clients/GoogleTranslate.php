@@ -1,8 +1,8 @@
 <?php
 
-namespace Stevebauman\Translation\Clients;
+namespace Crystoline\Translation\Clients;
 
-use Stevebauman\Translation\Contracts\Client;
+use Crystoline\Translation\Contracts\Client;
 use Stichoza\GoogleTranslate\TranslateClient;
 
 class GoogleTranslate implements Client

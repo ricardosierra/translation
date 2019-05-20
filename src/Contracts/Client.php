@@ -1,6 +1,6 @@
 <?php
 
-namespace Stevebauman\Translation\Contracts;
+namespace Crystoline\Translation\Contracts;
 
 interface Client
 {
