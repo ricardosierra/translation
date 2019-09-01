@@ -14,13 +14,10 @@ class CreateTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('locales', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->string('code')->unique();
             $table->primary('code');
-            $table->string('lang_code')->nullable();
-            $table->string('name')->nullable();
-            $table->string('display_name')->nullable();
-            $table->timestamps();
+            $table->string('name');
         });
 
         Schema::create('languages', function (Blueprint $table) {
@@ -29,13 +26,18 @@ class CreateTranslationsTable extends Migration
             $table->primary('code');
 
 			$table->integer('position')->nullable();
-            $table->string('name', 50)->unique();
-
-
+            $table->string('name', 50);
+        });
+        
+        Schema::create('locales', function (Blueprint $table) {
+            $table->string('language')->unique();
+            $table->string('country')->nullable();
             
-            $table->string('locale', 10)->unique();
-            $table->timestamps();
-            $table->softDeletes();
+            $table->primary(['language','country']);
+
+            $table->foreign('language')->references('code')->on('languages');
+            $table->foreign('country')->references('code')->on('countries');
+
         });
 
 
@@ -48,9 +50,12 @@ class CreateTranslationsTable extends Migration
             $table->text('text');
             $table->boolean('unstable')->default(false);
             $table->boolean('locked')->default(false);
-            $table->timestamps();
-            $table->foreign('locale')->references('locale')->on('languages');
+
+            $table->foreign('locale')->references('code')->on('languages');
             $table->unique(['locale', 'namespace', 'group', 'item']);
+
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         // Schema::create('translations', function (Blueprint $table) {
@@ -78,6 +83,43 @@ class CreateTranslationsTable extends Migration
         // Note: Laravel does not support spatial types.
         // See: https://dev.mysql.com/doc/refman/5.7/en/spatial-type-overview.html
         DB::statement("ALTER TABLE `locations` ADD `coordinates` POINT;");
+
+        /**
+         * Carrega Paises
+         */
+        $langs = config('translation.countries');
+        if (!empty($langs)) {
+            $class = config('translation.models.country');
+            foreach($langs as $code=>$name) {
+                $language = new $class;
+                $language->name = $name;
+                $language->code = $code;
+                $language->save();
+            }
+        }
+
+        /**
+         * Carrega Linguagens
+         */
+        $langs = config('translation.locales');
+        if (!empty($langs)) {
+            $class = config('translation.models.language');
+            foreach($langs as $code=>$name) {
+                $language = new $class;
+                $language->name = $name;
+                $language->code = $code;
+                $language->save();
+            }
+        }
+
+        /**
+         * Localizações principais Principais
+         */
+        $class = config('translation.models.locale');
+        $locale = new $class;
+        $locale->country = 'BR';
+        $locale->language = 'pt';
+        $locale->save();
     }
 
     /**
