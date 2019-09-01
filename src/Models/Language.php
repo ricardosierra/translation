@@ -11,6 +11,13 @@ class Language extends Model
      *  @var string
      */
     protected $table = 'languages';
+    
+    public $incrementing = false;
+    protected $casts = [
+        'code' => 'string',
+    ];
+    protected $primaryKey = 'code';
+    protected $keyType = 'string';
 
     /**
      *  List of variables that cannot be mass assigned
