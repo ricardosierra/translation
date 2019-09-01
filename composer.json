@@ -15,6 +15,10 @@
         {
             "name": "Steve Bauman",
             "email": "steven_bauman@outlook.com"
+        },
+        {
+            "name": "Levan Velijanashvili",
+            "email": "me@stichoza.com"
         }
     ],
     "require": {
@@ -22,7 +26,9 @@
         "illuminate/database": "5.*",
         "illuminate/support": "5.*",
         "stichoza/google-translate-php": ">=4.0.0",
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "^6.0",
+        "ext-json": "*",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "orchestra/testbench": "~3.0",

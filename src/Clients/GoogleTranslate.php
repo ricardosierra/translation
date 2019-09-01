@@ -3,7 +3,7 @@
 namespace RicardoSierra\Translation\Clients;
 
 use RicardoSierra\Translation\Contracts\Client;
-use Stichoza\GoogleTranslate\TranslateClient;
+use RicardoSierra\Translation\TranslateClient;
 
 class GoogleTranslate implements Client
 {
