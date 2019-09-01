@@ -10,7 +10,7 @@ class Language extends Model
      *  Table name in the database.
      *  @var string
      */
-    protected $table = 'translator_languages';
+    protected $table = 'languages';
 
     /**
      *  List of variables that cannot be mass assigned

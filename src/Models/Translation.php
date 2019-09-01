@@ -1,20 +1,27 @@
 <?php namespace RicardoSierra\Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use RicardoSierra\Translation\Traits\TranslationTrait;
 
 class Translation extends Model
 {
+    use TranslationTrait;
+
     /**
      *  Table name in the database.
      *  @var string
      */
-    protected $table = 'translator_translations';
+    protected $table = 'translations';
 
     /**
      *  List of variables that can be mass assigned
      *  @var array
      */
-    protected $fillable = ['locale', 'namespace', 'group', 'item', 'text', 'unstable'];
+    protected $fillable = [
+        'locale', 'namespace', 'group', 'item', 'text', 'unstable',
+        'translation_id',
+        'translation',
+    ];
 
     /**
      *  Each translation belongs to a language.
@@ -58,5 +65,21 @@ class Translation extends Model
     public function isLocked()
     {
         return (boolean) $this->locked;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function locale()
+    {
+        return $this->belongsTo(Locale::class, 'locale', 'code');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parent()
+    {
+        return $this->belongsTo(self::class, $this->getForeignKey());
     }
 }
