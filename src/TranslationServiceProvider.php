@@ -11,7 +11,7 @@ use RicardoSierra\Translation\Loaders\DatabaseLoader;
 use RicardoSierra\Translation\Loaders\FileLoader;
 use RicardoSierra\Translation\Loaders\MixedLoader;
 use RicardoSierra\Translation\Middleware\TranslationMiddleware;
-use RicardoSierra\Translation\Models\Translation;
+use RicardoSierra\Translation\Models\Translation as TranslationModel;
 use RicardoSierra\Translation\Repositories\LanguageRepository;
 use RicardoSierra\Translation\Repositories\TranslationRepository;
 use RicardoSierra\Translation\Routes\ResourceRegistrar;
