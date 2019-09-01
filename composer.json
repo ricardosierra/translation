@@ -28,7 +28,8 @@
         "stichoza/google-translate-php": ">=4.0.0",
         "guzzlehttp/guzzle": "^6.0",
         "ext-json": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "orchestra/testbench": "~3.0",
@@ -41,12 +42,14 @@
     },
     "autoload": {
         "psr-4": {
-            "RicardoSierra\\Translation\\": "src/"
+            "RicardoSierra\\Translation\\": "src/",
+            "Waavi\\Translation\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RicardoSierra\\Translation\\Tests\\": "tests/"
+            "RicardoSierra\\Translation\\Tests\\": "tests/",
+            "Waavi\\Translation\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",

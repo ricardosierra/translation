@@ -1,45 +1,62 @@
-<?php
-
-namespace RicardoSierra\Translation\Models;
+<?php namespace RicardoSierra\Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use RicardoSierra\Translation\Traits\TranslationTrait;
 
 class Translation extends Model
 {
-    use TranslationTrait;
+    /**
+     *  Table name in the database.
+     *  @var string
+     */
+    protected $table = 'translator_translations';
 
     /**
-     * The locale translations table.
-     *
-     * @var string
+     *  List of variables that can be mass assigned
+     *  @var array
      */
-    protected $table = 'translations';
+    protected $fillable = ['locale', 'namespace', 'group', 'item', 'text', 'unstable'];
 
     /**
-     * The fillable locale translation attributes.
-     *
-     * @var array
+     *  Each translation belongs to a language.
      */
-    protected $fillable = [
-        'locale_id',
-        'translation_id',
-        'translation',
-    ];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function locale()
+    public function language()
     {
-        return $this->belongsTo(Locale::class);
+        return $this->belongsTo(Language::class, 'locale', 'locale');
     }
 
     /**
-     * {@inheritdoc}
+     *  Returns the full translation code for an entry: namespace.group.item
+     *  @return string
      */
-    public function parent()
+    public function getCodeAttribute()
     {
-        return $this->belongsTo(self::class, $this->getForeignKey());
+        return $this->namespace === '*' ? "{$this->group}.{$this->item}" : "{$this->namespace}::{$this->group}.{$this->item}";
+    }
+
+    /**
+     *  Flag this entry as Reviewed
+     *  @return void
+     */
+    public function flagAsReviewed()
+    {
+        $this->unstable = 0;
+    }
+
+    /**
+     *  Set the translation to the locked state
+     *  @return void
+     */
+    public function lock()
+    {
+        $this->locked = 1;
+    }
+
+    /**
+     *  Check if the translation is locked
+     *  @return boolean
+     */
+    public function isLocked()
+    {
+        return (boolean) $this->locked;
     }
 }
