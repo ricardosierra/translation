@@ -1,5 +1,7 @@
 <?php
 
+
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateTranslationsTable extends Migration
@@ -21,7 +23,7 @@ class CreateTranslationsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('languages', function ($table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('locale', 10)->unique();
             $table->string('name', 60)->unique();
@@ -30,7 +32,7 @@ class CreateTranslationsTable extends Migration
         });
 
 
-        Schema::create('translations', function ($table) {
+        Schema::create('translations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('locale', 10);
             $table->string('namespace')->default('*');
@@ -68,11 +70,8 @@ class CreateTranslationsTable extends Migration
      */
     public function down()
     {
-
         Schema::dropIfExists('translations');
-
-        Schema::drop('translations');
-        Schema::drop('languages');
+        Schema::dropIfExists('languages');
         Schema::dropIfExists('locales');
     }
 }
