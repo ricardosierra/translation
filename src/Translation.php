@@ -137,27 +137,21 @@ class Translation implements TranslationInterface
             return $this->makeReplacements($translation->translation, $replacements);
         } catch (\Illuminate\Database\QueryException $e) {
             // If foreign key integrity constrains fail, we have a caching issue
-            if (!$runOnce) {
-                // If this has not been run before, proceed
-                //if($toLocale)
-                // Burst locale cache
-
-                $this->removeCacheLocale($toLocale->code);
-
-                // Burst translation cache
-                $this->removeCacheTranslation($this->translationModel->firstOrNew([
-                    $toLocale->getForeignKey() => $toLocale->getKey(),
-                    'translation'              => $text,
-                ])
-                );
-
-                // Attempt translation 1 more time
-                return $this->translate($text, $replacements, $toLocale->code, $runOnce = true);
-            } else {
-                // If it has already tried translating once and failed again,
-                // prevent infinite loops and just return the text
+            if ($runOnce || !is_object($toLocale)) {
                 return $text;
             }
+
+            $this->removeCacheLocale($toLocale->code);
+
+            // Burst translation cache
+            $this->removeCacheTranslation($this->translationModel->firstOrNew([
+                $toLocale->getForeignKey() => $toLocale->getKey(),
+                'translation'              => $text,
+            ])
+            );
+
+            // Attempt translation 1 more time
+            return $this->translate($text, $replacements, $toLocale->code, $runOnce = true);
         }
     }
 
