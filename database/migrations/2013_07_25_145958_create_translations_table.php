@@ -18,6 +18,9 @@ class CreateTranslationsTable extends Migration
             $table->string('code')->unique();
             $table->primary('code');
             $table->string('name');
+
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('languages', function (Blueprint $table) {
@@ -27,6 +30,9 @@ class CreateTranslationsTable extends Migration
 
 			$table->integer('position')->nullable();
             $table->string('name', 50);
+
+            $table->timestamps();
+            $table->softDeletes();
         });
         
         Schema::create('locales', function (Blueprint $table) {
@@ -38,6 +44,8 @@ class CreateTranslationsTable extends Migration
             $table->foreign('language')->references('code')->on('languages');
             $table->foreign('country')->references('code')->on('countries');
 
+            $table->timestamps();
+            $table->softDeletes();
         });
 
 
