@@ -44,13 +44,6 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
             __DIR__ . '/../config/translation.php' => config_path('translation.php'),
         ]);
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
-
-        /**
-         * Provider Antigo
-         */
-        Blade::directive('t', function ($args) {
-            return "<?php echo App::make('translation')->translate{$args}; ?>";
-        });
     }
 
     /**
@@ -64,6 +57,15 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/translation.php', 'translation');
 
         parent::register();
+
+        /**
+         * Provider Antigo
+         */
+        Blade::directive('t', function ($args) {
+            return "<?php echo App::make('translation')->translate{$args}; ?>";
+        });
+
+
         $this->registerCacheRepository();
         $this->registerFileLoader();
         $this->registerCacheFlusher();
