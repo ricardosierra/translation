@@ -23,12 +23,13 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "illuminate/database": "5.*",
-        "illuminate/support": "5.*",
-        "guzzlehttp/guzzle": "^6.0",
+        "illuminate/validation": "*",
+        "illuminate/database": "*",
+        "illuminate/support": "*",
+        "guzzlehttp/guzzle": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "*"
     },
     "require-dev": {
         "orchestra/testbench": "~3.0",
