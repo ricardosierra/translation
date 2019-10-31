@@ -58,6 +58,14 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         parent::register();
 
+        // Bind translation to the IoC.
+        $this->app->bind('translation', function (Application $app) {
+            return new Translation($app);
+        });
+
+        // Bind translation contract to IoC.
+        $this->app->bind(TranslationInterface::class, 'translation');
+
         /**
          * Provider Antigo
          */
@@ -76,14 +84,6 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         // Bind guzzle contract to IoC.
         $this->app->bind(ClientInterface::class, Client::class);
-
-        // Bind translation to the IoC.
-        $this->app->bind('translation', function (Application $app) {
-            return new Translation($app);
-        });
-
-        // Bind translation contract to IoC.
-        $this->app->bind(TranslationInterface::class, 'translation');
 
         // Include the helpers file for global `_t()` function
         include __DIR__.'/helpers.php';
