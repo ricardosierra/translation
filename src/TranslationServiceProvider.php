@@ -56,6 +56,25 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/translator.php', 'translator');
         $this->mergeConfigFrom(__DIR__ . '/../config/translation.php', 'translation');
 
+        $this->registerPresenceVerifier();
+
+        $this->app['validator'] = $this->app->share(function($app)
+        {
+            // THIS WILL NOW RETURN YOUR FACTORY SINCE YOU'RE
+            // IN THE MyLib\Validation NAMESPACE
+            $validator = new Factory($app['translator'], $app);
+
+            // The validation presence verifier is responsible for determining the existence
+            // of values in a given data collection, typically a relational database or
+            // other persistent data stores. And it is used to check for uniqueness.
+            if (isset($app['validation.presence']))
+            {
+                $validator->setPresenceVerifier($app['validation.presence']);
+            }
+
+            return $validator;
+        });
+
         parent::register();
 
         // Bind translation to the IoC.
