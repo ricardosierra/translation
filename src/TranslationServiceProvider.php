@@ -44,6 +44,11 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
             __DIR__ . '/../config/translation.php' => config_path('translation.php'),
         ]);
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
+
+
+        $this->registerCacheRepository();
+        $this->registerFileLoader();
+        $this->registerCacheFlusher();
     }
 
     /**
@@ -92,10 +97,6 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
             return "<?php echo App::make('translation')->translate{$args}; ?>";
         });
 
-
-        $this->registerCacheRepository();
-        $this->registerFileLoader();
-        $this->registerCacheFlusher();
         $this->app->singleton('translation.uri.localizer', UriLocalizer::class);
         $this->app[\Illuminate\Routing\Router::class]->aliasMiddleware('localize', TranslationMiddleware::class);
         // Fix issue with laravel prepending the locale to localize resource routes:
