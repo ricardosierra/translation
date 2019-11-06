@@ -49,6 +49,13 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         $this->registerCacheRepository();
         $this->registerFileLoader();
         $this->registerCacheFlusher();
+
+        /**
+         * Provider Antigo
+         */
+        Blade::directive('t', function ($args) {
+            return "<?php echo App::make('translation')->translate{$args}; ?>";
+        });
     }
 
     /**
@@ -71,12 +78,6 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         // Bind translation contract to IoC.
         $this->app->bind(TranslationInterface::class, 'translation');
 
-        /**
-         * Provider Antigo
-         */
-        Blade::directive('t', function ($args) {
-            return "<?php echo App::make('translation')->translate{$args}; ?>";
-        });
 
         $this->app->singleton('translation.uri.localizer', UriLocalizer::class);
         $this->app[\Illuminate\Routing\Router::class]->aliasMiddleware('localize', TranslationMiddleware::class);
