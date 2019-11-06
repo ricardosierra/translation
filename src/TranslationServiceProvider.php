@@ -45,17 +45,15 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         ]);
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
-
-        $this->registerCacheRepository();
         $this->registerFileLoader();
         $this->registerCacheFlusher();
-
         /**
          * Provider Antigo
          */
         Blade::directive('t', function ($args) {
             return "<?php echo App::make('translation')->translate{$args}; ?>";
         });
+
     }
 
     /**
@@ -70,6 +68,8 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         parent::register();
 
+        $this->registerCacheRepository();
+
         // Bind translation to the IoC.
         $this->app->bind('translation', function (Application $app) {
             return new Translation($app);
@@ -77,7 +77,6 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         // Bind translation contract to IoC.
         $this->app->bind(TranslationInterface::class, 'translation');
-
 
         $this->app->singleton('translation.uri.localizer', UriLocalizer::class);
         $this->app[\Illuminate\Routing\Router::class]->aliasMiddleware('localize', TranslationMiddleware::class);
