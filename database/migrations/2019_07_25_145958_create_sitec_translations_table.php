@@ -14,57 +14,64 @@ class CreateSitecTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('countries', function (Blueprint $table) {
-            $table->string('code')->unique();
-            $table->primary('code');
-            $table->string('name');
+    //     if (!Schema::hasColumn('flights', 'departure_time')) {
+    //   $table->timestamp('departure_time');
+    //     } 
+        if (!Schema::hasTable('countries')) {
+            Schema::create('countries', function (Blueprint $table) {
+                $table->string('code')->unique();
+                $table->primary('code');
+                $table->string('name');
+    
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
+        if (!Schema::hasTable('languages')) {
+            Schema::create('languages', function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->string('code')->unique();
+                $table->primary('code');
 
-            $table->timestamps();
-            $table->softDeletes();
-        });
+                $table->integer('position')->nullable();
+                $table->string('name', 50);
 
-        Schema::create('languages', function (Blueprint $table) {
-		    $table->engine = 'InnoDB';
-            $table->string('code')->unique();
-            $table->primary('code');
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
+        if (!Schema::hasTable('locales')) {
+            Schema::create('locales', function (Blueprint $table) {
+                $table->string('language')->unique();
+                $table->string('country')->nullable();
+                
+                $table->primary(['language','country']);
 
-			$table->integer('position')->nullable();
-            $table->string('name', 50);
+                $table->foreign('language')->references('code')->on('languages');
+                $table->foreign('country')->references('code')->on('countries');
 
-            $table->timestamps();
-            $table->softDeletes();
-        });
-        
-        Schema::create('locales', function (Blueprint $table) {
-            $table->string('language')->unique();
-            $table->string('country')->nullable();
-            
-            $table->primary(['language','country']);
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
+        if (!Schema::hasTable('translations')) {
+            Schema::create('translations', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('locale', 10);
+                $table->string('namespace')->default('*');
+                $table->string('group');
+                $table->string('item');
+                $table->text('text');
+                $table->boolean('unstable')->default(false);
+                $table->boolean('locked')->default(false);
 
-            $table->foreign('language')->references('code')->on('languages');
-            $table->foreign('country')->references('code')->on('countries');
+                $table->foreign('locale')->references('code')->on('languages');
+                $table->unique(['locale', 'namespace', 'group', 'item']);
 
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-
-        Schema::create('translations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('locale', 10);
-            $table->string('namespace')->default('*');
-            $table->string('group');
-            $table->string('item');
-            $table->text('text');
-            $table->boolean('unstable')->default(false);
-            $table->boolean('locked')->default(false);
-
-            $table->foreign('locale')->references('code')->on('languages');
-            $table->unique(['locale', 'namespace', 'group', 'item']);
-
-            $table->timestamps();
-            $table->softDeletes();
-        });
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
 
         // Schema::create('translations', function (Blueprint $table) {
         //     $table->increments('id');
