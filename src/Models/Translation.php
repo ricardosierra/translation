@@ -11,7 +11,7 @@ class Translation extends Model
      *  Table name in the database.
      *  @var string
      */
-    protected $table = 'translations';
+    protected $table = 'model_translations';
 
     /**
      *  List of variables that can be mass assigned

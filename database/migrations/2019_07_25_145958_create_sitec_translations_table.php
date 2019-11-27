@@ -54,8 +54,8 @@ class CreateSitecTranslationsTable extends Migration
                 $table->softDeletes();
             });
         }
-        if (!Schema::hasTable('translations')) {
-            Schema::create('translations', function (Blueprint $table) {
+        if (!Schema::hasTable('model_translations')) {
+            Schema::create('model_translations', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('locale', 10);
                 $table->string('namespace')->default('*');
