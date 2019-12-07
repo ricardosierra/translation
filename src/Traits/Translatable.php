@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Traits;
+<?php
+
+namespace RicardoSierra\Translation\Traits;
 
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;

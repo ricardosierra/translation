@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Repositories;
+<?php
+
+namespace RicardoSierra\Translation\Repositories;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\Application;

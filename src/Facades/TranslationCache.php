@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Facades;
+<?php
+
+namespace RicardoSierra\Translation\Facades;
 
 use \Illuminate\Support\Facades\Facade;
 

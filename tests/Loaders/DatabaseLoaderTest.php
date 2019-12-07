@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Loaders;
+<?php
+
+namespace RicardoSierra\Translation\Test\Loaders;
 
 use RicardoSierra\Translation\Loaders\DatabaseLoader;
 use RicardoSierra\Translation\Repositories\TranslationRepository;

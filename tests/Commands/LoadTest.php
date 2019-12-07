@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Commands;
+<?php
+
+namespace RicardoSierra\Translation\Test\Commands;
 
 use RicardoSierra\Translation\Commands\FileLoaderCommand;
 use RicardoSierra\Translation\Repositories\LanguageRepository;

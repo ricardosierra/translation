@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Repositories;
+<?php
+
+namespace RicardoSierra\Translation\Test\Repositories;
 
 use RicardoSierra\Translation\Models\Translation;
 use RicardoSierra\Translation\Repositories\LanguageRepository;

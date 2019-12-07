@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Cache;
+<?php
+
+namespace RicardoSierra\Translation\Test\Cache;
 
 use RicardoSierra\Translation\Test\TestCase;
 

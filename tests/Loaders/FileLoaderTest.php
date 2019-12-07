@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Loaders;
+<?php
+
+namespace RicardoSierra\Translation\Test\Loaders;
 
 use Illuminate\Translation\FileLoader as LaravelFileLoader;
 use RicardoSierra\Translation\Loaders\FileLoader;

@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Loaders;
+<?php
+
+namespace RicardoSierra\Translation\Loaders;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Contracts\Translation\Loader as LoaderContract;

@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Models;
+<?php
+
+namespace RicardoSierra\Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

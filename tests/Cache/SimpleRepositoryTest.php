@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Cache;
+<?php
+
+namespace RicardoSierra\Translation\Test\Cache;
 
 use Illuminate\Cache\ArrayStore;
 use RicardoSierra\Translation\Cache\SimpleRepository;

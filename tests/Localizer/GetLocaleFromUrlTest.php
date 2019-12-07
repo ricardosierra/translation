@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Localizer;
+<?php
+
+namespace RicardoSierra\Translation\Test\Localizer;
 
 use UriLocalizer;
 use RicardoSierra\Translation\Test\TestCase;

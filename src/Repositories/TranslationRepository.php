@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Repositories;
+<?php
+
+namespace RicardoSierra\Translation\Repositories;
 
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Application;

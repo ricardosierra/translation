@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Loaders;
+<?php
+
+namespace RicardoSierra\Translation\Test\Loaders;
 
 use RicardoSierra\Translation\Cache\SimpleRepository as Cache;
 use RicardoSierra\Translation\Loaders\CacheLoader;

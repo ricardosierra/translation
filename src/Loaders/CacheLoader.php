@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Loaders;
+<?php
+
+namespace RicardoSierra\Translation\Loaders;
 
 use RicardoSierra\Translation\Cache\CacheRepositoryInterface as Cache;
 

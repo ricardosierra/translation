@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation;
+<?php
+
+namespace RicardoSierra\Translation;
 
 use Illuminate\Http\Request;
 use RicardoSierra\Translation\Repositories\LanguageRepository;

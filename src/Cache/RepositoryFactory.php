@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Cache;
+<?php
+
+namespace RicardoSierra\Translation\Cache;
 
 use Illuminate\Contracts\Cache\Store;
 use \ReflectionClass;

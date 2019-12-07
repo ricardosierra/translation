@@ -1,4 +1,6 @@
-<?php namespace RicardoSierra\Translation\Test\Localizer;
+<?php
+
+namespace RicardoSierra\Translation\Test\Localizer;
 
 // PHPUnit wrappers:
 use UriLocalizer;
