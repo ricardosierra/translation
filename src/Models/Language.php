@@ -44,5 +44,15 @@ class Language extends Model
     {
         return "languages.{$this->locale}";
     }
+	
+	public function getImageUrl( $withBaseUrl = false )
+	{
+		if(!$this->icon) return NULL;
+		
+		$imgDir = '/images/languages/' . $this->id;
+		$url = $imgDir . '/' . $this->icon;
+		
+		return $withBaseUrl ? URL::asset( $url ) : $url;
+	}
 
 }
