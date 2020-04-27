@@ -35,6 +35,7 @@ class CreateSitecTranslationsTable extends Migration
 
                 $table->integer('position')->nullable();
                 $table->string('name', 50);
+                $table->boolean('is_default')->default(false);
 
                 $table->timestamps();
                 $table->softDeletes();
