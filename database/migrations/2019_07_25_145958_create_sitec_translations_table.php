@@ -103,9 +103,9 @@ class CreateSitecTranslationsTable extends Migration
         /**
          * Carrega Paises
          */
-        $langs = config('translation.countries');
+        $langs = \Illuminate\Support\Facades\Config::get('translation.countries');
         if (!empty($langs)) {
-            $class = config('translation.models.country');
+            $class = \Illuminate\Support\Facades\Config::get('translation.models.country');
             foreach($langs as $code=>$name) {
                 $language = new $class;
                 $language->name = $name;
@@ -117,9 +117,9 @@ class CreateSitecTranslationsTable extends Migration
         /**
          * Carrega Linguagens
          */
-        $langs = config('translation.locales');
+        $langs = \Illuminate\Support\Facades\Config::get('translation.locales');
         if (!empty($langs)) {
-            $class = config('translation.models.language');
+            $class = \Illuminate\Support\Facades\Config::get('translation.models.language');
             foreach($langs as $code=>$name) {
                 $language = new $class;
                 $language->name = $name;
@@ -131,7 +131,7 @@ class CreateSitecTranslationsTable extends Migration
         /**
          * Localizações principais Principais
          */
-        $class = config('translation.models.locale');
+        $class = \Illuminate\Support\Facades\Config::get('translation.models.locale');
         $locale = new $class;
         $locale->country = 'BR';
         $locale->language = 'pt';

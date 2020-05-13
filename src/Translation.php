@@ -197,7 +197,7 @@ class Translation implements TranslationInterface
             if ($this->request->hasSession() and $this->request->session()->has('locale')) {
                 return $this->request->session()->get('locale');
             }
-            if ($locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2) and in_array($locale, config('translation.locales'))){
+            if ($locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2) and in_array($locale, \Illuminate\Support\Facades\Config::get('translation.locales'))){
                 return $locale;
             }
             return $this->getConfigDefaultLocale();
@@ -655,7 +655,7 @@ class Translation implements TranslationInterface
         if (!$request->hasCookie('locale')) {
             $locale = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
 
-            if (in_array($locale, config('translation.locales'))) {
+            if (in_array($locale, \Illuminate\Support\Facades\Config::get('translation.locales'))) {
                 $request->cookies->set('locale', $locale);
             }
         } else {

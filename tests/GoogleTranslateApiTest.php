@@ -32,7 +32,7 @@ class GoogleTranslateApiTest extends FunctionalTestCase
 
         $this->guzzle->shouldReceive('request')->once()->with('GET', 'https://www.googleapis.com/language/translate/v2', [
             'query' => [
-                'key'    => config('translation.clients.api_key'),
+                'key'    => \Illuminate\Support\Facades\Config::get('translation.clients.api_key'),
                 'format' => 'html',
                 'source' => 'en',
                 'target' => 'es',
@@ -65,7 +65,7 @@ class GoogleTranslateApiTest extends FunctionalTestCase
 
         $this->guzzle->shouldReceive('request')->once()->with('GET', 'https://www.googleapis.com/language/translate/v2', [
             'query' => [
-                'key'    => config('translation.clients.api_key'),
+                'key'    => \Illuminate\Support\Facades\Config::get('translation.clients.api_key'),
                 'format' => 'html',
                 'source' => 'en',
                 'target' => 'es',
@@ -101,7 +101,7 @@ class GoogleTranslateApiTest extends FunctionalTestCase
 
         $this->guzzle->shouldReceive('request')->once()->with('GET', 'https://www.googleapis.com/language/translate/v2', [
             'query' => [
-                'key'    => config('translation.clients.api_key'),
+                'key'    => \Illuminate\Support\Facades\Config::get('translation.clients.api_key'),
                 'format' => 'html',
                 'source' => 'en',
                 'target' => 'es',
@@ -126,7 +126,7 @@ class GoogleTranslateApiTest extends FunctionalTestCase
 
         $this->guzzle->shouldReceive('request')->once()->with('GET', 'https://www.googleapis.com/language/translate/v2', [
             'query' => [
-                'key'    => config('translation.clients.api_key'),
+                'key'    => \Illuminate\Support\Facades\Config::get('translation.clients.api_key'),
                 'format' => 'html',
                 'source' => 'en',
                 'target' => 'es',

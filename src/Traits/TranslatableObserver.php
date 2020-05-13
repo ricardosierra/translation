@@ -23,7 +23,7 @@ class TranslatableObserver
                 $translationRepository->updateDefaultByCode($model->translationCodeFor($attribute), $model->getRawAttribute($attribute));
             }
         }
-        $cacheRepository->flush(config('app.locale'), 'translatable', '*');
+        $cacheRepository->flush(\Illuminate\Support\Facades\Config::get('app.locale'), 'translatable', '*');
     }
 
     /**
