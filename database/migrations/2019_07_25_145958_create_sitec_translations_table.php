@@ -92,7 +92,7 @@ class CreateSitecTranslationsTable extends Migration
 
 
         
-        Schema::create(config('app.db-prefix', '').'locations', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
         });
 
