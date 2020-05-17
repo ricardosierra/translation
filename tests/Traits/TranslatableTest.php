@@ -14,15 +14,17 @@ class TranslatableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        \Schema::create('dummies', function ($table) {
-            $table->increments('id');
-            $table->string('title')->nullable();
-            $table->string('title_translation')->nullable();
-            $table->string('slug')->nullable();
-            $table->string('text')->nullable();
-            $table->string('text_translation')->nullable();
-            $table->timestamps();
-        });
+        \Schema::create(
+            'dummies', function ($table) {
+                $table->increments('id');
+                $table->string('title')->nullable();
+                $table->string('title_translation')->nullable();
+                $table->string('slug')->nullable();
+                $table->string('text')->nullable();
+                $table->string('text_translation')->nullable();
+                $table->timestamps();
+            }
+        );
         $this->languageRepository    = \App::make(LanguageRepository::class);
         $this->translationRepository = \App::make(TranslationRepository::class);
     }
@@ -59,7 +61,11 @@ class TranslatableTest extends TestCase
     public function it_flushes_cache()
     {
         $cacheMock = Mockery::mock(\RicardoSierra\Translation\Cache\SimpleRepository::class);
-        $this->app->bind('translation.cache.repository', function ($app) use ($cacheMock) {return $cacheMock;});
+        $this->app->bind(
+            'translation.cache.repository', function ($app) use ($cacheMock) {
+                return $cacheMock;
+            }
+        );
         $cacheMock->shouldReceive('flush')->with('en', 'translatable', '*');
         $dummy        = new Dummy;
         $dummy->title = 'Dummy title';
@@ -69,7 +75,7 @@ class TranslatableTest extends TestCase
     }
 
     /**
-     *  @test
+     * @test
      */
     public function to_array_features_translated_attributes()
     {

@@ -47,14 +47,16 @@ class TranslationTest extends FunctionalTestCase
         $this->assertTrue(is_array($rawResult), 'Method getResponse() should return an array.');
     }
     
-    public function testItCanDetectLocalesSetByBrowsers(){
-        request()->server->set('HTTP_ACCEPT_LANGUAGE','es-Spain');
+    public function testItCanDetectLocalesSetByBrowsers()
+    {
+        request()->server->set('HTTP_ACCEPT_LANGUAGE', 'es-Spain');
 
-        $this->assertEquals("es",Translation::detectLocale(request()));
-        $this->assertEquals("Hola",Translation::translate("Hello"));
+        $this->assertEquals("es", Translation::detectLocale(request()));
+        $this->assertEquals("Hola", Translation::translate("Hello"));
     }
 
-    public function testDefaultTranslationCanBeSet(){
+    public function testDefaultTranslationCanBeSet()
+    {
         Translation::setLocale('fr');
 
         $this->assertEquals("Bonjour le monde", Translation::translate("Hello World"));

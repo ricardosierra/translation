@@ -29,15 +29,19 @@ class FunctionalTestCase extends TestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'testbench');
-        $app['config']->set('database.connections.testbench', [
+        $app['config']->set(
+            'database.connections.testbench', [
             'driver'   => 'sqlite',
             'database' => ':memory:',
-        ]);
+            ]
+        );
 
-        $app['config']->set('translation.locales', [
+        $app['config']->set(
+            'translation.locales', [
             'en' => 'English',
             'fr' => 'French',
-        ]);
+            ]
+        );
 
         $app['config']->set('translation.clients.api_key', 123456);
     }
@@ -62,12 +66,15 @@ class FunctionalTestCase extends TestCase
         return ['Translation' => \RicardoSierra\Translation\Facades\Translation::class];
     }
 
-    protected function loadMigrationsFrom($paths) {
+    protected function loadMigrationsFrom($paths)
+    {
         $paths = (is_array($paths)) ? $paths : [$paths];
-        $this->app->afterResolving('migrator', function ($migrator) use ($paths) {
-            foreach ((array) $paths as $path) {
-                $migrator->path($path);
+        $this->app->afterResolving(
+            'migrator', function ($migrator) use ($paths) {
+                foreach ((array) $paths as $path) {
+                    $migrator->path($path);
+                }
             }
-        });
+        );
     }
 }

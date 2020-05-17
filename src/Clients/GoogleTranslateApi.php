@@ -9,19 +9,29 @@ use RicardoSierra\Translation\Contracts\Client;
 
 class GoogleTranslateApi implements Client
 {
-    /** @var ClientInterface */
+    /**
+     * @var ClientInterface 
+     */
     protected $client;
 
-    /** @var \Illuminate\Config\Repository Holds the current config instance. */
+    /**
+     * @var \Illuminate\Config\Repository Holds the current config instance. 
+     */
     protected $config;
 
-    /** @var string API endpoint */
+    /**
+     * @var string API endpoint 
+     */
     protected $endpoint = 'https://www.googleapis.com/language/translate/v2';
 
-    /** @var string source language */
+    /**
+     * @var string source language 
+     */
     protected $source;
 
-    /** @var string target language */
+    /**
+     * @var string target language 
+     */
     protected $target;
 
     /**
@@ -41,7 +51,8 @@ class GoogleTranslateApi implements Client
      */
     public function translate($text)
     {
-        $response = $this->client->request('GET', $this->endpoint, [
+        $response = $this->client->request(
+            'GET', $this->endpoint, [
             'query' => [
                 'key'    => $this->getApiKey(),
                 'format' => 'html', // text | html for source text
@@ -49,7 +60,8 @@ class GoogleTranslateApi implements Client
                 'target' => $this->getTarget(),
                 'q'      => $text,
             ],
-        ]);
+            ]
+        );
 
         return $this->parseResponse(json_decode($response->getBody(), true));
     }

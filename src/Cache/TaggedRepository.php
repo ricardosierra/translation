@@ -23,7 +23,7 @@ class TaggedRepository implements CacheRepositoryInterface
     /**
      * Create a new cache repository instance.
      *
-     * @param  \Illuminate\Contracts\Cache\Store  $store
+     * @param  \Illuminate\Contracts\Cache\Store $store
      * @return void
      */
     public function __construct(Store $store, $cacheTag)
@@ -35,10 +35,10 @@ class TaggedRepository implements CacheRepositoryInterface
     /**
      *  Checks if an entry with the given key exists in the cache.
      *
-     *  @param  string  $locale
-     *  @param  string  $group
-     *  @param  string  $namespace
-     *  @return boolean
+     * @param  string $locale
+     * @param  string $group
+     * @param  string $namespace
+     * @return boolean
      */
     public function has($locale, $group, $namespace)
     {
@@ -48,10 +48,10 @@ class TaggedRepository implements CacheRepositoryInterface
     /**
      *  Get an item from the cache
      *
-     *  @param  string  $locale
-     *  @param  string  $group
-     *  @param  string  $namespace
-     *  @return mixed
+     * @param  string $locale
+     * @param  string $group
+     * @param  string $namespace
+     * @return mixed
      */
     public function get($locale, $group, $namespace)
     {
@@ -62,12 +62,12 @@ class TaggedRepository implements CacheRepositoryInterface
     /**
      *  Put an item into the cache store
      *
-     *  @param  string  $locale
-     *  @param  string  $group
-     *  @param  string  $namespace
-     *  @param  mixed   $content
-     *  @param  integer $minutes
-     *  @return void
+     * @param  string  $locale
+     * @param  string  $group
+     * @param  string  $namespace
+     * @param  mixed   $content
+     * @param  integer $minutes
+     * @return void
      */
     public function put($locale, $group, $namespace, $content, $minutes)
     {
@@ -78,10 +78,10 @@ class TaggedRepository implements CacheRepositoryInterface
     /**
      *  Flush the cache for the given entries
      *
-     *  @param  string  $locale
-     *  @param  string  $group
-     *  @param  string  $namespace
-     *  @return void
+     * @param  string $locale
+     * @param  string $group
+     * @param  string $namespace
+     * @return void
      */
     public function flush($locale, $group, $namespace)
     {
@@ -92,10 +92,10 @@ class TaggedRepository implements CacheRepositoryInterface
     /**
      *  Completely flush the cache
      *
-     *  @param  string  $locale
-     *  @param  string  $group
-     *  @param  string  $namespace
-     *  @return void
+     * @param  string $locale
+     * @param  string $group
+     * @param  string $namespace
+     * @return void
      */
     public function flushAll()
     {
@@ -105,10 +105,10 @@ class TaggedRepository implements CacheRepositoryInterface
     /**
      *  Returns a unique cache key.
      *
-     *  @param  string  $locale
-     *  @param  string  $group
-     *  @param  string  $namespace
-     *  @return string
+     * @param  string $locale
+     * @param  string $group
+     * @param  string $namespace
+     * @return string
      */
     protected function getKey($locale, $group, $namespace)
     {

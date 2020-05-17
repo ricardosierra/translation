@@ -13,9 +13,9 @@ use UnexpectedValueException;
 /**
  * Free Google Translate API PHP Package.
  *
- * @author      Levan Velijanashvili <me@stichoza.com>
- * @link        http://stichoza.com/
- * @license     MIT
+ * @author  Levan Velijanashvili <me@stichoza.com>
+ * @link    http://stichoza.com/
+ * @license MIT
  */
 class GoogleTranslate
 {
@@ -101,9 +101,9 @@ class GoogleTranslate
      * For more information about HTTP client configuration options, see "Request Options" in
      * GuzzleHttp docs: http://docs.guzzlephp.org/en/stable/request-options.html
      *
-     * @param string $target Target language
-     * @param string|null $source Source language
-     * @param array|null $options Associative array of http client configuration options
+     * @param string                      $target        Target language
+     * @param string|null                 $source        Source language
+     * @param array|null                  $options       Associative array of http client configuration options
      * @param TokenProviderInterface|null $tokenProvider
      */
     public function __construct(string $target = 'en', string $source = null, array $options = null, TokenProviderInterface $tokenProvider = null)
@@ -118,7 +118,7 @@ class GoogleTranslate
     /**
      * Set target language for translation.
      *
-     * @param string $target Language code
+     * @param  string $target Language code
      * @return GoogleTranslate
      */
     public function setTarget(string $target) : self
@@ -130,7 +130,7 @@ class GoogleTranslate
     /**
      * Set source language for translation.
      *
-     * @param string|null $source Language code
+     * @param  string|null $source Language code
      * @return GoogleTranslate
      */
     public function setSource(string $source = null) : self
@@ -142,7 +142,7 @@ class GoogleTranslate
     /**
      * Set Google Translate URL base
      *
-     * @param string $url Google Translate URL base
+     * @param  string $url Google Translate URL base
      * @return GoogleTranslate
      */
     public function setUrl(string $url) : self
@@ -154,7 +154,7 @@ class GoogleTranslate
     /**
      * Set GuzzleHttp client options.
      *
-     * @param array $options guzzleHttp client options.
+     * @param  array $options guzzleHttp client options.
      * @return GoogleTranslate
      */
     public function setOptions(array $options = null) : self
@@ -166,7 +166,7 @@ class GoogleTranslate
     /**
      * Set token provider.
      *
-     * @param TokenProviderInterface $tokenProvider
+     * @param  TokenProviderInterface $tokenProvider
      * @return GoogleTranslate
      */
     public function setTokenProvider(TokenProviderInterface $tokenProvider) : self
@@ -188,11 +188,11 @@ class GoogleTranslate
     /**
      * Override translate method for static call.
      *
-     * @param string $string
-     * @param string $target
-     * @param string|null $source
-     * @param array $options
-     * @param TokenProviderInterface|null $tokenProvider
+     * @param  string                      $string
+     * @param  string                      $target
+     * @param  string|null                 $source
+     * @param  array                       $options
+     * @param  TokenProviderInterface|null $tokenProvider
      * @return null|string
      * @throws ErrorException If the HTTP request fails
      * @throws UnexpectedValueException If received data cannot be decoded
@@ -213,7 +213,7 @@ class GoogleTranslate
      * This can be called from instance method translate() using __call() magic method.
      * Use $instance->translate($string) instead.
      *
-     * @param string $string String to translate
+     * @param  string $string String to translate
      * @return string|null
      * @throws ErrorException           If the HTTP request fails
      * @throws UnexpectedValueException If received data cannot be decoded
@@ -269,10 +269,12 @@ class GoogleTranslate
             return $responseArray;
         } else {
             if (is_array($responseArray[0])) {
-                return (string) array_reduce($responseArray[0], function ($carry, $item) {
-                    $carry .= $item[0];
-                    return $carry;
-                });
+                return (string) array_reduce(
+                    $responseArray[0], function ($carry, $item) {
+                        $carry .= $item[0];
+                        return $carry;
+                    }
+                );
             } else {
                 return (string) $responseArray[0];
             }
@@ -282,26 +284,30 @@ class GoogleTranslate
     /**
      * Get response array.
      *
-     * @param string $string String to translate
+     * @param  string $string String to translate
      * @throws ErrorException           If the HTTP request fails
      * @throws UnexpectedValueException If received data cannot be decoded
      * @return array|string Response
      */
     public function getResponse(string $string) : array
     {
-        $queryArray = array_merge($this->urlParams, [
+        $queryArray = array_merge(
+            $this->urlParams, [
             'sl'   => $this->source,
             'tl'   => $this->target,
             'tk'   => $this->tokenProvider->generateToken($this->source, $this->target, $string),
             'q'    => $string
-        ]);
+            ]
+        );
 
         $queryUrl = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', http_build_query($queryArray));
 
         try {
-            $response = $this->client->get($this->url, [
+            $response = $this->client->get(
+                $this->url, [
                     'query' => $queryUrl,
-                ] + $this->options);
+                ] + $this->options
+            );
         } catch (RequestException $e) {
             throw new ErrorException($e->getMessage());
         }
@@ -322,7 +328,7 @@ class GoogleTranslate
     /**
      * Check if given locale is valid.
      *
-     * @param string $lang Langauge code to verify
+     * @param  string $lang Langauge code to verify
      * @return bool
      */
     protected function isValidLocale(string $lang) : bool

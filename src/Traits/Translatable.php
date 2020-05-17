@@ -10,7 +10,7 @@ trait Translatable
     /**
      *  Register Model observer.
      *
-     *  @return void
+     * @return void
      */
     public static function bootTranslatable()
     {
@@ -20,8 +20,8 @@ trait Translatable
     /**
      *  Hijack parent's getAttribute to get the translation of the given field instead of its value.
      *
-     *  @param  string  $key  Attribute name
-     *  @return mixed
+     * @param  string $key Attribute name
+     * @return mixed
      */
     public function getAttribute($attribute)
     {
@@ -41,9 +41,9 @@ trait Translatable
     /**
      *  Hijack Eloquent's setAttribute to create a Language Entry, or update the existing one, when setting the value of this attribute.
      *
-     *  @param  string  $attribute    Attribute name
-     *  @param  string  $value  Text value in default locale.
-     *  @return void
+     * @param  string $attribute Attribute name
+     * @param  string $value     Text value in default locale.
+     * @return void
      */
     public function setAttribute($attribute, $value)
     {
@@ -62,7 +62,7 @@ trait Translatable
     /**
      *  Extend parent's attributesToArray so that _translation attributes do not appear in array, and translatable attributes are translated.
      *
-     *  @return array
+     * @return array
      */
     public function attributesToArray()
     {
@@ -81,8 +81,8 @@ trait Translatable
     /**
      *  Get the set translation code for the give attribute
      *
-     *  @param string $attribute
-     *  @return string
+     * @param  string $attribute
+     * @return string
      */
     public function translationCodeFor($attribute)
     {
@@ -92,8 +92,8 @@ trait Translatable
     /**
      *  Check if the attribute being queried is the raw value of a translatable attribute.
      *
-     *  @param  string $attribute
-     *  @return boolean
+     * @param  string $attribute
+     * @return boolean
      */
     public function rawValueRequested($attribute)
     {
@@ -115,8 +115,8 @@ trait Translatable
     /**
      *  Return the translation related to a translatable attribute.
      *
-     *  @param  string $attribute
-     *  @return Translation
+     * @param  string $attribute
+     * @return Translation
      */
     public function translate($attribute)
     {
@@ -128,7 +128,7 @@ trait Translatable
     /**
      *  Check if an attribute is translatable.
      *
-     *  @return boolean
+     * @return boolean
      */
     public function isTranslatable($attribute)
     {
@@ -138,8 +138,8 @@ trait Translatable
     /**
      *  Check if a translation exists for the given attribute.
      *
-     *  @param  string $attribute
-     *  @return boolean
+     * @param  string $attribute
+     * @return boolean
      */
     public function isTranslated($attribute)
     {
@@ -149,7 +149,7 @@ trait Translatable
     /**
      *  Return the translatable attributes array
      *
-     *  @return  array
+     * @return array
      */
     public function translatableAttributes()
     {

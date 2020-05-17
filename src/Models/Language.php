@@ -10,7 +10,8 @@ class Language extends Model
 
     /**
      *  Table name in the database.
-     *  @var string
+     *
+     * @var string
      */
     protected $table = 'languages';
     
@@ -23,7 +24,8 @@ class Language extends Model
 
     /**
      *  List of variables that cannot be mass assigned
-     *  @var array
+     *
+     * @var array
      */
     protected $fillable = ['locale', 'name'];
 
@@ -38,21 +40,22 @@ class Language extends Model
     /**
      *  Returns the name of this language in the current selected language.
      *
-     *  @return string
+     * @return string
      */
     public function getLanguageCodeAttribute()
     {
         return "languages.{$this->locale}";
     }
-	
-	public function getImageUrl( $withBaseUrl = false )
-	{
-		if(!$this->icon) return NULL;
-		
-		$imgDir = '/images/languages/' . $this->id;
-		$url = $imgDir . '/' . $this->icon;
-		
-		return $withBaseUrl ? URL::asset( $url ) : $url;
-	}
+    
+    public function getImageUrl( $withBaseUrl = false )
+    {
+        if(!$this->icon) { return null;
+        }
+        
+        $imgDir = '/images/languages/' . $this->id;
+        $url = $imgDir . '/' . $this->icon;
+        
+        return $withBaseUrl ? URL::asset($url) : $url;
+    }
 
 }

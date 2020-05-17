@@ -43,11 +43,13 @@ abstract class TestCase extends Orchestra
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'testbench');
-        $app['config']->set('database.connections.testbench', [
+        $app['config']->set(
+            'database.connections.testbench', [
             'driver'   => 'sqlite',
             'database' => ':memory:',
             'prefix'   => '',
-        ]);
+            ]
+        );
         $app['config']->set('app.key', 'sF5r4kJy5HEcOEx3NWxUcYj1zLZLHxuu');
         $app['config']->set('translator.source', 'database');
     }
@@ -69,38 +71,60 @@ abstract class TestCase extends Orchestra
      */
     protected function setUpRoutes($app)
     {
-        \Route::get('/', ['middleware' => 'localize', function () {
-            return 'Whoops';
-        }]);
-        \Route::get('/ca', ['middleware' => 'localize', function () {
-            return 'Whoops ca';
-        }]);
-        \Route::post('/', ['middleware' => 'localize', function () {
-            return 'POST answer';
-        }]);
-        \Route::get('/es', ['middleware' => 'localize', function () {
-            return 'Hola mundo';
-        }]);
-        \Route::get('/en', ['middleware' => 'localize', function () {
-            return 'Hello world';
-        }]);
-        \Route::get('/en/locale', ['middleware' => 'localize', function () {
-            return \App::getLocale();
-        }]);
-        \Route::get('/es/locale', ['middleware' => 'localize', function () {
-            return \App::getLocale();
-        }]);
-        \Route::get('/api/v1/en/locale', ['middleware' => 'localize:2', function () {
-            return \App::getLocale();
-        }]);
-        \Route::get('/api/v1/es/locale', ['middleware' => 'localize:2', function () {
-            return \App::getLocale();
-        }]);
-        \Route::get('/api/v1/ca/locale', ['middleware' => 'localize:2', function () {
-            return 'Whoops ca';
-        }]);
-        \Route::post('/welcome', ['middleware' => 'localize', function () {
-            return trans('welcome.title');
-        }]);
+        \Route::get(
+            '/', ['middleware' => 'localize', function () {
+                return 'Whoops';
+            }]
+        );
+        \Route::get(
+            '/ca', ['middleware' => 'localize', function () {
+                return 'Whoops ca';
+            }]
+        );
+        \Route::post(
+            '/', ['middleware' => 'localize', function () {
+                return 'POST answer';
+            }]
+        );
+        \Route::get(
+            '/es', ['middleware' => 'localize', function () {
+                return 'Hola mundo';
+            }]
+        );
+        \Route::get(
+            '/en', ['middleware' => 'localize', function () {
+                return 'Hello world';
+            }]
+        );
+        \Route::get(
+            '/en/locale', ['middleware' => 'localize', function () {
+                return \App::getLocale();
+            }]
+        );
+        \Route::get(
+            '/es/locale', ['middleware' => 'localize', function () {
+                return \App::getLocale();
+            }]
+        );
+        \Route::get(
+            '/api/v1/en/locale', ['middleware' => 'localize:2', function () {
+                return \App::getLocale();
+            }]
+        );
+        \Route::get(
+            '/api/v1/es/locale', ['middleware' => 'localize:2', function () {
+                return \App::getLocale();
+            }]
+        );
+        \Route::get(
+            '/api/v1/ca/locale', ['middleware' => 'localize:2', function () {
+                return 'Whoops ca';
+            }]
+        );
+        \Route::post(
+            '/welcome', ['middleware' => 'localize', function () {
+                return trans('welcome.title');
+            }]
+        );
     }
 }

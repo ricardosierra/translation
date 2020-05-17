@@ -13,11 +13,11 @@ class TranslationMiddleware
     /**
      *  Constructor
      *
-     *  @param  RicardoSierra\Translation\UriLocalizer                      $uriLocalizer
-     *  @param  RicardoSierra\Translation\Repositories\LanguageRepository   $languageRepository
-     *  @param  Illuminate\Config\Repository                        $config                 Laravel config
-     *  @param  Illuminate\View\Factory                             $viewFactory
-     *  @param  Illuminate\Foundation\Application                   $app
+     * @param RicardoSierra\Translation\UriLocalizer                    $uriLocalizer
+     * @param RicardoSierra\Translation\Repositories\LanguageRepository $languageRepository
+     * @param Illuminate\Config\Repository                              $config             Laravel config
+     * @param Illuminate\View\Factory                                   $viewFactory
+     * @param Illuminate\Foundation\Application                         $app
      */
     public function __construct(UriLocalizer $uriLocalizer, LanguageRepository $languageRepository, Config $config, ViewFactory $viewFactory, Application $app)
     {
@@ -31,10 +31,10 @@ class TranslationMiddleware
     /**
      * Handle an incoming request.
      *
-     *  @param  \Illuminate\Http\Request  $request
-     *  @param  \Closure  $next
-     *  @param  integer $segment     Index of the segment containing locale info
-     *  @return mixed
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
+     * @param  integer                  $segment Index of the segment containing locale info
+     * @return mixed
      */
     public function handle($request, Closure $next, $segment = 0)
     {

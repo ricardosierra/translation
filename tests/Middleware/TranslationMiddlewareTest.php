@@ -58,7 +58,7 @@ class TranslationMiddlewareTest extends TestCase
     }
 
     /**
-     *  @test
+     * @test
      */
     public function it_will_ignore_post_requests()
     {
@@ -70,7 +70,7 @@ class TranslationMiddlewareTest extends TestCase
     }
 
     /**
-     *  @test
+     * @test
      */
     public function it_sets_the_app_locale()
     {
@@ -81,7 +81,7 @@ class TranslationMiddlewareTest extends TestCase
     }
 
     /**
-     *  @test
+     * @test
      */
     public function it_detects_the_app_locale_in_custom_segment()
     {
@@ -110,21 +110,25 @@ class TranslationMiddlewareTest extends TestCase
     public function it_keeps_locale_in_post_requests_with_no_locale_set()
     {
         $translationRepository = \App::make(TranslationRepository::class);
-        $trans                 = $translationRepository->create([
+        $trans                 = $translationRepository->create(
+            [
             'locale'    => 'en',
             'namespace' => '*',
             'group'     => 'welcome',
             'item'      => 'title',
             'text'      => 'Welcome',
-        ]);
+            ]
+        );
 
-        $trans = $translationRepository->create([
+        $trans = $translationRepository->create(
+            [
             'locale'    => 'es',
             'namespace' => '*',
             'group'     => 'welcome',
             'item'      => 'title',
             'text'      => 'Bienvenido',
-        ]);
+            ]
+        );
 
         $this->call('GET', '/es');
         $response   = $this->call('POST', '/welcome');

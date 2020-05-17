@@ -36,27 +36,33 @@ class DatabaseLoaderTest extends TestCase
                 ],
             ],
         ];
-        $translation = $this->translationRepository->create([
+        $translation = $this->translationRepository->create(
+            [
             'locale'    => 'es',
             'namespace' => '*',
             'group'     => 'group',
             'item'      => 'simple',
             'text'      => 'text',
-        ]);
-        $translation = $this->translationRepository->create([
+            ]
+        );
+        $translation = $this->translationRepository->create(
+            [
             'locale'    => 'es',
             'namespace' => '*',
             'group'     => 'group',
             'item'      => 'array.item',
             'text'      => 'item',
-        ]);
-        $translation = $this->translationRepository->create([
+            ]
+        );
+        $translation = $this->translationRepository->create(
+            [
             'locale'    => 'es',
             'namespace' => '*',
             'group'     => 'group',
             'item'      => 'array.nested.item',
             'text'      => 'nested',
-        ]);
+            ]
+        );
         $translations = $this->loader->loadSource('es', 'group');
         $this->assertEquals($expected, $translations);
     }

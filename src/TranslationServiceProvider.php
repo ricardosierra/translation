@@ -39,10 +39,12 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
+        $this->publishes(
+            [
             __DIR__ . '/../config/translator.php' => config_path('translator.php'),
             __DIR__ . '/../config/translation.php' => config_path('translation.php'),
-        ]);
+            ]
+        );
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
         $this->registerFileLoader();
@@ -50,9 +52,11 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         /**
          * Provider Antigo
          */
-        Blade::directive('t', function ($args) {
-            return "<?php echo App::make('translation')->translate{$args}; ?>";
-        });
+        Blade::directive(
+            't', function ($args) {
+                return "<?php echo App::make('translation')->translate{$args}; ?>";
+            }
+        );
 
     }
 
@@ -71,9 +75,11 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         $this->registerCacheRepository();
 
         // Bind translation to the IoC.
-        $this->app->bind('translation', function (Application $app) {
-            return new Translation($app);
-        });
+        $this->app->bind(
+            'translation', function (Application $app) {
+                return new Translation($app);
+            }
+        );
 
         // Bind translation contract to IoC.
         $this->app->bind(TranslationInterface::class, 'translation');
@@ -93,7 +99,7 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
     /**
      *  IOC alias provided by this Service Provider.
      *
-     *  @return array
+     * @return array
      */
     public function provides()
     {
@@ -110,50 +116,54 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
     protected function registerLoader()
     {
         $app = $this->app;
-        $this->app->singleton('translation.loader', function ($app) {
-            $defaultLocale = $app['config']->get('app.locale');
-            $loader        = null;
-            $source        = $app['config']->get('translator.source');
+        $this->app->singleton(
+            'translation.loader', function ($app) {
+                $defaultLocale = $app['config']->get('app.locale');
+                $loader        = null;
+                $source        = $app['config']->get('translator.source');
 
-            switch ($source) {
+                switch ($source) {
                 case 'mixed':
                     $laravelFileLoader = new LaravelFileLoader($app['files'], $app->basePath() . '/resources/lang');
                     $fileLoader        = new FileLoader($defaultLocale, $laravelFileLoader);
                     $databaseLoader    = new DatabaseLoader($defaultLocale, $app->make(TranslationRepository::class));
                     $loader            = new MixedLoader($defaultLocale, $fileLoader, $databaseLoader);
-                    break;
+break;
                 case 'mixed_db':
                     $laravelFileLoader = new LaravelFileLoader($app['files'], $app->basePath() . '/resources/lang');
                     $fileLoader        = new FileLoader($defaultLocale, $laravelFileLoader);
                     $databaseLoader    = new DatabaseLoader($defaultLocale, $app->make(TranslationRepository::class));
                     $loader            = new MixedLoader($defaultLocale, $databaseLoader, $fileLoader);
-                    break;
+break;
                 case 'database':
                     $loader = new DatabaseLoader($defaultLocale, $app->make(TranslationRepository::class));
-                    break;
+break;
                 default:case 'files':
-                    $laravelFileLoader = new LaravelFileLoader($app['files'], $app->basePath() . '/resources/lang');
-                    $loader            = new FileLoader($defaultLocale, $laravelFileLoader);
-                    break;
+                        $laravelFileLoader = new LaravelFileLoader($app['files'], $app->basePath() . '/resources/lang');
+                        $loader            = new FileLoader($defaultLocale, $laravelFileLoader);
+break;
+                }
+                if ($app['config']->get('translator.cache.enabled')) {
+                    $loader = new CacheLoader($defaultLocale, $app['translation.cache.repository'], $loader, $app['config']->get('translator.cache.timeout'));
+                }
+                return $loader;
             }
-            if ($app['config']->get('translator.cache.enabled')) {
-                $loader = new CacheLoader($defaultLocale, $app['translation.cache.repository'], $loader, $app['config']->get('translator.cache.timeout'));
-            }
-            return $loader;
-        });
+        );
     }
 
     /**
      *  Register the translation cache repository
      *
-     *  @return void
+     * @return void
      */
     public function registerCacheRepository()
     {
-        $this->app->singleton('translation.cache.repository', function ($app) {
-            $cacheStore = $app['cache']->getStore();
-            return CacheRepositoryFactory::make($cacheStore, $app['config']->get('translator.cache.suffix'));
-        });
+        $this->app->singleton(
+            'translation.cache.repository', function ($app) {
+                $cacheStore = $app['cache']->getStore();
+                return CacheRepositoryFactory::make($cacheStore, $app['config']->get('translator.cache.suffix'));
+            }
+        );
     }
 
     /**
@@ -177,7 +187,7 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
     /**
      *  Flushes the translation cache
      *
-     *  @return void
+     * @return void
      */
     public function registerCacheFlusher()
     {

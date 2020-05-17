@@ -7,7 +7,9 @@ use RicardoSierra\Translation\GoogleTranslate as TranslateClient;
 
 class GoogleTranslate implements Client
 {
-    /** @var TranslateClient */
+    /**
+     * @var TranslateClient 
+     */
     protected $client;
 
     /**

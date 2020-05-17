@@ -10,8 +10,8 @@ class TranslatableObserver
     /**
      *  Save translations when model is saved.
      *
-     *  @param  Model $model
-     *  @return void
+     * @param  Model $model
+     * @return void
      */
     public function saved($model)
     {
@@ -29,8 +29,8 @@ class TranslatableObserver
     /**
      *  Delete translations when model is deleted.
      *
-     *  @param  Model $model
-     *  @return void
+     * @param  Model $model
+     * @return void
      */
     public function deleted($model)
     {

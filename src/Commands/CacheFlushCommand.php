@@ -24,9 +24,9 @@ class CacheFlushCommand extends Command
     /**
      *  Create the cache flushed command
      *
-     *  @param  \Waavi\Lang\Providers\LanguageProvider        $languageRepository
-     *  @param  \Waavi\Lang\Providers\LanguageEntryProvider   $translationRepository
-     *  @param  \Illuminate\Foundation\Application            $app
+     * @param \Waavi\Lang\Providers\LanguageProvider      $languageRepository
+     * @param \Waavi\Lang\Providers\LanguageEntryProvider $translationRepository
+     * @param \Illuminate\Foundation\Application          $app
      */
     public function __construct(CacheRepository $cacheRepository, $cacheEnabled)
     {
@@ -38,7 +38,7 @@ class CacheFlushCommand extends Command
     /**
      *  Execute the console command.
      *
-     *  @return void
+     * @return void
      */
     public function fire()
     {
@@ -54,8 +54,8 @@ class CacheFlushCommand extends Command
      * Execute the console command for Laravel 5.5
      * this laravel version call handle intead of fire
      */
-     public function handle()
-     {
-         $this->fire();
-     }
+    public function handle()
+    {
+        $this->fire();
+    }
 }

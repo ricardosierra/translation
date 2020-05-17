@@ -9,7 +9,7 @@ class UriLocalizer
 {
     /**
      * @param LanguageRepository $languageRepository
-     * @param Request $request
+     * @param Request            $request
      */
     public function __construct(LanguageRepository $languageRepository, Request $request)
     {
@@ -20,8 +20,8 @@ class UriLocalizer
     /**
      *  Returns the locale present in the current url, if any.
      *
-     *  @param  integer $segment     Index of the segment containing locale info
-     *  @return string
+     * @param  integer $segment Index of the segment containing locale info
+     * @return string
      */
     public function localeFromRequest($segment = 0)
     {
@@ -34,10 +34,10 @@ class UriLocalizer
      *  Ex: /home => /es/home, /en/home => /es/home, http://www.domain.com/en/home => /en/home, https:://domain.com/ => /en
      *  If a non zero segment index is given, and the url doesn't have enought segments, the url is unchanged.
      *
-     *  @param  string  $url
-     *  @param  string  $locale
-     *  @param  integer $segment     Index of the segment containing locale info
-     *  @return string
+     * @param  string  $url
+     * @param  string  $locale
+     * @param  integer $segment Index of the segment containing locale info
+     * @return string
      */
     public function localize($url, $locale, $segment = 0)
     {
@@ -54,9 +54,9 @@ class UriLocalizer
     /**
      *  Extract the first valid locale from a url
      *
-     *  @param  string  $url
-     *  @param  integer $segment     Index of the segment containing locale info
-     *  @return string|null $locale
+     * @param  string  $url
+     * @param  integer $segment Index of the segment containing locale info
+     * @return string|null $locale
      */
     public function getLocaleFromUrl($url, $segment = 0)
     {
@@ -67,9 +67,9 @@ class UriLocalizer
      *  Removes the domain and locale (if present) of a given url.
      *  Ex: http://www.domain.com/locale/random => /random, https://www.domain.com/random => /random, http://domain.com/random?param=value => /random?param=value
      *
-     *  @param  string  $url
-     *  @param  integer $segment     Index of the segment containing locale info
-     *  @return string
+     * @param  string  $url
+     * @param  integer $segment Index of the segment containing locale info
+     * @return string
      */
     public function cleanUrl($url, $segment = 0)
     {
@@ -88,9 +88,9 @@ class UriLocalizer
      *      A new "segments" key replaces 'path', with the uri segments in array form ('/es/random/thing' => ['es', 'random', 'thing'])
      *      A 'locale' key is added, with the value of the locale found in the current url
      *
-     *  @param  string  $url
-     *  @param  integer $segment     Index of the segment containing locale info
-     *  @return mixed
+     * @param  string  $url
+     * @param  integer $segment Index of the segment containing locale info
+     * @return mixed
      */
     protected function parseUrl($url, $segment = 0)
     {
@@ -107,7 +107,7 @@ class UriLocalizer
     /**
      *  Returns the uri for the given parsed url based on its segments, query and fragment
      *
-     *  @return string
+     * @return string
      */
     protected function pathFromParsedUrl($parsedUrl)
     {
@@ -124,8 +124,8 @@ class UriLocalizer
     /**
      *  Remove the front slash from a string
      *
-     *  @param  string $path
-     *  @return string
+     * @param  string $path
+     * @return string
      */
     protected function removeFrontSlash($path)
     {
@@ -135,8 +135,8 @@ class UriLocalizer
     /**
      *  Remove the trailing slash from a string
      *
-     *  @param  string $path
-     *  @return string
+     * @param  string $path
+     * @return string
      */
     protected function removeTrailingSlash($path)
     {

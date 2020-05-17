@@ -6,28 +6,31 @@ class MixedLoader extends Loader
 {
     /**
      *  The default locale.
-     *  @var string
+     *
+     * @var string
      */
     protected $defaultLocale;
 
     /**
      *  The file loader.
-     *  @var \RicardoSierra\Translation\Loaders\Loader
+     *
+     * @var \RicardoSierra\Translation\Loaders\Loader
      */
     protected $primaryLoader;
 
     /**
      *  The database loader.
-     *  @var \RicardoSierra\Translation\Loaders\Loader
+     *
+     * @var \RicardoSierra\Translation\Loaders\Loader
      */
     protected $secondaryLoader;
 
     /**
      *  Create a new mixed loader instance.
      *
-     *  @param  string  $defaultLocale
-     *  @param  Loader  $primaryLoader
-     *  @param  Loader  $secondaryLoader
+     * @param string $defaultLocale
+     * @param Loader $primaryLoader
+     * @param Loader $secondaryLoader
      */
     public function __construct($defaultLocale, Loader $primaryLoader, Loader $secondaryLoader)
     {
@@ -39,10 +42,10 @@ class MixedLoader extends Loader
     /**
      *  Load the messages strictly for the given locale.
      *
-     *  @param  string   $locale
-     *  @param  string   $group
-     *  @param  string   $namespace
-     *  @return array
+     * @param  string $locale
+     * @param  string $group
+     * @param  string $namespace
+     * @return array
      */
     public function loadSource($locale, $group, $namespace = '*')
     {
@@ -55,9 +58,9 @@ class MixedLoader extends Loader
     /**
      *  Add a new namespace to the loader.
      *
-     *  @param  string  $namespace
-     *  @param  string  $hint
-     *  @return void
+     * @param  string $namespace
+     * @param  string $hint
+     * @return void
      */
     public function addNamespace($namespace, $hint)
     {
@@ -69,7 +72,7 @@ class MixedLoader extends Loader
     /**
      * Add a new JSON path to the loader.
      *
-     * @param  string  $path
+     * @param  string $path
      * @return void
      */
     public function addJsonPath($path)

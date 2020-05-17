@@ -100,17 +100,19 @@ class LoadTest extends TestCase
     }
 
     /**
-     *  @test
+     * @test
      */
     public function it_doesnt_overwrite_locked_translations()
     {
-        $trans = $this->translationRepository->create([
+        $trans = $this->translationRepository->create(
+            [
             'locale'    => 'en',
             'namespace' => '*',
             'group'     => 'auth',
             'item'      => 'login.label',
             'text'      => 'No override',
-        ]);
+            ]
+        );
         $trans->locked = true;
         $trans->save();
 
@@ -134,7 +136,7 @@ class LoadTest extends TestCase
     }
 
     /**
-     *  @test
+     * @test
      */
     public function it_doesnt_load_empty_arrays()
     {

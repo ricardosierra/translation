@@ -158,27 +158,33 @@ class LanguageRepositoryTest extends TestCase
     {
         $this->assertEquals(0, $this->languageRepository->percentTranslated('es'));
 
-        $this->translationRepository->create([
+        $this->translationRepository->create(
+            [
             'locale'    => 'es',
             'namespace' => '*',
             'group'     => 'group',
             'item'      => 'item',
             'text'      => 'text',
-        ]);
-        $this->translationRepository->create([
+            ]
+        );
+        $this->translationRepository->create(
+            [
             'locale'    => 'en',
             'namespace' => '*',
             'group'     => 'group',
             'item'      => 'item',
             'text'      => 'text',
-        ]);
-        $this->translationRepository->create([
+            ]
+        );
+        $this->translationRepository->create(
+            [
             'locale'    => 'en',
             'namespace' => '*',
             'group'     => 'group',
             'item'      => 'item2',
             'text'      => 'text',
-        ]);
+            ]
+        );
 
         $this->assertEquals(50, $this->languageRepository->percentTranslated('es'));
         $this->assertEquals(100, $this->languageRepository->percentTranslated('en'));

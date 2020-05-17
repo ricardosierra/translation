@@ -54,7 +54,7 @@ class LoadTest extends TestCase
     }
 
     /**
-     *  @testLoadTest
+     * @testLoadTest
      */
     public function it_returns_translation_code_if_text_not_found()
     {

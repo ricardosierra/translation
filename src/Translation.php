@@ -144,10 +144,13 @@ class Translation implements TranslationInterface
             $this->removeCacheLocale($toLocale->code);
 
             // Burst translation cache
-            $this->removeCacheTranslation($this->translationModel->firstOrNew([
-                $toLocale->getForeignKey() => $toLocale->getKey(),
-                'translation'              => $text,
-            ])
+            $this->removeCacheTranslation(
+                $this->translationModel->firstOrNew(
+                    [
+                    $toLocale->getForeignKey() => $toLocale->getKey(),
+                    'translation'              => $text,
+                    ]
+                )
             );
 
             // Attempt translation 1 more time
@@ -185,7 +188,7 @@ class Translation implements TranslationInterface
         try {
             return app()->getLocale();
         } catch (Exception $e) {
-            if($this->request->request->has('locale')){
+            if($this->request->request->has('locale')) {
                 return strtolower($this->request->input('locale'));
             }
             if ($this->request->hasHeader('locale')) {
@@ -197,7 +200,7 @@ class Translation implements TranslationInterface
             if ($this->request->hasSession() and $this->request->session()->has('locale')) {
                 return $this->request->session()->get('locale');
             }
-            if ($locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2) and in_array($locale, \Illuminate\Support\Facades\Config::get('translation.locales'))){
+            if ($locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2) and in_array($locale, \Illuminate\Support\Facades\Config::get('translation.locales'))) {
                 return $locale;
             }
             return $this->getConfigDefaultLocale();
@@ -305,10 +308,12 @@ class Translation implements TranslationInterface
 
         $name = $this->getConfigLocaleByCode($code);
 
-        $locale = $this->localeModel->firstOrCreate([
+        $locale = $this->localeModel->firstOrCreate(
+            [
             'code' => $code,
             'name' => $name,
-        ]);
+            ]
+        );
 
         $this->setCacheLocale($locale);
 
@@ -357,16 +362,20 @@ class Translation implements TranslationInterface
 
         if ($parentTranslation) {
             // If a parent translation is given we're looking for it's child translation.
-            $translation = $this->translationModel->firstOrNew([
+            $translation = $this->translationModel->firstOrNew(
+                [
                 $locale->getForeignKey()                 => $locale->getKey(),
                 $this->translationModel->getForeignKey() => $parentTranslation->getKey(),
-            ]);
+                ]
+            );
         } else {
             // Otherwise we're creating the parent translation.
-            $translation = $this->translationModel->firstOrNew([
+            $translation = $this->translationModel->firstOrNew(
+                [
                 $locale->getForeignKey() => $locale->getKey(),
                 'translation'            => $text,
-            ]);
+                ]
+            );
         }
 
         if (empty($translation->getAttribute('translation'))) {
@@ -651,7 +660,8 @@ class Translation implements TranslationInterface
      * Detects the Default Locale Based on
      */
 
-    public function detectLocale($request){
+    public function detectLocale($request)
+    {
         if (!$request->hasCookie('locale')) {
             $locale = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
 

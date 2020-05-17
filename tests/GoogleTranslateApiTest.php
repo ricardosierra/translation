@@ -10,10 +10,14 @@ use RicardoSierra\Translation\Contracts\Client;
 
 class GoogleTranslateApiTest extends FunctionalTestCase
 {
-    /** @var Guzzle */
+    /**
+     * @var Guzzle 
+     */
     protected $guzzle;
 
-    /** @var Client */
+    /**
+     * @var Client 
+     */
     protected $client;
 
     public function setUp()
@@ -30,7 +34,8 @@ class GoogleTranslateApiTest extends FunctionalTestCase
 
         $response = m::mock(ResponseInterface::class);
 
-        $this->guzzle->shouldReceive('request')->once()->with('GET', 'https://www.googleapis.com/language/translate/v2', [
+        $this->guzzle->shouldReceive('request')->once()->with(
+            'GET', 'https://www.googleapis.com/language/translate/v2', [
             'query' => [
                 'key'    => \Illuminate\Support\Facades\Config::get('translation.clients.api_key'),
                 'format' => 'html',
@@ -38,17 +43,22 @@ class GoogleTranslateApiTest extends FunctionalTestCase
                 'target' => 'es',
                 'q'      => $text,
             ],
-        ])->andReturn($response);
+            ]
+        )->andReturn($response);
 
-        $response->shouldReceive('getBody')->andReturn(json_encode([
-            'data' => [
+        $response->shouldReceive('getBody')->andReturn(
+            json_encode(
+                [
+                'data' => [
                 'translations' => [
                     [
                         'translatedText' => '¡Hola Mundo!',
                     ],
                 ],
-            ],
-        ]));
+                ],
+                ]
+            )
+        );
 
         $this->client->setSource('en');
         $this->client->setTarget('es');
@@ -63,7 +73,8 @@ class GoogleTranslateApiTest extends FunctionalTestCase
 
         $response = m::mock(ResponseInterface::class);
 
-        $this->guzzle->shouldReceive('request')->once()->with('GET', 'https://www.googleapis.com/language/translate/v2', [
+        $this->guzzle->shouldReceive('request')->once()->with(
+            'GET', 'https://www.googleapis.com/language/translate/v2', [
             'query' => [
                 'key'    => \Illuminate\Support\Facades\Config::get('translation.clients.api_key'),
                 'format' => 'html',
@@ -71,10 +82,13 @@ class GoogleTranslateApiTest extends FunctionalTestCase
                 'target' => 'es',
                 'q'      => $text,
             ],
-        ])->andReturn($response);
+            ]
+        )->andReturn($response);
 
-        $response->shouldReceive('getBody')->andReturn(json_encode([
-            'data' => [
+        $response->shouldReceive('getBody')->andReturn(
+            json_encode(
+                [
+                'data' => [
                 'translations' => [
                     [
                         'translatedText' => '¡Hola Mundo!',
@@ -83,8 +97,10 @@ class GoogleTranslateApiTest extends FunctionalTestCase
                         'translatedText' => 'Cerveza',
                     ],
                 ],
-            ],
-        ]));
+                ],
+                ]
+            )
+        );
 
         $this->client->setSource('en');
         $this->client->setTarget('es');
@@ -99,7 +115,8 @@ class GoogleTranslateApiTest extends FunctionalTestCase
 
         $response = m::mock(ResponseInterface::class);
 
-        $this->guzzle->shouldReceive('request')->once()->with('GET', 'https://www.googleapis.com/language/translate/v2', [
+        $this->guzzle->shouldReceive('request')->once()->with(
+            'GET', 'https://www.googleapis.com/language/translate/v2', [
             'query' => [
                 'key'    => \Illuminate\Support\Facades\Config::get('translation.clients.api_key'),
                 'format' => 'html',
@@ -107,7 +124,8 @@ class GoogleTranslateApiTest extends FunctionalTestCase
                 'target' => 'es',
                 'q'      => $text,
             ],
-        ])->andReturn($response);
+            ]
+        )->andReturn($response);
         
         $response->shouldReceive('getBody')->andReturn(json_encode([]));
 
@@ -124,7 +142,8 @@ class GoogleTranslateApiTest extends FunctionalTestCase
 
         $response = m::mock(ResponseInterface::class);
 
-        $this->guzzle->shouldReceive('request')->once()->with('GET', 'https://www.googleapis.com/language/translate/v2', [
+        $this->guzzle->shouldReceive('request')->once()->with(
+            'GET', 'https://www.googleapis.com/language/translate/v2', [
             'query' => [
                 'key'    => \Illuminate\Support\Facades\Config::get('translation.clients.api_key'),
                 'format' => 'html',
@@ -132,7 +151,8 @@ class GoogleTranslateApiTest extends FunctionalTestCase
                 'target' => 'es',
                 'q'      => $text,
             ],
-        ])->andReturn($response);
+            ]
+        )->andReturn($response);
 
         $response->shouldReceive('getBody')->andReturn(json_encode(['error' => 'foo']));
 
