@@ -32,10 +32,7 @@
         "doctrine/dbal": "*"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.0",
-        "orchestra/database": "~3.0",
-        "mockery/mockery": "^0.9.4",
-        "phpunit/phpunit": "~4|~5|~6|~7"
+        "phpunit/phpunit": "~4|~5|~6|~7|~8"
     },
     "archive": {
       "exclude": ["/tests"]
@@ -52,7 +49,9 @@
             "Waavi\\Translation\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "stable",
+    "replace": {
+        "waavi/translation":"2.*"
+    },
     "extra": {
         "laravel": {
             "providers": [
@@ -62,5 +61,12 @@
               "Translation": "RicardoSierra\\Translation\\Facades\\Translation"
             }
         }
-    }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
