@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Http\Middleware;
+namespace RicardoSierra\Translation\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

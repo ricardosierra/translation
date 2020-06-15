@@ -22,17 +22,17 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
-        "illuminate/validation": "*",
-        "illuminate/database": "*",
-        "illuminate/support": "*",
+        "php": ">=7.2",
+        "illuminate/validation": "^5.8|^6.0|^7.0|^8.0",
+        "illuminate/database": "^5.8|^6.0|^7.0|^8.0",
+        "illuminate/support": "^5.8|^6.0|^7.0|^8.0",
         "guzzlehttp/guzzle": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "doctrine/dbal": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4|~5|~6|~7|~8"
+        "phpunit/phpunit": ">=4.0"
     },
     "archive": {
       "exclude": ["/tests"]
@@ -50,7 +50,7 @@
         }
     },
     "replace": {
-        "waavi/translation":"2.*"
+        "waavi/translation":"*"
     },
     "extra": {
         "laravel": {
