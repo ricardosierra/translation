@@ -27,14 +27,14 @@ class Language extends Model
      *
      * @var array
      */
-    protected $fillable = ['locale', 'name'];
+    protected $fillable = ['name'];
 
     /**
      *  Each language may have several translations.
      */
     public function translations()
     {
-        return $this->hasMany(Translation::class, 'locale', 'locale');
+        return $this->hasMany(Translation::class, 'language_code', 'code');
     }
 
     /**
@@ -44,7 +44,7 @@ class Language extends Model
      */
     public function getLanguageCodeAttribute()
     {
-        return "languages.{$this->locale}";
+        return "languages.{$this->language_code}";
     }
     
     public function getImageUrl( $withBaseUrl = false )

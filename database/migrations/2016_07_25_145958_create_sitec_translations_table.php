@@ -61,26 +61,6 @@ class CreateSitecTranslationsTable extends Migration
                 }
             );
         }
-        if (!Schema::hasTable('model_translations')) {
-            Schema::create(
-                'model_translations', function (Blueprint $table) {
-                    $table->increments('id');
-                    $table->string('locale', 10);
-                    $table->string('namespace')->default('*');
-                    $table->string('group');
-                    $table->string('item');
-                    $table->text('text');
-                    $table->boolean('unstable')->default(false);
-                    $table->boolean('locked')->default(false);
-
-                    $table->foreign('locale')->references('code')->on('languages');
-                    $table->unique(['locale', 'namespace', 'group', 'item']);
-
-                    $table->timestamps();
-                    $table->softDeletes();
-                }
-            );
-        }
 
         // Schema::create('translations', function (Blueprint $table) {
         //     $table->increments('id');
@@ -156,7 +136,6 @@ class CreateSitecTranslationsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('locations');
-        Schema::dropIfExists('translations');
         Schema::dropIfExists('languages');
         Schema::dropIfExists('locales');
     }
