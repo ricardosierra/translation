@@ -7,6 +7,126 @@ use Illuminate\Support\Str;
 
 trait Translatable
 {
+
+    /**
+     * From Siravel
+     */
+
+    /**
+     * Get a translation.
+     *
+     * @param string $lang
+     *
+     * @return mixed
+     */
+    public function translation($lang)
+    {
+        return Translation::where('entity_id', $this->id)
+            ->where('entity_type', get_class($this))
+            ->where('entity_data', 'LIKE', '%"lang":"'.$lang.'"%')
+            ->first();
+    }
+
+    /**
+     * Get translation data.
+     *
+     * @param string $lang
+     *
+     * @return array|null
+     */
+    public function translationData($lang)
+    {
+        $translation = $this->translation($lang);
+
+        if ($translation) {
+            return json_decode($translation->entity_data);
+        }
+
+        return null;
+    }
+
+    /**
+     * Get a translations attribute.
+     *
+     * @return array
+     */
+    public function getTranslationsAttribute()
+    {
+        $translationData = [];
+        $translations = Translation::where('entity_id', $this->id)->where('entity_type', get_class($this))->get();
+
+        foreach ($translations as $translation) {
+            $translationData[] = $translation->data->attributes;
+        }
+
+        return $translationData;
+    }
+    /**
+     * COmentado .. Essa funcao é a equivalente do Spatie @todo
+     *
+     * @return array
+     */
+    // public function getTranslationsAttribute(): array
+    // {
+    //     return collect($this->getTranslatableAttributes())
+    //         ->mapWithKeys(function (string $key) {
+    //             return [$key => $this->getTranslations($key)];
+    //         })
+    //         ->toArray();
+    // }
+
+    /**
+     * After the item is created in the database.
+     *
+     * @param object $payload
+     */
+    public function afterCreate($payload)
+    {
+        if (config('cms.auto-translate', false)) {
+            $entry = $payload->toArray();
+
+            unset($entry['created_at']);
+            unset($entry['updated_at']);
+            unset($entry['translations']);
+            unset($entry['is_published']);
+            unset($entry['published_at']);
+            unset($entry['id']);
+
+            foreach (config('cms.languages') as $code => $language) {
+                if ($code != config('cms.default-language')) {
+                    $tr = new GoogleTranslate(config('cms.default-language'), $code);
+                    $translation = [
+                        'lang' => $code,
+                        'template' => 'show',
+                    ];
+
+                    foreach ($entry as $key => $value) {
+                        if (!empty($value)) {
+                            try {
+                                $translation[$key] = json_decode(json_encode($tr->translate(strip_tags($value))));
+                            } catch (Exception $e) {
+                                Log::info('[Translate] Erro> '.$e->getMessage());
+                                unset($translation[$key]);
+                            }
+                        }
+                    }
+
+                    if (isset($translation['url'])) {
+                        $translation['url'] = app(CmsService::class)->convertToURL($translation['url']);
+                    }
+
+                    $entityId = $payload->id;
+                    $entityType = get_class($payload);
+                    app(TranslationRepository::class)->createOrUpdate($entityId, $entityType, $code, $translation);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Peguei da Spatie
+     */
+
     /**
      *  Register Model observer.
      *
@@ -68,11 +188,13 @@ trait Translatable
     {
         $attributes = parent::attributesToArray();
 
-        foreach ($this->translatableAttributes as $translatableAttribute) {
-            if (isset($attributes[$translatableAttribute])) {
-                $attributes[$translatableAttribute] = $this->translate($translatableAttribute);
+        if (property_exists($this, 'translatable')) {
+            foreach ($this->translatableAttributes as $translatableAttribute) {
+                if (isset($attributes[$translatableAttribute])) {
+                    $attributes[$translatableAttribute] = $this->translate($translatableAttribute);
+                }
+                unset($attributes["{$translatableAttribute}_translation"]);
             }
-            unset($attributes["{$translatableAttribute}_translation"]);
         }
 
         return $attributes;
@@ -132,6 +254,9 @@ trait Translatable
      */
     public function isTranslatable($attribute)
     {
+        if (!property_exists($this, 'translatable')) {
+            return false;
+        }
         return in_array($attribute, $this->translatableAttributes);
     }
 
@@ -153,6 +278,11 @@ trait Translatable
      */
     public function translatableAttributes()
     {
+        if (!property_exists($this, 'translatable')) {
+            return [];
+        }
+
         return $this->translatableAttributes;
     }
+
 }
