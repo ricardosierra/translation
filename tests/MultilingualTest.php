@@ -5,7 +5,7 @@ namespace Facilitador\Tests;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Facilitador\Facades\Facilitador;
-use Siravel\Models\Page;
+use Siravel\Models\Negocios\Page;
 use RicardoSierra\Translation\Traits\HasTranslations;
 use RicardoSierra\Translation\Translator;
 use RicardoSierra\Translation\Translator\Collection;

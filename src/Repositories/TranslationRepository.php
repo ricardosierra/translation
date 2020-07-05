@@ -5,7 +5,7 @@ namespace RicardoSierra\Translation\Repositories;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\NamespacedItemResolver;
-use RicardoSierra\Translation\Models\ModelTranslation as Translation;
+use RicardoSierra\Translation\Models\Translation as Translation;
 
 class TranslationRepository extends Repository
 {
