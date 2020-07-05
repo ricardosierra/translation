@@ -276,7 +276,7 @@ The Translation Model:
 
 ```php
 <?php
-    use RicardoSierra\Translation\Traits\HasTranslationsTrait;
+    use RicardoSierra\Translation\Observers\HasTranslations;
     use Illuminate\Database\Eloquent\Model;
     
     class Translation extends Model

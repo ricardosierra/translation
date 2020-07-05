@@ -6,8 +6,8 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Facilitador\Facades\Facilitador;
-use Facilitador\Models\Translation;
-use Facilitador\Translator;
+use RicardoSierra\Translation\Models\Translation;
+use RicardoSierra\Translation\Translator;
 
 /**
  * HasTranslation do Facilitador

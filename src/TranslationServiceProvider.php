@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use RicardoSierra\Translation\Contracts\Translation as TranslationInterface;
 
+use Illuminate\Database\Eloquent\Collection;
+use RicardoSierra\Translation\Translator\Collection as TranslatorCollection;
+
 class TranslationServiceProvider extends LaravelTranslationServiceProvider
 {
     /**
@@ -58,6 +61,8 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
             }
         );
 
+
+        $this->bootTranslatorCollectionMacros();
     }
 
     /**
@@ -94,6 +99,13 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         // Include the helpers file for global `_t()` function
         include __DIR__.'/helpers.php';
+
+
+
+        $this->app['events']->listen(
+            'eloquent.saving:*',
+            '\RicardoSierra\Translation\Observers\Localize'
+        );
     }
 
     /**
@@ -197,5 +209,20 @@ break;
 
         $this->app['command.translator:flush'] = $command;
         $this->commands('command.translator:flush');
+    }
+
+    protected function bootTranslatorCollectionMacros()
+    {
+        Collection::macro(
+            'translate', function () {
+                $transtors = [];
+
+                foreach ($this->all() as $item) {
+                    $transtors[] = call_user_func_array([$item, 'translate'], func_get_args());
+                }
+
+                return new TranslatorCollection($transtors);
+            }
+        );
     }
 }

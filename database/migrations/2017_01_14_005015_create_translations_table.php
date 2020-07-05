@@ -58,7 +58,7 @@ class CreateTranslationsTable extends Migration
                 $table->foreign('language_code')->references('code')->on('languages');
                 $table->foreign('country_code')->references('code')->on('countries');
 
-                $table->unique(['entity_id', 'entity_type', 'language_code', 'country_code']);
+                $table->unique(['entity_id', 'entity_type', 'language_code', 'country_code'], 'translation_unique');
                 // $table->primary(['entity_id', 'entity_type', 'language_code', 'country_code']); @todo
 
                 $table->timestamps();
