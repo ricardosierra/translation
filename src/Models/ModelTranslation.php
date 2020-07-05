@@ -24,7 +24,8 @@ class ModelTranslation extends Model
         'entity_id',
         'entity_type',
         'entity_data',
-        'locale',
+        'country_code',
+        'language_code',
     ];
 
     public function getDataAttribute()

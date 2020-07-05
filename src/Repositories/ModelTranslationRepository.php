@@ -59,7 +59,7 @@ class ModelTranslationRepository
             [
             'entity_id' => $entityId,
             'entity_type' => $entityType,
-            'translation_code' => $language,
+            'language_code' => $language,
             'country_code' => $country,
             ]
         );

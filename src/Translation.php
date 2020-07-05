@@ -96,7 +96,11 @@ class Translation implements TranslationInterface
      */
     public function extractFromLang($lang)
     {
-        return explode('-', $lang);
+        $langs = explode('-', $lang);
+        if (!isset($langs[1])) {
+            $langs[1] = null;
+        }
+        return $langs;
     }
 
     /**
