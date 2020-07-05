@@ -4,10 +4,10 @@ namespace RicardoSierra\Translation\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Boravel\Models\System\Language;
+use RicardoSierra\Translation\Models\Language;
 use Illuminate\Support\Facades\Auth;
 
-class LanguageService extends Service
+class LanguageService// extends Service
 {
 
     public function getActualLanguage()
@@ -55,11 +55,6 @@ class LanguageService extends Service
 
     private function getActualLanguageCode()
     {
-        $cacheLanguage = CacheService::get('language');
-        if (!empty($cacheLanguage)) {
-            return $cacheLanguage;
-        }
-
         return config('app.locale');
     }
 
