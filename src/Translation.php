@@ -90,6 +90,16 @@ class Translation implements TranslationInterface
     }
 
     /**
+     * Pega um code e retorna corretamente translation e pais
+     *
+     * @return void
+     */
+    public function extractFromLang($lang)
+    {
+        return explode('-', $lang);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function translate($text = '', $replacements = [], $toLocale = '', $runOnce = false)

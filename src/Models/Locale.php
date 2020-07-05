@@ -3,11 +3,9 @@
 namespace RicardoSierra\Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use RicardoSierra\Translation\Traits\LocaleTrait;
 
 class Locale extends Model
 {
-    use LocaleTrait;
     
     public $incrementing = false;
     protected $casts = [
@@ -35,11 +33,12 @@ class Locale extends Model
         'display_name',
     ];
 
-    /**
-     * {@inheritdoc].
-     */
-    public function translations()
-    {
-        return $this->hasMany(Translation::class);
-    }
+    // /**
+    //  * {@inheritdoc].
+    //  */
+    // public function translations()
+    // {
+    //     return $this->hasMany(Translation::class); // @todo usar https://github.com/topclaudy/compoships
+    // }
+    
 }

@@ -335,7 +335,7 @@ Example:
 
     class Example extends Model
 	{
-	    use \RicardoSierra\Translation\Traits\Translatable;
+	    use \RicardoSierra\Translation\Traits\HasTranslations;
 	    protected $translatableAttributes = ['title', 'text'];
 	}
 ```

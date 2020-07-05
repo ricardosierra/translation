@@ -6,7 +6,7 @@ use Mockery;
 use RicardoSierra\Translation\Repositories\LanguageRepository;
 use RicardoSierra\Translation\Repositories\TranslationRepository;
 use RicardoSierra\Translation\Test\TestCase;
-use RicardoSierra\Translation\Traits\Translatable;
+use RicardoSierra\Translation\Traits\HasTranslations;
 
 class TranslatableTest extends TestCase
 {
@@ -92,7 +92,7 @@ class TranslatableTest extends TestCase
 
 class Dummy extends Model
 {
-    use Translatable;
+    use HasTranslations;
 
     /**
      * @var array

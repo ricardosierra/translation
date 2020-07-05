@@ -33,4 +33,12 @@ class Country extends Model
             "analyzer" => "standard",
         ],
     );
+
+    /**
+     *  Each language may have several translations.
+     */
+    public function locales()
+    {
+        return $this->hasMany(Locale::class, 'country_code', 'code');
+    }
 }

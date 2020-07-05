@@ -5,7 +5,7 @@ namespace RicardoSierra\Translation\Repositories;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\NamespacedItemResolver;
-use RicardoSierra\Translation\Models\Translation;
+use RicardoSierra\Translation\Models\ModelTranslation as Translation;
 
 class TranslationRepository extends Repository
 {
@@ -486,4 +486,5 @@ class TranslationRepository extends Repository
             ->where("$table.locale", $this->defaultLocale)
             ->whereNull("e.id");
     }
+
 }

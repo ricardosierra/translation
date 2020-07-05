@@ -5,6 +5,9 @@ namespace RicardoSierra\Translation\Traits;
 use RicardoSierra\Translation\Models\Translation;
 use RicardoSierra\Translation\Repositories\TranslationRepository;
 
+/**
+ * For Model
+ */
 class TranslatableObserver
 {
     /**

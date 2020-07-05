@@ -48,13 +48,13 @@ class CreateSitecTranslationsTable extends Migration
         if (!Schema::hasTable('locales')) {
             Schema::create(
                 'locales', function (Blueprint $table) {
-                    $table->string('language')->unique();
-                    $table->string('country')->nullable();
+                    $table->string('language_code');
+                    $table->string('country_code')->nullable();
                 
-                    $table->primary(['language','country']);
+                    $table->primary(['language_code','country_code']);
 
-                    $table->foreign('language')->references('code')->on('languages');
-                    $table->foreign('country')->references('code')->on('countries');
+                    $table->foreign('language_code')->references('code')->on('languages');
+                    $table->foreign('country_code')->references('code')->on('countries');
 
                     $table->timestamps();
                     $table->softDeletes();
@@ -123,8 +123,8 @@ class CreateSitecTranslationsTable extends Migration
          */
         $class = \Illuminate\Support\Facades\Config::get('translation.models.locale');
         $locale = new $class;
-        $locale->country = 'BR';
-        $locale->language = 'pt';
+        $locale->country_code = 'BR';
+        $locale->language_code = 'pt';
         $locale->save();
     }
 

@@ -31,10 +31,20 @@ class Language extends Model
 
     /**
      *  Each language may have several translations.
+     * 
+     * SOmente se nao tiver pais
      */
     public function translations()
     {
-        return $this->hasMany(Translation::class, 'language_code', 'code');
+        return $this->hasMany(Translation::class, 'locale', 'code');
+    }
+
+    /**
+     *  Each language may have several translations.
+     */
+    public function locales()
+    {
+        return $this->hasMany(Locale::class, 'language_code', 'code');
     }
 
     /**
