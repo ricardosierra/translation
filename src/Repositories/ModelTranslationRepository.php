@@ -24,7 +24,10 @@ class ModelTranslationRepository
 
     public function getTranslation($code, $type, $lang)
     {
-        list($language, $country) = Translation::extractFromLang($lang);
+        list($language, $country) = [
+            Translation::getLanguageCode($lang),
+            Translation::getCountryCode($lang)
+        ];
         if (
             $trans = ModelTranslation::where('entity_id', $code)
             ->where('entity_type', $type)
@@ -54,7 +57,10 @@ class ModelTranslationRepository
      */
     public function createOrUpdate($entityId, $entityType, $lang, $payload)
     {
-        list($language, $country) = Translation::extractFromLang($lang);
+        list($language, $country) = [
+            Translation::getLanguageCode($lang),
+            Translation::getCountryCode($lang)
+        ];
         $translation = $this->model->firstOrCreate(
             [
             'entity_id' => $entityId,

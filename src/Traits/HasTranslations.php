@@ -20,6 +20,10 @@ use Translation\Exceptions\AttributeIsNotTranslatable;
  */
 trait HasTranslations
 {
+    // @todo retirado tava dando pau, veio do cms
+    // protected $appends = [
+    //     'translations',
+    // ];
 
     /**
      * From Siravel
@@ -53,54 +57,6 @@ trait HasTranslations
         }
 
         return null;
-    }
-
-    /**
-     * After the item is created in the database.
-     *
-     * @param object $payload
-     */
-    public function afterCreate($payload)
-    {
-        if (config('cms.auto-translate', false)) {
-            $entry = $payload->toArray();
-
-            unset($entry['created_at']);
-            unset($entry['updated_at']);
-            unset($entry['translations']);
-            unset($entry['is_published']);
-            unset($entry['published_at']);
-            unset($entry['id']);
-
-            foreach (config('cms.languages') as $code => $language) {
-                if ($code != config('cms.default-language')) {
-                    $tr = new GoogleTranslate(config('cms.default-language'), $code);
-                    $translation = [
-                        'lang' => $code,
-                        'template' => 'show',
-                    ];
-
-                    foreach ($entry as $key => $value) {
-                        if (!empty($value)) {
-                            try {
-                                $translation[$key] = json_decode(json_encode($tr->translate(strip_tags($value))));
-                            } catch (Exception $e) {
-                                Log::info('[Translate] Erro> '.$e->getMessage());
-                                unset($translation[$key]);
-                            }
-                        }
-                    }
-
-                    if (isset($translation['url'])) {
-                        $translation['url'] = app(CmsService::class)->convertToURL($translation['url']);
-                    }
-
-                    $entityId = $payload->id;
-                    $entityType = get_class($payload);
-                    app(ModelTranslationRepository::class)->createOrUpdate($entityId, $entityType, $code, $translation);
-                }
-            }
-        }
     }
     
     /**
@@ -333,5 +289,19 @@ trait HasTranslations
         );
     }
 
+
+    /**
+     * Get a model as a translatable object (From CMS)
+     *
+     * @return Object
+     */
+    public function asObject()
+    {
+        if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en')) {
+            return $this->translationData(request('lang'));
+        }
+
+        return $this;
+    }
 
 }
