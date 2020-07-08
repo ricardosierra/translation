@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Loaders;
+namespace Translation\Test\Loaders;
 
 use Illuminate\Translation\FileLoader as LaravelFileLoader;
-use RicardoSierra\Translation\Loaders\FileLoader;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Loaders\FileLoader;
+use Translation\Test\TestCase;
 use \Mockery;
 
 class FileLoaderTest extends TestCase

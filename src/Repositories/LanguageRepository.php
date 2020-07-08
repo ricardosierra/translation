@@ -1,18 +1,18 @@
 <?php
 
-namespace RicardoSierra\Translation\Repositories;
+namespace Translation\Repositories;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\Application;
 use Illuminate\Validation\Factory as Validator;
-use RicardoSierra\Translation\Models\Language;
+use Translation\Models\Language;
 
 class LanguageRepository extends Repository
 {
     /**
      * The model being queried.
      *
-     * @var \RicardoSierra\Translation\Models\Language
+     * @var \Translation\Models\Language
      */
     protected $model;
 
@@ -54,7 +54,7 @@ class LanguageRepository extends Repository
     /**
      *  Constructor
      *
-     * @param  \RicardoSierra\Translation\Models\Language $model     Bade model for queries.
+     * @param  \Translation\Models\Language $model     Bade model for queries.
      * @param  \Illuminate\Validation\Validator           $validator Validator factory
      * @return void
      */

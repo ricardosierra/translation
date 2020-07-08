@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Localizer;
+namespace Translation\Test\Localizer;
 
 // PHPUnit wrappers:
 use UriLocalizer;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Test\TestCase;
 
 class LocalizeUriTest extends TestCase
 {

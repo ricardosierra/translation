@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Models;
+namespace Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

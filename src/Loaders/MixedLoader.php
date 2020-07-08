@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Loaders;
+namespace Translation\Loaders;
 
 class MixedLoader extends Loader
 {
@@ -14,14 +14,14 @@ class MixedLoader extends Loader
     /**
      *  The file loader.
      *
-     * @var \RicardoSierra\Translation\Loaders\Loader
+     * @var \Translation\Loaders\Loader
      */
     protected $primaryLoader;
 
     /**
      *  The database loader.
      *
-     * @var \RicardoSierra\Translation\Loaders\Loader
+     * @var \Translation\Loaders\Loader
      */
     protected $secondaryLoader;
 

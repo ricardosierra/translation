@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Services\Traits;
+namespace Translation\Services\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;

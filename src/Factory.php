@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation;
+namespace Translation;
 
 class Factory extends \Illuminate\Validation\Factory
 {

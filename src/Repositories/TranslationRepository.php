@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation\Repositories;
+namespace Translation\Repositories;
 
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\NamespacedItemResolver;
-use RicardoSierra\Translation\Models\Translation as Translation;
+use Translation\Models\Translation as Translation;
 
 class TranslationRepository extends Repository
 {
@@ -17,7 +17,7 @@ class TranslationRepository extends Repository
     /**
      * The model being queried.
      *
-     * @var \RicardoSierra\Translation\Models\Translation
+     * @var \Translation\Models\Translation
      */
     protected $model;
 
@@ -38,7 +38,7 @@ class TranslationRepository extends Repository
     /**
      *  Constructor
      *
-     * @param  \RicardoSierra\Translation\Models\Translation $model     Bade model for queries.
+     * @param  \Translation\Models\Translation $model     Bade model for queries.
      * @param  \Illuminate\Validation\Validator              $validator Validator factory
      * @return void
      */

@@ -1,14 +1,14 @@
 <?php
 
-namespace RicardoSierra\Translation\Traits;
+namespace Translation\Traits;
 
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use RicardoSierra\Translation\GoogleTranslate;
+use Translation\GoogleTranslate;
 use Illuminate\Support\Facades\Config;
-use RicardoSierra\Translation\Repositories\ModelTranslationRepository;
-use RicardoSierra\Translation\Events\TranslationHasBeenSet;
-use RicardoSierra\Translation\Exceptions\AttributeIsNotTranslatable;
+use Translation\Repositories\ModelTranslationRepository;
+use Translation\Events\TranslationHasBeenSet;
+use Translation\Exceptions\AttributeIsNotTranslatable;
 
 /**
  * Model has Translations

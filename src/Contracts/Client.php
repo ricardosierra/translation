@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Contracts;
+namespace Translation\Contracts;
 
 interface Client
 {

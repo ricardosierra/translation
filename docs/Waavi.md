@@ -68,7 +68,7 @@ Once installed, in your project's config/app.php file replace the following entr
 
 with:
 
-	RicardoSierra\Translation\TranslationServiceProvider::class
+	Translation\TranslationServiceProvider::class
 
 Remove your config cache:
 
@@ -76,7 +76,7 @@ Remove your config cache:
 
 Publish both the configuration file and the migrations:
 
-	php artisan vendor:publish --provider="RicardoSierra\Translation\TranslationServiceProvider"
+	php artisan vendor:publish --provider="Translation\TranslationServiceProvider"
 
 Execute the database migrations:
 
@@ -223,7 +223,7 @@ In order to access the translation cache, add to your config/app.php files, the 
 ```php
     'aliases'         => [
         /* ... */
-        'TranslationCache' => \RicardoSierra\Translation\Facades\TranslationCache::class,
+        'TranslationCache' => \Translation\Facades\TranslationCache::class,
     ]
 ```
 Once done, you may clear the whole translation cache by calling:
@@ -267,7 +267,7 @@ validationErrors();							| Get validation errors for create and update methods
 
 ### Managing Languages
 
-Language management should be done through the **\RicardoSierra\Translation\Repositories\LanguageRepository** to ensure proper data validation before inserts and updates. It is recommended that you instantiate this class through Dependency Injection.
+Language management should be done through the **\Translation\Repositories\LanguageRepository** to ensure proper data validation before inserts and updates. It is recommended that you instantiate this class through Dependency Injection.
 
 A valid Language record requires both its name and locale to be unique. It is recommended you use the native name for each language (Ex: English, Español, Français)
 
@@ -288,7 +288,7 @@ percentTranslated($locale);				| Returns the percent translated for the given lo
 
 ### Managing Translations
 
-Translation management should be done through the **\RicardoSierra\Translation\Repositories\TranslationRepository** to ensure proper data validation before inserts and updates. It is recommended that you instantiate this class through Dependency Injection.
+Translation management should be done through the **\Translation\Repositories\TranslationRepository** to ensure proper data validation before inserts and updates. It is recommended that you instantiate this class through Dependency Injection.
 
 A valid translation entry cannot have the same locale and language code than another.
 
@@ -317,7 +317,7 @@ Things to consider:
 You can also use the translation management system to manage your model attributes translations. To do this, you only need to:
 
  - Make sure either the database or mixed source are set.
- - Make sure your models use the RicardoSierra\Translation\Translatable\Trait
+ - Make sure your models use the Translation\Translatable\Trait
  - In your model, add a translatableAttributes array with the names of the attributes you wish to be available for translation.
  - For every field you wish to translate, make sure there is a corresponding attributeName_translation field in your database.
 
@@ -335,14 +335,14 @@ Example:
 
     class Example extends Model
 	{
-	    use \RicardoSierra\Translation\Traits\HasTranslations;
+	    use \Translation\Traits\HasTranslations;
 	    protected $translatableAttributes = ['title', 'text'];
 	}
 ```
 
 ## Uri localization
 
-You may use RicardoSierra\Translation\Middleware\TranslationMiddleware to make sure all of your urls are properly localized. The TranslationMiddleware will only redirect GET requests that do not have a locale in them.
+You may use Translation\Middleware\TranslationMiddleware to make sure all of your urls are properly localized. The TranslationMiddleware will only redirect GET requests that do not have a locale in them.
 
 For example, if a user visits the url /home, the following would happen:
 
@@ -363,7 +363,7 @@ You may choose to activate this Middleware globally by adding the middleware to 
 ```php
 	protected $middleware = [
 		/* ... */
-        \RicardoSierra\Translation\Middleware\TranslationMiddleware::class,
+        \Translation\Middleware\TranslationMiddleware::class,
     ]
 ```
 Or to apply it selectively through the **'localize'** route middleware, which is already registered when installing the package through the ServiceProvider.
@@ -373,7 +373,7 @@ It is recommended you add the following alias to your config/app.php aliases:
 ```php
 	'aliases'         => [
 		/* ... */
-		'UriLocalizer'	=> RicardoSierra\Translation\Facades\UriLocalizer::class,
+		'UriLocalizer'	=> Translation\Facades\UriLocalizer::class,
     ];
 ```
 

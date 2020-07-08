@@ -1,9 +1,9 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Localizer;
+namespace Translation\Test\Localizer;
 
 use UriLocalizer;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Test\TestCase;
 
 class CleanUrlTest extends TestCase
 {

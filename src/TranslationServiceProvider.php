@@ -1,30 +1,30 @@
 <?php
-namespace RicardoSierra\Translation;
+namespace Translation;
 
 use Illuminate\Translation\FileLoader as LaravelFileLoader;
 use Illuminate\Translation\TranslationServiceProvider as LaravelTranslationServiceProvider;
-use RicardoSierra\Translation\Cache\RepositoryFactory as CacheRepositoryFactory;
-use RicardoSierra\Translation\Commands\CacheFlushCommand;
-use RicardoSierra\Translation\Commands\FileLoaderCommand;
-use RicardoSierra\Translation\Loaders\CacheLoader;
-use RicardoSierra\Translation\Loaders\DatabaseLoader;
-use RicardoSierra\Translation\Loaders\FileLoader;
-use RicardoSierra\Translation\Loaders\MixedLoader;
-use RicardoSierra\Translation\Middleware\TranslationMiddleware;
-use RicardoSierra\Translation\Models\Translation as TranslationModel;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
-use RicardoSierra\Translation\Repositories\TranslationRepository;
-use RicardoSierra\Translation\Routes\ResourceRegistrar;
+use Translation\Cache\RepositoryFactory as CacheRepositoryFactory;
+use Translation\Commands\CacheFlushCommand;
+use Translation\Commands\FileLoaderCommand;
+use Translation\Loaders\CacheLoader;
+use Translation\Loaders\DatabaseLoader;
+use Translation\Loaders\FileLoader;
+use Translation\Loaders\MixedLoader;
+use Translation\Middleware\TranslationMiddleware;
+use Translation\Models\Translation as TranslationModel;
+use Translation\Repositories\LanguageRepository;
+use Translation\Repositories\TranslationRepository;
+use Translation\Routes\ResourceRegistrar;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use RicardoSierra\Translation\Contracts\Translation as TranslationInterface;
+use Translation\Contracts\Translation as TranslationInterface;
 
 use Illuminate\Database\Eloquent\Collection;
-use RicardoSierra\Translation\Translator\Collection as TranslatorCollection;
+use Translation\Translator\Collection as TranslatorCollection;
 
 class TranslationServiceProvider extends LaravelTranslationServiceProvider
 {
@@ -104,7 +104,7 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         $this->app['events']->listen(
             'eloquent.saving:*',
-            '\RicardoSierra\Translation\Observers\Localize'
+            '\Translation\Observers\Localize'
         );
     }
 

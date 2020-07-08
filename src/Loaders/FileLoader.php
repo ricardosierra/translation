@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Loaders;
+namespace Translation\Loaders;
 
 use Illuminate\Translation\FileLoader as LaravelFileLoader;
 

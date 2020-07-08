@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation;
+namespace Translation;
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
 use JsonSerializable;
-use RicardoSierra\Translation\Facades\Facilitador as FacilitadorFacade;
+use Translation\Facades\Facilitador as FacilitadorFacade;
 
 class Translator implements ArrayAccess, JsonSerializable
 {
@@ -60,7 +60,7 @@ class Translator implements ArrayAccess, JsonSerializable
             if ($attribute['exists']) {
                 $translation = $this->getTranslationModel($key);
             } else {
-                $translation = RicardoSierra\TranslationFacade::model('Translation')->where('table_name', $this->model->getTable())
+                $translation = TranslationFacade::model('Translation')->where('table_name', $this->model->getTable())
                     ->where('column_name', $key)
                     ->where('foreign_key', $this->model->getKey())
                     ->where('locale', $this->locale)
@@ -68,7 +68,7 @@ class Translator implements ArrayAccess, JsonSerializable
             }
 
             if (is_null($translation)) {
-                $translation = RicardoSierra\TranslationFacade::model('Translation');
+                $translation = TranslationFacade::model('Translation');
             }
 
             $translation->fill(
@@ -237,7 +237,7 @@ class Translator implements ArrayAccess, JsonSerializable
             return false;
         }
 
-        $translation = RicardoSierra\TranslationFacade::model('Translation');
+        $translation = TranslationFacade::model('Translation');
         $translation->fill(
             [
             'table_name'  => $this->model->getTable(),
@@ -280,7 +280,7 @@ class Translator implements ArrayAccess, JsonSerializable
         $translations = $this->model->getRelation('translations');
         $locale = $this->locale;
 
-        RicardoSierra\TranslationFacade::model('Translation')->where('table_name', $this->model->getTable())
+        TranslationFacade::model('Translation')->where('table_name', $this->model->getTable())
             ->where('column_name', $key)
             ->where('foreign_key', $this->model->getKey())
             ->where('locale', $locale)
@@ -311,7 +311,7 @@ class Translator implements ArrayAccess, JsonSerializable
     public function __call($method, array $arguments)
     {
         if (!$this->model->hasTranslatorMethod($method)) {
-            throw new \Exception('Call to undefined method RicardoSierra\Translation\Translator::'.$method.'()');
+            throw new \Exception('Call to undefined method Translation\Translator::'.$method.'()');
         }
 
         return call_user_func_array([$this, 'runTranslatorMethod'], [$method, $arguments]);

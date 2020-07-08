@@ -1,9 +1,9 @@
 <?php
 
-namespace RicardoSierra\Translation\Models;
+namespace Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use RicardoSierra\Translation\Traits\HasTranslationsTrait;
+use Translation\Traits\HasTranslationsTrait;
 
 class ModelTranslation extends Model
 {

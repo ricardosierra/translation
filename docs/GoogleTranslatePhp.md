@@ -35,7 +35,7 @@ composer require stichoza/google-translate-php
 Create GoogleTranslate object
 
 ```php
-use RicardoSierra\Translation\GoogleTranslate;
+use Translation\GoogleTranslate;
 
 $tr = new GoogleTranslate('en'); // Translates into English
 ```
@@ -136,10 +136,10 @@ For more information, see [Creating a Client](http://guzzle.readthedocs.org/en/l
 
 You can override the token generator class by passing a generator object as a fourth parameter of constructor or just use `setTokenProvider` method.
 
-Generator must implement `RicardoSierra\Translation\Tokens\TokenProviderInterface`.
+Generator must implement `Translation\Tokens\TokenProviderInterface`.
 
 ```php
-use RicardoSierra\Translation\Tokens\TokenProviderInterface;
+use Translation\Tokens\TokenProviderInterface;
 
 class MyTokenGenerator implements TokenProviderInterface
 {

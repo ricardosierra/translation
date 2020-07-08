@@ -1,13 +1,13 @@
 <?php
 
-namespace RicardoSierra\Translation;
+namespace Translation;
 
 use ErrorException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
-use RicardoSierra\Translation\Contracts\Client as ClientInterface;
-use RicardoSierra\Translation\Contracts\Translation as TranslationInterface;
+use Translation\Contracts\Client as ClientInterface;
+use Translation\Contracts\Translation as TranslationInterface;
 use UnexpectedValueException;
 use Exception;
 

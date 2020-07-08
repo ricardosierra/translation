@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Loaders;
+namespace Translation\Test\Loaders;
 
-use RicardoSierra\Translation\Loaders\DatabaseLoader;
-use RicardoSierra\Translation\Loaders\FileLoader;
-use RicardoSierra\Translation\Loaders\MixedLoader;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Loaders\DatabaseLoader;
+use Translation\Loaders\FileLoader;
+use Translation\Loaders\MixedLoader;
+use Translation\Test\TestCase;
 use \Mockery;
 
 class MixedLoaderTest extends TestCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace RicardoSierra\Translation\Loaders;
+namespace Translation\Loaders;
 
-use RicardoSierra\Translation\Repositories\TranslationRepository;
+use Translation\Repositories\TranslationRepository;
 
 class DatabaseLoader extends Loader
 {
@@ -16,7 +16,7 @@ class DatabaseLoader extends Loader
     /**
      *  Translations repository.
      *
-     * @var \RicardoSierra\Translation\Repositories\TranslationRepository
+     * @var \Translation\Repositories\TranslationRepository
      */
     protected $translationRepository;
 
@@ -24,7 +24,7 @@ class DatabaseLoader extends Loader
      *  Create a new mixed loader instance.
      *
      * @param string                                                        $defaultLocale
-     * @param \RicardoSierra\Translation\Repositories\TranslationRepository $translationRepository
+     * @param \Translation\Repositories\TranslationRepository $translationRepository
      */
     public function __construct($defaultLocale, TranslationRepository $translationRepository)
     {

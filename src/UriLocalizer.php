@@ -1,9 +1,9 @@
 <?php
 
-namespace RicardoSierra\Translation;
+namespace Translation;
 
 use Illuminate\Http\Request;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
+use Translation\Repositories\LanguageRepository;
 
 class UriLocalizer
 {

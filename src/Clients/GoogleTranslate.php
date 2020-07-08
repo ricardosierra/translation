@@ -1,9 +1,9 @@
 <?php
 
-namespace RicardoSierra\Translation\Clients;
+namespace Translation\Clients;
 
-use RicardoSierra\Translation\Contracts\Client;
-use RicardoSierra\Translation\GoogleTranslate as TranslateClient;
+use Translation\Contracts\Client;
+use Translation\GoogleTranslate as TranslateClient;
 
 class GoogleTranslate implements Client
 {

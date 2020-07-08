@@ -1,8 +1,8 @@
 <?php
-namespace RicardoSierra\Translation\Test\Middleware;
+namespace Translation\Test\Middleware;
 
-use RicardoSierra\Translation\Repositories\TranslationRepository;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Repositories\TranslationRepository;
+use Translation\Test\TestCase;
 
 class TranslationMiddlewareTest extends TestCase
 {

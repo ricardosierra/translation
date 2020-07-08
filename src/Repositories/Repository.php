@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Repositories;
+namespace Translation\Repositories;
 
 class Repository
 {

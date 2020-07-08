@@ -1,9 +1,9 @@
 <?php
 
-namespace RicardoSierra\Translation\Traits;
+namespace Translation\Traits;
 
-use RicardoSierra\Translation\Models\Translation;
-use RicardoSierra\Translation\Repositories\TranslationRepository;
+use Translation\Models\Translation;
+use Translation\Repositories\TranslationRepository;
 
 /**
  * For Model

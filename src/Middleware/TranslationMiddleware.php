@@ -1,20 +1,20 @@
 <?php
-namespace RicardoSierra\Translation\Middleware;
+namespace Translation\Middleware;
 
 use Closure;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\Application;
 use Illuminate\View\Factory as ViewFactory;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
-use RicardoSierra\Translation\UriLocalizer;
+use Translation\Repositories\LanguageRepository;
+use Translation\UriLocalizer;
 
 class TranslationMiddleware
 {
     /**
      *  Constructor
      *
-     * @param RicardoSierra\Translation\UriLocalizer                    $uriLocalizer
-     * @param RicardoSierra\Translation\Repositories\LanguageRepository $languageRepository
+     * @param Translation\UriLocalizer                    $uriLocalizer
+     * @param Translation\Repositories\LanguageRepository $languageRepository
      * @param Illuminate\Config\Repository                              $config             Laravel config
      * @param Illuminate\View\Factory                                   $viewFactory
      * @param Illuminate\Foundation\Application                         $app

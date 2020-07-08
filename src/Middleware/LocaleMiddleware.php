@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Middleware;
+namespace Translation\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use RicardoSierra\Translation\Facades\Translation;
+use Translation\Facades\Translation;
 
 class LocaleMiddleware
 {

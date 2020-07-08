@@ -1,9 +1,9 @@
 <?php
 
-namespace RicardoSierra\Translation\Tests;
+namespace Translation\Tests;
 
 use PHPUnit\Framework\TestCase;
-use RicardoSierra\Translation\GoogleTranslate;
+use Translation\GoogleTranslate;
 
 class LanguageDetectionTest extends TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Loaders;
+namespace Translation\Test\Loaders;
 
-use RicardoSierra\Translation\Loaders\DatabaseLoader;
-use RicardoSierra\Translation\Repositories\TranslationRepository;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Loaders\DatabaseLoader;
+use Translation\Repositories\TranslationRepository;
+use Translation\Test\TestCase;
 use \Mockery;
 
 class DatabaseLoaderTest extends TestCase

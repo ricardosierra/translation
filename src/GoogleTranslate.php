@@ -1,13 +1,13 @@
 <?php
 
-namespace RicardoSierra\Translation;
+namespace Translation;
 
 use BadMethodCallException;
 use ErrorException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use RicardoSierra\Translation\Tokens\GoogleTokenGenerator;
-use RicardoSierra\Translation\Tokens\TokenProviderInterface;
+use Translation\Tokens\GoogleTokenGenerator;
+use Translation\Tokens\TokenProviderInterface;
 use UnexpectedValueException;
 
 /**

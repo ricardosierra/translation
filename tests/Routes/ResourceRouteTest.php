@@ -3,9 +3,9 @@
 namespace Waavi\Test\Routes;
 
 use Illuminate\Routing\Router;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
-use RicardoSierra\Translation\Routes\ResourceRegistrar;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Repositories\LanguageRepository;
+use Translation\Routes\ResourceRegistrar;
+use Translation\Test\TestCase;
 use \Mockery;
 
 class ResourceRouteTest extends TestCase

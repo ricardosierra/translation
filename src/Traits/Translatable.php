@@ -1,13 +1,13 @@
 <?php
 
-namespace RicardoSierra\Translation\Traits;
+namespace Translation\Traits;
 
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Facilitador\Facades\Facilitador;
-use RicardoSierra\Translation\Models\Translation;
-use RicardoSierra\Translation\Translator;
+use Translation\Models\Translation;
+use Translation\Translator;
 
 /**
  * HasTranslation do Facilitador

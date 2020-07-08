@@ -1,12 +1,12 @@
 <?php
-namespace RicardoSierra\Translation\Test\Traits;
+namespace Translation\Test\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Mockery;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
-use RicardoSierra\Translation\Repositories\TranslationRepository;
-use RicardoSierra\Translation\Test\TestCase;
-use RicardoSierra\Translation\Traits\HasTranslations;
+use Translation\Repositories\LanguageRepository;
+use Translation\Repositories\TranslationRepository;
+use Translation\Test\TestCase;
+use Translation\Traits\HasTranslations;
 
 class TranslatableTest extends TestCase
 {
@@ -60,7 +60,7 @@ class TranslatableTest extends TestCase
      */
     public function it_flushes_cache()
     {
-        $cacheMock = Mockery::mock(\RicardoSierra\Translation\Cache\SimpleRepository::class);
+        $cacheMock = Mockery::mock(\Translation\Cache\SimpleRepository::class);
         $this->app->bind(
             'translation.cache.repository', function ($app) use ($cacheMock) {
                 return $cacheMock;

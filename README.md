@@ -77,15 +77,15 @@ Require the translation package
 
 Add the service provider to your `config/app.php` config file (Laravel 5.8 and lower)
 
-    'RicardoSierra\Translation\TranslationServiceProvider',
+    'Translation\TranslationServiceProvider',
     
 Add the facade to your aliases in your `config/app.php` config file (Laravel 5.8 and lower)
 
-    'Translation' => 'RicardoSierra\Translation\Facades\Translation',
+    'Translation' => 'Translation\Facades\Translation',
     
 Publish the migrations
 
-    php artisan vendor:publish --provider="RicardoSierra\Translation\TranslationServiceProvider"
+    php artisan vendor:publish --provider="Translation\TranslationServiceProvider"
     
 Run the migrations
 
@@ -190,7 +190,7 @@ As of `v1.3.4` you can now inject the `Translation` contract into your controlle
 ```php
 <?php
     
-use RicardoSierra\Translation\Contracts\Translation;
+use Translation\Contracts\Translation;
 use App\Http\Controllers\Controller;
 use App\Http\Blog;
 
@@ -236,7 +236,7 @@ The Locale Model:
 
 ```php
 <?php    
-    use RicardoSierra\Translation\Traits\LocaleTrait;
+    use Translation\Traits\LocaleTrait;
     use Illuminate\Database\Eloquent\Model;
     
     class Locale extends Model
@@ -276,7 +276,7 @@ The Translation Model:
 
 ```php
 <?php
-    use RicardoSierra\Translation\Observers\HasTranslations;
+    use Translation\Observers\HasTranslations;
     use Illuminate\Database\Eloquent\Model;
     
     class Translation extends Model
@@ -367,7 +367,7 @@ the locale middleware:
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         
         // Insert Locale Middleware
-        'locale' => \RicardoSierra\Translation\Middleware\LocaleMiddleware::class
+        'locale' => \Translation\Middleware\LocaleMiddleware::class
     ];
 
 

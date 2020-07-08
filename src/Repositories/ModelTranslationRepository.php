@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation\Repositories;
+namespace Translation\Repositories;
 
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\NamespacedItemResolver;
-use RicardoSierra\Translation\Models\ModelTranslation;
+use Translation\Models\ModelTranslation;
 use Carbon\Carbon;
 use Translation;
 

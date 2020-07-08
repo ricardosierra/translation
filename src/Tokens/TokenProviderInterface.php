@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Tokens;
+namespace Translation\Tokens;
 
 /**
  * A nice interface for providing tokens.

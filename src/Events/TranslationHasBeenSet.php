@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Events;
+namespace Translation\Events;
 
 class TranslationHasBeenSet
 {
-    /** @var \RicardoSierra\Translation\Translatable */
+    /** @var \Translation\Translatable */
     public $model;
 
     /** @var string */

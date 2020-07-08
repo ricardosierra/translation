@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Commands;
+namespace Translation\Test\Commands;
 
-use RicardoSierra\Translation\Commands\FileLoaderCommand;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
-use RicardoSierra\Translation\Repositories\TranslationRepository;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Commands\FileLoaderCommand;
+use Translation\Repositories\LanguageRepository;
+use Translation\Repositories\TranslationRepository;
+use Translation\Test\TestCase;
 
 class LoadTest extends TestCase
 {

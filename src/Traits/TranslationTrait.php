@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Traits;
+namespace Translation\Traits;
 
 trait TranslationTrait
 {

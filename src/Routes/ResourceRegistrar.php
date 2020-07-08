@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Routes;
+namespace Translation\Routes;
 
 use Illuminate\Routing\ResourceRegistrar as LRR;
 use Illuminate\Routing\Router;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
+use Translation\Repositories\LanguageRepository;
 
 class ResourceRegistrar extends LRR
 {

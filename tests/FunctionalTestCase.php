@@ -1,9 +1,9 @@
 <?php
 
-namespace RicardoSierra\Translation\Tests;
+namespace Translation\Tests;
 
 use Orchestra\Testbench\TestCase;
-use RicardoSierra\Translation\TranslationServiceProvider;
+use Translation\TranslationServiceProvider;
 
 class FunctionalTestCase extends TestCase
 {
@@ -63,7 +63,7 @@ class FunctionalTestCase extends TestCase
      */
     protected function getPackageAliases($app)
     {
-        return ['Translation' => \RicardoSierra\Translation\Facades\Translation::class];
+        return ['Translation' => \Translation\Facades\Translation::class];
     }
 
     protected function loadMigrationsFrom($paths)

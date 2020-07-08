@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Tests;
+namespace Translation\Tests;
 
 use ReflectionClass;
 use PHPUnit\Framework\TestCase;
-use RicardoSierra\Translation\GoogleTranslate;
+use Translation\GoogleTranslate;
 
 class UtilityTest extends TestCase
 {

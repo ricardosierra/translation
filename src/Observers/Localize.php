@@ -1,8 +1,8 @@
 <?php
 
-namespace RicardoSierra\Translation\Observers;
+namespace Translation\Observers;
 
-use RicardoSierra\Translation\Models\Element;
+use Translation\Models\Element;
 use Config;
 use Illuminate\Support\Str;
 
@@ -18,7 +18,7 @@ class Localize
      * @param  string $event
      * @param  array  $payload Contains:
      *                         -
-     *                         RicardoSierra\Translation\Models\Base
+     *                         Translation\Models\Base
      *                         $model
      * @return void
      */

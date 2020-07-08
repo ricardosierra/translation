@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation;
+namespace Translation;
 
 class Validator extends \Illuminate\Validation\Validator
 {

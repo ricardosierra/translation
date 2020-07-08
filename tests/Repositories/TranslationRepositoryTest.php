@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Repositories;
+namespace Translation\Test\Repositories;
 
-use RicardoSierra\Translation\Models\Translation;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
-use RicardoSierra\Translation\Repositories\TranslationRepository;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Models\Translation;
+use Translation\Repositories\LanguageRepository;
+use Translation\Repositories\TranslationRepository;
+use Translation\Test\TestCase;
 
 class TranslationRepositoryTest extends TestCase
 {

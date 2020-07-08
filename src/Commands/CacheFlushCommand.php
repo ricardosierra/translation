@@ -1,9 +1,9 @@
 <?php
 
-namespace RicardoSierra\Translation\Commands;
+namespace Translation\Commands;
 
 use Illuminate\Console\Command;
-use RicardoSierra\Translation\Cache\CacheRepositoryInterface as CacheRepository;
+use Translation\Cache\CacheRepositoryInterface as CacheRepository;
 
 class CacheFlushCommand extends Command
 {

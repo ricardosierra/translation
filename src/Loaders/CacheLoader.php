@@ -1,8 +1,8 @@
 <?php
 
-namespace RicardoSierra\Translation\Loaders;
+namespace Translation\Loaders;
 
-use RicardoSierra\Translation\Cache\CacheRepositoryInterface as Cache;
+use Translation\Cache\CacheRepositoryInterface as Cache;
 
 class CacheLoader extends Loader
 {
@@ -38,8 +38,8 @@ class CacheLoader extends Loader
      *  Create a new mixed loader instance.
      *
      * @param string                                                        $defaultLocale
-     * @param \RicardoSierra\Translation\Contracts\CacheRepositoryInterface $cache         Cache repository.
-     * @param \RicardoSierra\Translation\Loaders\Loader                     $fallback      Translation loader to use on cache miss.
+     * @param \Translation\Contracts\CacheRepositoryInterface $cache         Cache repository.
+     * @param \Translation\Loaders\Loader                     $fallback      Translation loader to use on cache miss.
      * @param integer                                                       $cacheTimeout  In minutes.
      */
     public function __construct($defaultLocale, Cache $cache, Loader $fallback, $cacheTimeout)

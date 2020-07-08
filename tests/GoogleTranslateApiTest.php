@@ -1,12 +1,12 @@
 <?php
 
-namespace RicardoSierra\Translation\Tests;
+namespace Translation\Tests;
 
 use GuzzleHttp\ClientInterface as Guzzle;
 use Mockery as m;
 use Psr\Http\Message\ResponseInterface;
-use RicardoSierra\Translation\Clients\GoogleTranslateApi;
-use RicardoSierra\Translation\Contracts\Client;
+use Translation\Clients\GoogleTranslateApi;
+use Translation\Contracts\Client;
 
 class GoogleTranslateApiTest extends FunctionalTestCase
 {

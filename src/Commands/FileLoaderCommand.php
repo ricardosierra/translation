@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation\Commands;
+namespace Translation\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
-use RicardoSierra\Translation\Repositories\TranslationRepository;
+use Translation\Repositories\LanguageRepository;
+use Translation\Repositories\TranslationRepository;
 
 class FileLoaderCommand extends Command
 {

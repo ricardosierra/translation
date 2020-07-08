@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Exceptions;
+namespace Translation\Exceptions;
 
 use Exception;
 

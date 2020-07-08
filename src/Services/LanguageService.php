@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Services;
+namespace Translation\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use RicardoSierra\Translation\Models\Language;
+use Translation\Models\Language;
 use Illuminate\Support\Facades\Auth;
 
 class LanguageService// extends Service

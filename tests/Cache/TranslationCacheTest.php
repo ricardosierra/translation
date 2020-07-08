@@ -1,8 +1,8 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Cache;
+namespace Translation\Test\Cache;
 
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Test\TestCase;
 
 class TranslationCacheTest extends TestCase
 {

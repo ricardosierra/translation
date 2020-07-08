@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Cache;
+namespace Translation\Test\Cache;
 
 use Illuminate\Cache\ArrayStore;
-use RicardoSierra\Translation\Cache\SimpleRepository;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Cache\SimpleRepository;
+use Translation\Test\TestCase;
 
 class SimpleRepositoryTest extends TestCase
 {

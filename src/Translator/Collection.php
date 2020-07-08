@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Translator;
+namespace Translation\Translator;
 
 use Illuminate\Support\Collection as IlluminateCollection;
 

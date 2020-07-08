@@ -1,8 +1,8 @@
 <?php
-namespace RicardoSierra\Translation\Test;
+namespace Translation\Test;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
+use Translation\Repositories\LanguageRepository;
 
 abstract class TestCase extends Orchestra
 {
@@ -22,7 +22,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            \RicardoSierra\Translation\TranslationServiceProvider::class,
+            \Translation\TranslationServiceProvider::class,
         ];
     }
 
@@ -32,8 +32,8 @@ abstract class TestCase extends Orchestra
     protected function getPackageAliases($app)
     {
         return [
-            'UriLocalizer'     => \RicardoSierra\Translation\Facades\UriLocalizer::class,
-            'TranslationCache' => \RicardoSierra\Translation\Facades\TranslationCache::class,
+            'UriLocalizer'     => \Translation\Facades\UriLocalizer::class,
+            'TranslationCache' => \Translation\Facades\TranslationCache::class,
         ];
     }
 

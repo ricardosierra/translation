@@ -1,13 +1,13 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Cache;
+namespace Translation\Test\Cache;
 
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\FileStore;
-use RicardoSierra\Translation\Cache\RepositoryFactory;
-use RicardoSierra\Translation\Cache\SimpleRepository;
-use RicardoSierra\Translation\Cache\TaggedRepository;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Cache\RepositoryFactory;
+use Translation\Cache\SimpleRepository;
+use Translation\Cache\TaggedRepository;
+use Translation\Test\TestCase;
 
 class RepositoryFactoryTest extends TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace RicardoSierra\Translation\Repositories;
+namespace Translation\Repositories;
 
-use RicardoSierra\Translation\Models\Language;
-use RicardoSierra\Translation\Models\Locale;
-use RicardoSierra\Translation\Models\Country;
+use Translation\Models\Language;
+use Translation\Models\Locale;
+use Translation\Models\Country;
 
 
 class LangRepository

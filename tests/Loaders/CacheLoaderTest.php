@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation\Test\Loaders;
+namespace Translation\Test\Loaders;
 
-use RicardoSierra\Translation\Cache\SimpleRepository as Cache;
-use RicardoSierra\Translation\Loaders\CacheLoader;
-use RicardoSierra\Translation\Loaders\Loader;
-use RicardoSierra\Translation\Test\TestCase;
+use Translation\Cache\SimpleRepository as Cache;
+use Translation\Loaders\CacheLoader;
+use Translation\Loaders\Loader;
+use Translation\Test\TestCase;
 use \Mockery;
 
 class CacheLoaderTest extends TestCase

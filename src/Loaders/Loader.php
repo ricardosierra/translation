@@ -1,11 +1,11 @@
 <?php
 
-namespace RicardoSierra\Translation\Loaders;
+namespace Translation\Loaders;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Contracts\Translation\Loader as LoaderContract;
-use RicardoSierra\Translation\Repositories\LanguageRepository;
-use RicardoSierra\Translation\Repositories\TranslationRepository;
+use Translation\Repositories\LanguageRepository;
+use Translation\Repositories\TranslationRepository;
 
 abstract class Loader implements LoaderContract
 {
@@ -19,8 +19,8 @@ abstract class Loader implements LoaderContract
     /**
      *  Create a new loader instance.
      *
-     * @param \RicardoSierra\Translation\Repositories\LanguageRepository    $languageRepository
-     * @param \RicardoSierra\Translation\Repositories\TranslationRepository $translationRepository
+     * @param \Translation\Repositories\LanguageRepository    $languageRepository
+     * @param \Translation\Repositories\TranslationRepository $translationRepository
      * @param \Illuminate\Config\Repository                                 $config
      */
     public function __construct($defaultLocale)

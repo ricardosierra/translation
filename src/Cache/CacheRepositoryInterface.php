@@ -1,6 +1,6 @@
 <?php
 
-namespace RicardoSierra\Translation\Cache;
+namespace Translation\Cache;
 
 interface CacheRepositoryInterface
 {
