@@ -255,6 +255,32 @@ class Translation implements TranslationInterface
         }
     }
 
+    public function setLanguage($code)
+    {
+        CacheService::get('language', $code);
+        if ($user = Auth::user()) {
+            $user->language_code = $code;
+            $user->save();
+        }
+
+        return true;
+    }
+
+    public function getActualLanguage()
+    {
+        return $this->getActualLanguageCode();
+    }
+
+    private function getActualLanguageCode()
+    {
+        return config('app.locale');
+    }
+
+    public function getAllLanguages()
+    {
+        return Language::all();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -755,27 +781,6 @@ class Translation implements TranslationInterface
             '<a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.
                 $activeHtml.
             '</a>'.$html.'</li>';
-    }
-
-    public function setLanguage($code)
-    {
-        CacheService::get('language', $code);
-        if ($user = Auth::user()) {
-            $user->language_code = $code;
-            $user->save();
-        }
-
-        return true;
-    }
-
-    private function getActualLanguageCode()
-    {
-        return config('app.locale');
-    }
-
-    public function getAllLanguages()
-    {
-        return Language::all();
     }
 
     /**

@@ -19,7 +19,10 @@ use Translation\Routes\ResourceRegistrar;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Translation\Contracts\Translation as TranslationInterface;
 
@@ -42,6 +45,17 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
+
+        /**
+         * Translation Routes
+         */
+        Route::group([
+            'namespace' => '\Translation\Http\Controllers',
+        ], function (/**$router**/) {
+            require __DIR__.'/../routes/web.php';
+        });
+
         $this->publishes(
             [
             __DIR__ . '/../config/translator.php' => config_path('translator.php'),
