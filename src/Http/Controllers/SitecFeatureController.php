@@ -2,7 +2,8 @@
 
 namespace Translation\Http\Controllers;
 
-use Translation\Services\LanguageService;
+// use Translation\Services\LanguageService;
+use Translation;
 use Illuminate\Http\Request;
 
 class SitecFeatureController extends Controller
@@ -15,7 +16,7 @@ class SitecFeatureController extends Controller
      */
     public function setLanguage(Request $request, $lang)
     {
-        LanguageService::setLanguage($lang);
-        return back()->withCookie('language', $lang);
+        Translation::setLanguage($lang);
+        return back()->withCookie('language', $lang)->withCookie('locale', $lang);
     }
 }

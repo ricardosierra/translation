@@ -1,6 +1,6 @@
 <?php
 
-namespace Translation;
+namespace Translation\Services;
 
 use BadMethodCallException;
 use ErrorException;

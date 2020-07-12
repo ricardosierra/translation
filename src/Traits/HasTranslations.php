@@ -4,7 +4,7 @@ namespace Translation\Traits;
 
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use Translation\GoogleTranslate;
+use Translation\Services\GoogleTranslate;
 use Illuminate\Support\Facades\Config;
 use Translation\Repositories\ModelTranslationRepository;
 use Translation\Events\TranslationHasBeenSet;

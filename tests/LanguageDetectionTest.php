@@ -3,7 +3,7 @@
 namespace Translation\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Translation\GoogleTranslate;
+use Translation\Services\GoogleTranslate;
 
 class LanguageDetectionTest extends TestCase
 {

@@ -3,7 +3,7 @@
 namespace Translation\Clients;
 
 use Translation\Contracts\Client;
-use Translation\GoogleTranslate as TranslateClient;
+use Translation\Services\GoogleTranslate as TranslateClient;
 
 class GoogleTranslate implements Client
 {

@@ -1,14 +1,16 @@
 <?php
 
-namespace Translation\Middleware;
+namespace Translation\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Translation\Facades\Translation;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
 
-class Language
+class LocaleMiddleware
 {
     /**
      * The Guard implementation.
@@ -39,28 +41,30 @@ class Language
     }
 
     /**
-     * Handle an incoming request.
+     * Sets the locale cookie on every request depending
+     * on the locale supplied in the route prefix.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param Request $request
+     * @param Closure $next
      *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if ($this->auth->check()) {
             $language = (int) $this->auth->user()->language;
         }
 
-        if (Cookie::has('language')) {
-            Config::set('app.locale', Cookie::get('language'));
-            app()->setLocale(Cookie::get('language'));
+        if (Cookie::has('locale')) {
+            Config::set('app.locale', Cookie::get('locale'));
+            app()->setLocale(Cookie::get('locale'));
         }
 
-        if ($request->session()->has('language')) {
-            Config::set('app.locale', $request->session()->get('language'));
-            app()->setLocale($request->session()->get('language'));
+        if ($request->session()->has('locale')) {
+            Config::set('app.locale', $request->session()->get('locale'));
+            app()->setLocale($request->session()->get('locale'));
         }
+        $request->cookies->set('locale', Translation::detectLocale($request));
 
         return $next($request);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Translation;
+namespace Translation\Services;
 
 use Illuminate\Http\Request;
 use Translation\Repositories\LanguageRepository;

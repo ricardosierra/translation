@@ -1,11 +1,10 @@
 <?php
 
-namespace Translation;
+namespace Translation\Services;
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
 use JsonSerializable;
-use Translation\Facades\Facilitador as FacilitadorFacade;
 
 class Translator implements ArrayAccess, JsonSerializable
 {

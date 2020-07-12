@@ -13,6 +13,7 @@ use Throwable;
 use Illuminate\Support\Facades\Schema;
 use Auth;
 use Translation;
+use Translation\Services\GoogleTranslate;
 
 /**
  * Generate a locale_group attribute for localized models if
@@ -106,7 +107,7 @@ class Localize
             return true;
         }
 
-        if (!config('cms.auto-translate', false)) {
+        if (!config('siravel.auto-translate', false)) {
             return true;
         }
 
@@ -119,9 +120,9 @@ class Localize
         unset($entry['published_at']);
         unset($entry['id']);
 
-        foreach (config('cms.languages') as $code => $language) {
-            if ($code != config('cms.default-language')) {
-                $tr = new GoogleTranslate(config('cms.default-language'), $code);
+        foreach (config('siravel.languages') as $code => $language) {
+            if ($code != config('siravel.default-language')) {
+                $tr = new GoogleTranslate(config('siravel.default-language'), $code);
                 $translation = [
                     'lang' => $code,
                     'template' => 'show',

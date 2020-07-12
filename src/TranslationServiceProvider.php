@@ -28,6 +28,7 @@ use Translation\Contracts\Translation as TranslationInterface;
 
 use Illuminate\Database\Eloquent\Collection;
 use Translation\Translator\Collection as TranslatorCollection;
+use Translation\Http\Middleware\LocaleMiddleware;
 
 class TranslationServiceProvider extends LaravelTranslationServiceProvider
 {
@@ -43,9 +44,19 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
         Schema::defaultStringLength(191);
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
+        $this->publishes(
+            [
+            __DIR__ . '/../config/translator.php' => config_path('translator.php'),
+            __DIR__ . '/../config/translation.php' => config_path('translation.php'),
+            ]
+        );
+
+        $router->pushMiddlewareToGroup('web', LocaleMiddleware::class);
 
         /**
          * Translation Routes
@@ -56,13 +67,6 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
             require __DIR__.'/../routes/web.php';
         });
 
-        $this->publishes(
-            [
-            __DIR__ . '/../config/translator.php' => config_path('translator.php'),
-            __DIR__ . '/../config/translation.php' => config_path('translation.php'),
-            ]
-        );
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
         $this->registerFileLoader();
         $this->registerCacheFlusher();
@@ -96,14 +100,14 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         // Bind translation to the IoC.
         $this->app->bind(
             'translation', function (Application $app) {
-                return new Translation($app);
+                return new \Translation\Services\Translation($app);
             }
         );
 
         // Bind translation contract to IoC.
         $this->app->bind(TranslationInterface::class, 'translation');
 
-        $this->app->singleton('translation.uri.localizer', UriLocalizer::class);
+        $this->app->singleton('translation.uri.localizer', \Translation\Services\UriLocalizer::class);
         $this->app[\Illuminate\Routing\Router::class]->aliasMiddleware('localize', TranslationMiddleware::class);
         // Fix issue with laravel prepending the locale to localize resource routes:
         $this->app->bind('Illuminate\Routing\ResourceRegistrar', ResourceRegistrar::class);

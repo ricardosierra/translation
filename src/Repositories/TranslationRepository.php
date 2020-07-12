@@ -6,6 +6,7 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\NamespacedItemResolver;
 use Translation\Models\Translation as Translation;
+use Illuminate\Support\Facades\Schema;
 
 class TranslationRepository extends Repository
 {
@@ -234,6 +235,10 @@ class TranslationRepository extends Repository
      */
     public function loadSource($locale, $namespace, $group)
     {
+
+        if (!Schema::hasTable('translations')) {
+            return [];
+        }
         return $this->model
             ->whereLocale($locale)
             ->whereNamespace($namespace)

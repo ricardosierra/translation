@@ -1,6 +1,6 @@
 <?php
 
-namespace Translation;
+namespace Translation\Services;
 
 class Factory extends \Illuminate\Validation\Factory
 {

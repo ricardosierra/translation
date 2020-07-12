@@ -1,6 +1,6 @@
 <?php
 
-namespace Translation;
+namespace Translation\Services;
 
 use ErrorException;
 use Illuminate\Contracts\Foundation\Application;
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Schema;
 use Translation\Models\Language;
 use Illuminate\Support\Facades\Auth;
 use Muleta\Utils\Modificators\ArrayModificator;
+use Illuminate\Support\Facades\Cache;
 
 class Translation implements TranslationInterface
 {
@@ -255,11 +256,14 @@ class Translation implements TranslationInterface
         }
     }
 
-    public function setLanguage($code)
+    public function setLanguage($locale)
     {
-        CacheService::get('language', $code);
+        Cache::set('language', $locale);
+        $this->request->cookies->set('locale', $locale);
+        // $this->request->session()->put('locale', $locale);
+        // CacheService::get('language', $locale);
         if ($user = Auth::user()) {
-            $user->language_code = $code;
+            $user->language_code = $locale;
             $user->save();
         }
 

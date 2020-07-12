@@ -4,7 +4,7 @@ namespace Translation\Tests;
 
 use ReflectionClass;
 use PHPUnit\Framework\TestCase;
-use Translation\GoogleTranslate;
+use Translation\Services\GoogleTranslate;
 
 class UtilityTest extends TestCase
 {

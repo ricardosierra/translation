@@ -35,7 +35,7 @@ composer require stichoza/google-translate-php
 Create GoogleTranslate object
 
 ```php
-use Translation\GoogleTranslate;
+use Translation\Services\GoogleTranslate;
 
 $tr = new GoogleTranslate('en'); // Translates into English
 ```
