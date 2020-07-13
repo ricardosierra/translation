@@ -20,6 +20,7 @@ use Translation\Exceptions\AttributeIsNotTranslatable;
  */
 trait HasTranslations
 {
+    use Translatable;
     // @todo retirado tava dando pau, veio do cms
     // protected $appends = [
     //     'translations',
