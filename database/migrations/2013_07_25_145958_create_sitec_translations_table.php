@@ -79,16 +79,6 @@ class CreateSitecTranslationsTable extends Migration
         // });
 
 
-        
-        Schema::create(
-            'locations', function (Blueprint $table) {
-                $table->increments('id');
-            }
-        );
-
-        // Note: Laravel does not support spatial types.
-        // See: https://dev.mysql.com/doc/refman/5.7/en/spatial-type-overview.html
-        DB::statement("ALTER TABLE `locations` ADD `coordinates` POINT;");
 
         /**
          * Carrega Paises
