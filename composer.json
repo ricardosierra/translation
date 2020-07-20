@@ -1,9 +1,25 @@
 {
     "name": "ricardosierra/translation",
     "description": "An easy automatic database driven translator for Laravel 5.*",
-    "keywords": ["lang", "translation", "translate", "localization", "localize", "laravel"],
+    "type": "library",
+    "keywords": [
+        "sierratecnologia",
+        "lang", "translation", "translate", "localization", "localize", "laravel"
+    ],
     "license": "MIT",
+    "homepage": "https://sierratecnologia.com/packages/translation/",
+    "support": {
+        "email": "help@sierratecnologia.com",
+        "issues": "https://github.com/ricardosierra/translation/issues",
+        "source": "https://github.com/ricardosierra/translation",
+        "docs": "https://github.com/ricardosierra/translation/blob/master/README.md"
+    },
     "authors": [
+        {
+            "name": "SierraTecnologia",
+            "homepage": "https://sierratecnologia.com.br",
+            "email": "help@sierratecnologia.com.br"
+        },
         {
             "name": "Ricardo Sierra",
             "email": "ricardo@ricardosierra.com.br"

@@ -39,6 +39,11 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
      */
     protected $defer = false;
     
+
+    public static $menuItens = [
+        
+    ];
+    
     /**
      * Bootstrap the application events.
      *
