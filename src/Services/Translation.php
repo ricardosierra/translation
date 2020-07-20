@@ -16,6 +16,7 @@ use Translation\Models\Language;
 use Illuminate\Support\Facades\Auth;
 use Muleta\Utils\Modificators\ArrayModificator;
 use Illuminate\Support\Facades\Cache;
+use Translation\Repositories\LangRepository;
 
 class Translation implements TranslationInterface
 {
@@ -821,6 +822,91 @@ class Translation implements TranslationInterface
         $response .= '</ul></li>';
 
         return $response;
+    }
+
+    /**
+     * Build Menu para o componente de menu do  Laravel Support
+     *
+     * @return void
+     */
+    public function menuAdminLte()
+    {
+        $langs = LangRepository::get();
+
+        if (!$langs || empty($langs)) {
+            return '';
+        }
+
+        $current = LangRepository::getCurrent();
+        
+        $response = '';
+        $response .= '<li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+              <i class="'.$current['class'].'"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right p-0">
+              <a href="#" class="dropdown-item active">
+                <i class="'.$current['class'].' mr-2"></i> '.$current['locale'].'
+              </a>';
+
+            foreach ($langs as $lang) {
+                if ($lang['locale'] !== $current['locale']) {
+                    $response .= '<a href="'.url('sitec/language/set/'.$lang['locale']).'" class="dropdown-item">
+                        <i class="'.$lang['class'].' mr-2"></i> '.$lang['locale'].'
+                    </a>';
+                }
+            }
+              
+            $response .= '</div>
+          </li>';
+          return $response;
+    }
+
+    /**
+     * Build Menu para o componente de menu do  Laravel Support
+     *
+     * @return void
+     */
+    public function menuBuilder()
+    {
+
+        $langs = LangRepository::get();
+
+        if (!$langs || empty($langs)) {
+            return [];
+        }
+        $current = LangRepository::getCurrent();
+
+        $array = [
+            [
+                'text'        => $current['locale'],
+                'url'       => url('sitec/language/set/'.$current['locale']),
+                'icon'        => $current['class'],
+                // 'topnav' => true,
+                // 'topnav_user' => true,
+                'topnav_right' => true,
+                // 'access' => \App\Models\Role::$ADMIN
+            ],
+            $current['locale'] => [
+
+            ],
+        ];
+
+        foreach ($langs as $lang) {
+
+            if ($lang['locale'] !== $current['locale']) {
+                $array[$current['locale']][] = [
+                    'text'        => $lang['locale'],
+                    'url'       => url('sitec/language/set/'.$lang['locale']),
+                    'icon'        => $lang['class'],
+                    'topnav_right' => true,
+                    // 'level'       => 3, // 0 (Public), 1, 2 (Admin) , 3 (Root)
+                ];
+            }
+        }
+
+        return $array;
+
     }
 
     /**
