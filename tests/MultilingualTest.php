@@ -1,10 +1,10 @@
 <?php
 
-namespace Facilitador\Tests;
+namespace Translation\Tests;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Facilitador\Facades\Facilitador;
+use Translation\Facades\Translation;
 use Siravel\Models\Negocios\Page;
 use Translation\Traits\HasTranslations;
 use Translation\Translator;
@@ -25,14 +25,14 @@ class MultilingualTest extends TestCase
 
     public function testCheckingModelIsTranslatable()
     {
-        $this->assertTrue(Facilitador::translatable(TranslatableModel::class));
-        $this->assertTrue(Facilitador::translatable(ActuallyTranslatableModel::class));
+        $this->assertTrue(Translation::translatable(TranslatableModel::class));
+        $this->assertTrue(Translation::translatable(ActuallyTranslatableModel::class));
     }
 
     public function testCheckingModelIsNotTranslatable()
     {
-        $this->assertFalse(Facilitador::translatable(NotTranslatableModel::class));
-        $this->assertFalse(Facilitador::translatable(StillNotTranslatableModel::class));
+        $this->assertFalse(Translation::translatable(NotTranslatableModel::class));
+        $this->assertFalse(Translation::translatable(StillNotTranslatableModel::class));
     }
 
     public function testGettingModelTranslatableAttributes()
