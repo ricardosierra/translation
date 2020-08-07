@@ -22,7 +22,7 @@ class CreateSitecTranslationsTable extends Migration
                 'countries', function (Blueprint $table) {
                     $table->string('code')->unique();
                     $table->primary('code');
-                    $table->string('name');
+                    $table->string('name', 255);
     
                     $table->timestamps();
                     $table->softDeletes();
@@ -37,7 +37,7 @@ class CreateSitecTranslationsTable extends Migration
                     $table->primary('code');
 
                     $table->integer('position')->nullable();
-                    $table->string('name', 50);
+                    $table->string('name', 255);
                     $table->boolean('is_default')->default(false);
 
                     $table->timestamps();
