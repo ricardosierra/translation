@@ -11,7 +11,7 @@ class TranslationTest extends FunctionalTestCase
 {
     public $tr;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->tr = new GoogleTranslate();
     }

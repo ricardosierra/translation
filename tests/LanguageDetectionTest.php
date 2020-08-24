@@ -9,7 +9,7 @@ class LanguageDetectionTest extends TestCase
 {
     public $tr;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->tr = new GoogleTranslate();
     }

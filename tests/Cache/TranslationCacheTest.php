@@ -6,7 +6,7 @@ use Translation\Test\TestCase;
 
 class TranslationCacheTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         // During the parent's setup, both a 'es' 'Spanish' and 'en' 'English' languages are inserted into the database.
         parent::setUp();

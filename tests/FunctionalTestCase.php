@@ -10,7 +10,7 @@ class FunctionalTestCase extends TestCase
     /**
      * Set up the test environment.
      */
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

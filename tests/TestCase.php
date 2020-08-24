@@ -6,7 +6,7 @@ use Translation\Repositories\LanguageRepository;
 
 abstract class TestCase extends Orchestra
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         //$this->app['cache']->clear();

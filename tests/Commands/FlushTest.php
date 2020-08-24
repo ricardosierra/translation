@@ -7,7 +7,7 @@ use Translation\Test\TestCase;
 
 class FlushTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->cacheRepository = \App::make('translation.cache.repository');

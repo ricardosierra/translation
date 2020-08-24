@@ -9,7 +9,7 @@ use \Mockery;
 
 class DatabaseLoaderTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->translationRepository = \App::make(TranslationRepository::class);

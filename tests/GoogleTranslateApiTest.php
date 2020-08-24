@@ -20,7 +20,7 @@ class GoogleTranslateApiTest extends FunctionalTestCase
      */
     protected $client;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

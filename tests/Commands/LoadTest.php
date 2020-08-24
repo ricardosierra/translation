@@ -9,7 +9,7 @@ use Translation\Test\TestCase;
 
 class LoadTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->languageRepository    = \App::make(LanguageRepository::class);

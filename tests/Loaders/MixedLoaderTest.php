@@ -10,7 +10,7 @@ use \Mockery;
 
 class MixedLoaderTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->fileLoader  = Mockery::mock(FileLoader::class);

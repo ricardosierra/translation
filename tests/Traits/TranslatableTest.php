@@ -11,7 +11,7 @@ use Translation\Traits\HasTranslations;
 class TranslatableTest extends TestCase
 {
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         \Schema::create(

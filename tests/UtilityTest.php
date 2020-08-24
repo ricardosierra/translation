@@ -12,7 +12,7 @@ class UtilityTest extends TestCase
 
     public $method;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->tr = new GoogleTranslate();
         $reflection = new ReflectionClass(get_class($this->tr));

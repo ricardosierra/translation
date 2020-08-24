@@ -9,7 +9,7 @@ use \Mockery;
 
 class FileLoaderTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->laravelLoader = Mockery::mock(LaravelFileLoader::class);

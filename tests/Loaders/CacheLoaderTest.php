@@ -10,7 +10,7 @@ use \Mockery;
 
 class CacheLoaderTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->cache       = Mockery::mock(Cache::class);
