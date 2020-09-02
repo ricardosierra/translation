@@ -38,10 +38,10 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
-        "illuminate/validation": "^5.8|^6.0|^7.0|^8.0",
-        "illuminate/database": "^5.8|^6.0|^7.0|^8.0",
-        "illuminate/support": "^5.8|^6.0|^7.0|^8.0",
+        "php": ">=7.4",
+        "illuminate/validation": "^7.0",
+        "illuminate/database": "^7.0",
+        "illuminate/support": "^7.0",
         "guzzlehttp/guzzle": "*",
         "spatie/laravel-translatable": ">=4.2",
         "ext-json": "*",
