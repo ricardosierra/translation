@@ -13,7 +13,7 @@ class CreateTranslationsTable extends Migration
      */
     public function up()
     {
-        // if (!Schema::hasTable('translations')) {
+        if (!Schema::hasTable('translations')) {
             Schema::create(
                 'translations', function (Blueprint $table) {
                     $table->increments('id');
@@ -39,32 +39,37 @@ class CreateTranslationsTable extends Migration
                     // $table->string('language')->nullable();
                 }
             );
-        // }
+        }
 
-        // if (!Schema::hasTable('model_translations')) {
-        Schema::create(
-            'model_translations', function (Blueprint $table) {
-                $table->increments('id');
+        try {
+            if (!Schema::hasTable('model_translations')) {
+                Schema::create(
+                    'model_translations', function (Blueprint $table) {
+                        $table->increments('id');
 
-                $table->string('entity_id');
-                $table->string('entity_type');
-                $table->string('entity_data')->nullable();
+                        $table->string('entity_id');
+                        $table->string('entity_type');
+                        $table->string('entity_data')->nullable();
 
-                
-                $table->string('language_code');
-                $table->string('country_code')->nullable();
-            
+                        
+                        $table->string('language_code');
+                        $table->string('country_code')->nullable();
+                    
 
-                $table->foreign('language_code')->references('code')->on('languages');
-                $table->foreign('country_code')->references('code')->on('countries');
+                        $table->foreign('language_code')->references('code')->on('languages');
+                        $table->foreign('country_code')->references('code')->on('countries');
 
-                $table->unique(['entity_id', 'entity_type', 'language_code', 'country_code'], 'translation_unique');
-                // $table->primary(['entity_id', 'entity_type', 'language_code', 'country_code']); @todo
+                        $table->unique(['entity_id', 'entity_type', 'language_code', 'country_code'], 'translation_unique');
+                        // $table->primary(['entity_id', 'entity_type', 'language_code', 'country_code']); @todo
 
-                $table->timestamps();
+                        $table->timestamps();
+                    }
+                );
             }
-        );
-        // }
+            //code...
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -74,7 +79,7 @@ class CreateTranslationsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('model_translations');
         Schema::dropIfExists('translations');
-        Schema::drop('model_translations');
     }
 }

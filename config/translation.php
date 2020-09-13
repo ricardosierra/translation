@@ -202,7 +202,7 @@ return [
         'co' => 'Corsican',
         'cr' => 'Cree',
         'cs' => 'Czech',
-        'cu' => 'Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic',
+        // 'cu' => 'Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic',
         'cv' => 'Chuvash',
         'cy' => 'Welsh',
         'da' => 'Danish',

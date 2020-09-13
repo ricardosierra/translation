@@ -1,8 +1,9 @@
 <?php
 
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSitecTranslationsTable extends Migration
 {
@@ -16,7 +17,7 @@ class CreateSitecTranslationsTable extends Migration
     {
         //     if (!Schema::hasColumn('flights', 'departure_time')) {
         //   $table->timestamp('departure_time');
-        //     } 
+        //     }
         if (!Schema::hasTable('countries')) {
             Schema::create(
                 'countries', function (Blueprint $table) {
@@ -79,43 +80,54 @@ class CreateSitecTranslationsTable extends Migration
         // });
 
 
-
         /**
          * Carrega Paises
          */
-        $langs = \Illuminate\Support\Facades\Config::get('translation.countries');
-        if (!empty($langs)) {
-            $class = \Illuminate\Support\Facades\Config::get('translation.models.country');
-            foreach($langs as $code=>$name) {
-                $language = new $class;
-                $language->name = $name;
-                $language->code = $code;
-                $language->save();
+        try {
+            $langs = \Illuminate\Support\Facades\Config::get('translation.countries');
+            if (!empty($langs)) {
+                $class = \Illuminate\Support\Facades\Config::get('translation.models.country');
+                foreach ($langs as $code=>$name) {
+                    $language = new $class;
+                    $language->name = $name;
+                    $language->code = $code;
+                    $language->save();
+                }
             }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
 
         /**
          * Carrega Linguagens
          */
-        $langs = \Illuminate\Support\Facades\Config::get('translation.locales');
-        if (!empty($langs)) {
-            $class = \Illuminate\Support\Facades\Config::get('translation.models.language');
-            foreach($langs as $code=>$name) {
-                $language = new $class;
-                $language->name = $name;
-                $language->code = $code;
-                $language->save();
+        try {
+            $langs = \Illuminate\Support\Facades\Config::get('translation.locales');
+            if (!empty($langs)) {
+                $class = \Illuminate\Support\Facades\Config::get('translation.models.language');
+                foreach ($langs as $code=>$name) {
+                    $language = new $class;
+                    $language->name = $name;
+                    $language->code = $code;
+                    $language->save();
+                }
             }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
 
         /**
          * Localizações principais Principais
          */
-        $class = \Illuminate\Support\Facades\Config::get('translation.models.locale');
-        $locale = new $class;
-        $locale->country_code = 'BR';
-        $locale->language_code = 'pt';
-        $locale->save();
+        try {
+            $class = \Illuminate\Support\Facades\Config::get('translation.models.locale');
+            $locale = new $class;
+            $locale->country_code = 'BR';
+            $locale->language_code = 'pt';
+            $locale->save();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
