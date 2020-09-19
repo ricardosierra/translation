@@ -28,11 +28,7 @@ class ModelTranslationRepository
             Translation::getLanguageCode($lang),
             Translation::getCountryCode($lang)
         ];
-        if (
-            $trans = ModelTranslation::where('entity_id', $code)
-            ->where('entity_type', $type)
-            ->where('language_code', $language)
-            ->where('country_code', $country)
+        if ($trans = ModelTranslation::where('entity_id', $code)->where('entity_type', $type)->where('language_code', $language)->where('country_code', $country)
             // ->where('entity_data', 'LIKE', '%"lang":"'.$lang.'"%')
             ->first()
         ) {
@@ -40,9 +36,9 @@ class ModelTranslationRepository
         }
 
         return ModelTranslation::where('entity_id', $code)
-        ->where('entity_type', $type)
-        ->where('language_code', $language)
-        ->first();
+            ->where('entity_type', $type)
+            ->where('language_code', $language)
+            ->first();
     }
 
     /**

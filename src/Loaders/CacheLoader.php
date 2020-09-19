@@ -37,10 +37,10 @@ class CacheLoader extends Loader
     /**
      *  Create a new mixed loader instance.
      *
-     * @param string                                                        $defaultLocale
+     * @param string                                          $defaultLocale
      * @param \Translation\Contracts\CacheRepositoryInterface $cache         Cache repository.
      * @param \Translation\Loaders\Loader                     $fallback      Translation loader to use on cache miss.
-     * @param integer                                                       $cacheTimeout  In minutes.
+     * @param integer                                         $cacheTimeout  In minutes.
      */
     public function __construct($defaultLocale, Cache $cache, Loader $fallback, $cacheTimeout)
     {

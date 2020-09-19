@@ -23,7 +23,7 @@ class DatabaseLoader extends Loader
     /**
      *  Create a new mixed loader instance.
      *
-     * @param string                                                        $defaultLocale
+     * @param string                                          $defaultLocale
      * @param \Translation\Repositories\TranslationRepository $translationRepository
      */
     public function __construct($defaultLocale, TranslationRepository $translationRepository)

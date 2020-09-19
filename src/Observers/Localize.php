@@ -71,21 +71,21 @@ class Localize
      */
     public function onCreating($model)
     {
-        if (Schema::hasColumn($model->getTable(), 'locale') && 
-            !empty($model->locale)
-                && empty($model->locale_group)
-                && !is_a($model, Element::class) // Elements don't have groups
-                && ($locales = Config::get('sitec.site.locales'))
-                && count($locales) > 1
+        if (Schema::hasColumn($model->getTable(), 'locale')  
+            && !empty($model->locale)
+            && empty($model->locale_group)
+            && !is_a($model, Element::class) // Elements don't have groups
+            && ($locales = Config::get('sitec.site.locales'))
+            && count($locales) > 1
         ) {
             $model->setAttribute('locale_group', Str::random());
         }
 
-        if (Schema::hasColumn($model->getTable(), 'language_code') && empty($model->language_code)){
+        if (Schema::hasColumn($model->getTable(), 'language_code') && empty($model->language_code)) {
             $model->language_code = Translation::getLanguageCode();
         }
 
-        if (Schema::hasColumn($model->getTable(), 'country_code') && empty($model->country_code)){
+        if (Schema::hasColumn($model->getTable(), 'country_code') && empty($model->country_code)) {
             $model->language_code = Translation::getCountryCode();
         }
 
@@ -100,10 +100,8 @@ class Localize
      * @param object $model
      */
     public function onCreated($model)
-    // public function afterCreate($model)
     {
-        if (!Schema::hasColumn($model->getTable(), 'language_code'))
-        {
+        if (!Schema::hasColumn($model->getTable(), 'language_code')) {
             return true;
         }
 

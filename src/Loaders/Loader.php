@@ -21,7 +21,7 @@ abstract class Loader implements LoaderContract
      *
      * @param \Translation\Repositories\LanguageRepository    $languageRepository
      * @param \Translation\Repositories\TranslationRepository $translationRepository
-     * @param \Illuminate\Config\Repository                                 $config
+     * @param \Illuminate\Config\Repository                   $config
      */
     public function __construct($defaultLocale)
     {

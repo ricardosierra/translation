@@ -54,8 +54,8 @@ class LanguageRepository extends Repository
     /**
      *  Constructor
      *
-     * @param  \Translation\Models\Language $model     Bade model for queries.
-     * @param  \Illuminate\Validation\Validator           $validator Validator factory
+     * @param  \Translation\Models\Language     $model     Bade model for queries.
+     * @param  \Illuminate\Validation\Validator $validator Validator factory
      * @return void
      */
     public function __construct(Language $model, Application $app)

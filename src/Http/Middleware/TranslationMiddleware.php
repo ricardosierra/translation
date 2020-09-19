@@ -15,9 +15,9 @@ class TranslationMiddleware
      *
      * @param Translation\UriLocalizer                    $uriLocalizer
      * @param Translation\Repositories\LanguageRepository $languageRepository
-     * @param Illuminate\Config\Repository                              $config             Laravel config
-     * @param Illuminate\View\Factory                                   $viewFactory
-     * @param Illuminate\Foundation\Application                         $app
+     * @param Illuminate\Config\Repository                $config             Laravel config
+     * @param Illuminate\View\Factory                     $viewFactory
+     * @param Illuminate\Foundation\Application           $app
      */
     public function __construct(UriLocalizer $uriLocalizer, LanguageRepository $languageRepository, Config $config, ViewFactory $viewFactory, Application $app)
     {

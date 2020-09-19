@@ -39,8 +39,8 @@ class TranslationRepository extends Repository
     /**
      *  Constructor
      *
-     * @param  \Translation\Models\Translation $model     Bade model for queries.
-     * @param  \Illuminate\Validation\Validator              $validator Validator factory
+     * @param  \Translation\Models\Translation  $model     Bade model for queries.
+     * @param  \Illuminate\Validation\Validator $validator Validator factory
      * @return void
      */
     public function __construct(Translation $model, Application $app)

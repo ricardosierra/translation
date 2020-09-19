@@ -8,6 +8,7 @@ use Config;
 /**
  * Methods to assit in the creation of the localize sidebar UI
  * and the locale form field
+ *
  * @todo Translation
  */
 class Localize

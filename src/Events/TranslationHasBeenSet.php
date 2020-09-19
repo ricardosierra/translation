@@ -4,13 +4,19 @@ namespace Translation\Events;
 
 class TranslationHasBeenSet
 {
-    /** @var \Translation\Translatable */
+    /**
+     * @var \Translation\Translatable 
+     */
     public $model;
 
-    /** @var string */
+    /**
+     * @var string 
+     */
     public $key;
 
-    /** @var string */
+    /**
+     * @var string 
+     */
     public $locale;
 
     public $oldValue;

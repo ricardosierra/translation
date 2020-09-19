@@ -33,9 +33,11 @@ class ModelTranslation extends Model
         $object = app($this->entity_type);
 
         $attributes = (array) json_decode($this->text);
-        $object->attributes = array_merge($attributes, [
+        $object->attributes = array_merge(
+            $attributes, [
             $object->getKey() => $this->item,
-        ]);
+            ]
+        );
 
         return $object;
     }

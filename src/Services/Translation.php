@@ -772,14 +772,14 @@ class Translation implements TranslationInterface
         $activeHtml = config('app.locale');
 
         $html = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="languages">';
-            foreach ($languages as $language) {
-                $active = '';
-                if ($language->code == $actual) {
-                    $active = ' active';
-                    $activeHtml = $language->code;
-                }
-                $html .= '<a class="dropdown-item'.$active.'" href="'.route('language.set', ['language' => $language->code]).'">'.$language->name.'</a>';
+        foreach ($languages as $language) {
+            $active = '';
+            if ($language->code == $actual) {
+                $active = ' active';
+                $activeHtml = $language->code;
             }
+            $html .= '<a class="dropdown-item'.$active.'" href="'.route('language.set', ['language' => $language->code]).'">'.$language->name.'</a>';
+        }
         $html .= '</div>';
 
         return '<li class="nav-item dropdown">'.
@@ -849,13 +849,13 @@ class Translation implements TranslationInterface
                 <i class="'.$current['class'].' mr-2"></i> '.$current['locale'].'
               </a>';
 
-            foreach ($langs as $lang) {
-                if ($lang['locale'] !== $current['locale']) {
-                    $response .= '<a href="'.url('sitec/language/set/'.$lang['locale']).'" class="dropdown-item">
+        foreach ($langs as $lang) {
+            if ($lang['locale'] !== $current['locale']) {
+                $response .= '<a href="'.url('sitec/language/set/'.$lang['locale']).'" class="dropdown-item">
                         <i class="'.$lang['class'].' mr-2"></i> '.$lang['locale'].'
                     </a>';
-                }
             }
+        }
               
             $response .= '</div>
           </li>';
