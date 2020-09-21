@@ -78,7 +78,7 @@ class Language extends Model
 
 // namespace Population\Models\Components\Wiki;
 
-// use Support\Models\Base; //use Illuminate\Database\Eloquent\Model;
+// use Pedreiro\Models\Base; //use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Database\Eloquent\SoftDeletes;
 // use DomainException;
 // use Session;
