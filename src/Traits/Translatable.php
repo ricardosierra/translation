@@ -2,441 +2,325 @@
 
 namespace Translation\Traits;
 
+use App\Models\SiravelModel;
+use App\Models\System\Translation;
+use App\Repositories\TranslationRepository;
+use App\Services\CmsService;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Facilitador\Facades\Facilitador;
-use Translation\Models\Translation;
-use Translation\Translator;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
+use Log;
+use Translation\GoogleTranslate;
 
-/**
- * HasTranslation do Facilitador
- */
 trait Translatable
 {
     /**
-     * Check if this model can translate.
+     * Get a translation.
      *
-     * @return bool
-     */
-    public function translatable()
-    {
-        if (isset($this->translatable) && $this->translatable == false) {
-            return false;
-        }
-
-        return !empty($this->getTranslatableAttributes());
-    }
-
-    /**
-     * Load translations relation.
+     * @param string $lang
      *
      * @return mixed
      */
-    public function translations()
+    public function translation($lang)
     {
-        return $this->hasMany(Facilitador::model('Translation'), 'foreign_key', $this->getKeyName())
-            ->where('table_name', $this->getTable())
-            ->whereIn('locale', \Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.locales', []));
+        return Translation::where('entity_id', $this->id)
+            ->where('entity_type', get_class($this))
+            ->where('entity_data', 'LIKE', '%"lang":"'.$lang.'"%')
+            ->first();
     }
 
     /**
-     * This scope eager loads the translations for the default and the fallback locale only.
-     * We can use this as a shortcut to improve performance in our application.
+     * Get translation data.
      *
-     * @param Builder     $query
-     * @param string|null $locale
-     * @param string|bool $fallback
+     * @param string $lang
+     *
+     * @return array|null
      */
-    public function scopeWithTranslation(Builder $query, $locale = null, $fallback = true)
+    public function translationData($lang)
     {
-        if (is_null($locale)) {
-            $locale = app()->getLocale();
+        $translation = $this->translation($lang);
+
+        if ($translation) {
+            return json_decode($translation->entity_data);
         }
 
-        if ($fallback === true) {
-            $fallback = \Illuminate\Support\Facades\Config::get('app.fallback_locale', 'en');
-        }
-
-        $query->with(
-            ['translations' => function (Relation $query) use ($locale, $fallback) {
-                $query->where(
-                    function ($q) use ($locale, $fallback) {
-                        $q->where('locale', $locale);
-
-                        if ($fallback !== false) {
-                            $q->orWhere('locale', $fallback);
-                        }
-                    }
-                );
-            }]
-        );
+        return null;
     }
 
     /**
-     * This scope eager loads the translations for the default and the fallback locale only.
-     * We can use this as a shortcut to improve performance in our application.
-     *
-     * @param Builder           $query
-     * @param string|null|array $locales
-     * @param string|bool       $fallback
-     */
-    public function scopeWithTranslations(Builder $query, $locales = null, $fallback = true)
-    {
-        if (is_null($locales)) {
-            $locales = app()->getLocale();
-        }
-
-        if ($fallback === true) {
-            $fallback = \Illuminate\Support\Facades\Config::get('app.fallback_locale', 'en');
-        }
-
-        $query->with(
-            ['translations' => function (Relation $query) use ($locales, $fallback) {
-                if (is_null($locales)) {
-                    return;
-                }
-
-                $query->where(
-                    function ($q) use ($locales, $fallback) {
-                        if (is_array($locales)) {
-                            $q->whereIn('locale', $locales);
-                        } else {
-                            $q->where('locale', $locales);
-                        }
-
-                        if ($fallback !== false) {
-                            $q->orWhere('locale', $fallback);
-                        }
-                    }
-                );
-            }]
-        );
-    }
-
-    /**
-     * Translate the whole model.
-     *
-     * @param null|string $language
-     * @param bool[string $fallback
-     *
-     * @return Translator
-     */
-    public function translate($language = null, $fallback = true)
-    {
-        if (!$this->relationLoaded('translations')) {
-            $this->load('translations');
-        }
-
-        return (new Translator($this))->translate($language, $fallback);
-    }
-
-    /**
-     * Get a single translated attribute.
-     *
-     * @param $attribute
-     * @param null $language
-     * @param bool $fallback
-     *
-     * @return null
-     */
-    public function getTranslatedAttribute($attribute, $language = null, $fallback = true)
-    {
-        // If multilingual is not enabled don't check for translations
-        if (!\Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.enabled')) {
-            return $this->getAttributeValue($attribute);
-        }
-
-        list($value) = $this->getTranslatedAttributeMeta($attribute, $language, $fallback);
-
-        return $value;
-    }
-
-    public function getTranslationsOf($attribute, array $languages = null, $fallback = true)
-    {
-        if (is_null($languages)) {
-            $languages = \Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.locales', [\Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.default')]);
-        }
-
-        $response = [];
-        foreach ($languages as $language) {
-            $response[$language] = $this->getTranslatedAttribute($attribute, $language, $fallback);
-        }
-
-        return $response;
-    }
-
-    public function getTranslatedAttributeMeta($attribute, $locale = null, $fallback = true)
-    {
-        // Attribute is translatable
-        //
-        if (!in_array($attribute, $this->getTranslatableAttributes())) {
-            return [$this->getAttribute($attribute), \Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.default'), false];
-        }
-
-        if (!$this->relationLoaded('translations')) {
-            $this->load('translations');
-        }
-
-        if (is_null($locale)) {
-            $locale = app()->getLocale();
-        }
-
-        if ($fallback === true) {
-            $fallback = \Illuminate\Support\Facades\Config::get('app.fallback_locale', 'en');
-        }
-
-        $default = \Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.default');
-
-        $translations = $this->getRelation('translations')
-            ->where('column_name', $attribute);
-
-        if ($default == $locale) {
-            return [$this->getAttribute($attribute), $default, true];
-        }
-
-        $localeTranslation = $translations->where('locale', $locale)->first();
-
-        if ($localeTranslation) {
-            return [$localeTranslation->value, $locale, true];
-        }
-
-        if ($fallback == $locale) {
-            return [$this->getAttribute($attribute), $locale, false];
-        }
-
-        if ($fallback == $default) {
-            return [$this->getAttribute($attribute), $locale, false];
-        }
-
-        $fallbackTranslation = $translations->where('locale', $fallback)->first();
-
-        if ($fallbackTranslation && $fallback !== false) {
-            return [$fallbackTranslation->value, $locale, true];
-        }
-
-        return [null, $locale, false];
-    }
-
-    /**
-     * Get attributes that can be translated.
+     * Get a translations attribute.
      *
      * @return array
      */
-    public function getTranslatableAttributes()
+    public function getTranslationsAttribute(): array
     {
-        return property_exists($this, 'translatable') ? $this->translatable : [];
-    }
+        $translationData = [];
+        $translations = Translation::where('entity_id', $this->id)->where('entity_type', get_class($this))->get();
 
-    public function setAttributeTranslations($attribute, array $translations, $save = false)
-    {
-        $response = [];
-
-        if (!$this->relationLoaded('translations')) {
-            $this->load('translations');
+        foreach ($translations as $translation) {
+            $translationData[] = $translation->data->attributes;
         }
 
-        $default = \Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.default', 'en');
-        $locales = \Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.locales', [$default]);
-
-        foreach ($locales as $locale) {
-            if (empty($translations[$locale])) {
-                continue;
-            }
-
-            if ($locale == $default) {
-                $this->$attribute = $translations[$locale];
-                continue;
-            }
-
-            $tranlator = $this->translate($locale, false);
-            $tranlator->$attribute = $translations[$locale];
-
-            if ($save) {
-                $tranlator->save();
-            }
-
-            $response[] = $tranlator;
-        }
-
-        return $response;
+        return $translationData;
     }
+    /**
+     * COmentado .. Essa funcao é a equivalente do Spatie @todo
+     *
+     * @return array
+     */
+    // public function getTranslationsAttribute(): array
+    // {
+    //     return collect($this->getTranslatableAttributes())
+    //         ->mapWithKeys(function (string $key) {
+    //             return [$key => $this->getTranslations($key)];
+    //         })
+    //         ->toArray();
+    // }
 
     /**
-     * Get entries filtered by translated value.
+     * After the item is created in the database.
      *
-     * @example Class::whereTranslation('title', '=', 'zuhause', ['de', 'iu'])
-     * @example $query->whereTranslation('title', '=', 'zuhause', ['de', 'iu'])
-     *
-     * @param string       $field    {required} the field your looking to find a value in.
-     * @param string       $operator {required} value you are looking for or a relation modifier such as LIKE, =, etc.
-     * @param string       $value    {optional} value you are looking for. Only use if you supplied an operator.
-     * @param string|array $locales  {optional} locale(s) you are looking for the field.
-     * @param bool         $default  {optional} if true checks for $value is in default database before checking translations.
-     *
-     * @return Builder
+     * @param object $payload
      */
-    public static function scopeWhereTranslation($query, $field, $operator, $value = null, $locales = null, $default = true)
+    public function afterCreate($payload)
     {
-        if ($locales && !is_array($locales)) {
-            $locales = [$locales];
-        }
-        if (!isset($value)) {
-            $value = $operator;
-            $operator = '=';
-        }
+        if (config('cms.auto-translate', false)) {
+            $entry = $payload->toArray();
 
-        $self = new static();
-        $table = $self->getTable();
+            unset($entry['created_at']);
+            unset($entry['updated_at']);
+            unset($entry['translations']);
+            unset($entry['is_published']);
+            unset($entry['published_at']);
+            unset($entry['id']);
 
-        return $query->whereIn(
-            $self->getKeyName(), Translation::where('table_name', $table)
-                ->where('column_name', $field)
-                ->where('value', $operator, $value)
-                ->when(
-                    !is_null($locales), function ($query) use ($locales) {
-                        return $query->whereIn('locale', $locales);
+            foreach (config('cms.languages') as $code => $language) {
+                if ($code != config('cms.default-language')) {
+                    $tr = new GoogleTranslate(config('cms.default-language'), $code);
+                    $translation = [
+                        'lang' => $code,
+                        'template' => 'show',
+                    ];
+
+                    foreach ($entry as $key => $value) {
+                        if (!empty($value)) {
+                            try {
+                                $translation[$key] = json_decode(json_encode($tr->translate(strip_tags($value))));
+                            } catch (Exception $e) {
+                                Log::info('[Translate] Erro> '.$e->getMessage());
+                                unset($translation[$key]);
+                            }
+                        }
                     }
-                )
-            ->pluck('foreign_key')
-        )->when(
-            $default, function ($query) use ($field, $operator, $value) {
-                return $query->orWhere($field, $operator, $value);
+
+                    if (isset($translation['url'])) {
+                        $translation['url'] = app(CmsService::class)->convertToURL($translation['url']);
+                    }
+
+                    $entityId = $payload->id;
+                    $entityType = get_class($payload);
+                    app(TranslationRepository::class)->createOrUpdate($entityId, $entityType, $code, $translation);
+                }
             }
-        );
-    }
-
-    public function hasTranslatorMethod($name)
-    {
-        if (!isset($this->translatorMethods)) {
-            return false;
         }
-
-        return isset($this->translatorMethods[$name]);
     }
-
-    public function getTranslatorMethod($name)
-    {
-        if (!$this->hasTranslatorMethod($name)) {
-            return;
-        }
-
-        return $this->translatorMethods[$name];
-    }
-
-    public function deleteAttributeTranslations(array $attributes, $locales = null)
-    {
-        $this->translations()
-            ->whereIn('column_name', $attributes)
-            ->when(
-                !is_null($locales), function ($query) use ($locales) {
-                    $method = is_array($locales) ? 'whereIn' : 'where';
-
-                    return $query->$method('locale', $locales);
-                }
-            )
-            ->delete();
-    }
-
-    public function deleteAttributeTranslation($attribute, $locales = null)
-    {
-        $this->translations()
-            ->where('column_name', $attribute)
-            ->when(
-                !is_null($locales), function ($query) use ($locales) {
-                    $method = is_array($locales) ? 'whereIn' : 'where';
-
-                    return $query->$method('locale', $locales);
-                }
-            )
-            ->delete();
-    }
-
+    
     /**
-     * Prepare translations and set default locale field value.
-     *
-     * @param object $request
-     *
-     * @return array translations
+     * Peguei da Spatie
      */
-    public function prepareTranslations(&$request)
+
+    public function getAttributeValue($key)
     {
-        $translations = [];
+        if (! $this->isTranslatableAttribute($key)) {
+            return parent::getAttributeValue($key);
+        }
 
-        // Translatable Fields
-        $transFields = $this->getTranslatableAttributes();
+        return $this->getTranslation($key, $this->getLocale());
+    }
 
-        foreach ($transFields as $field) {
-            if (!$request->input($field.'_i18n')) {
-                throw new Exception('Invalid Translatable field'.$field);
-            }
+    public function setAttribute($key, $value)
+    {
+        // Pass arrays and untranslatable attributes to the parent method.
+        if (! $this->isTranslatableAttribute($key) || is_array($value)) {
+            return parent::setAttribute($key, $value);
+        }
 
-            $trans = json_decode($request->input($field.'_i18n'), true);
+        // If the attribute is translatable and not already translated, set a
+        // translation for the current app locale.
+        return $this->setTranslation($key, $this->getLocale(), $value);
+    }
 
-            // Set the default local value
-            $request->merge([$field => $trans[\Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.default', 'en')]]);
+    public function translate(string $key, string $locale = ''): string
+    {
+        return $this->getTranslation($key, $locale);
+    }
 
-            $translations[$field] = $this->setAttributeTranslations(
-                $field,
-                $trans
+    public function getTranslation(string $key, string $locale, bool $useFallbackLocale = true)
+    {
+        $locale = $this->normalizeLocale($key, $locale, $useFallbackLocale);
+
+        $translations = $this->getTranslations($key);
+
+        $translation = $translations[$locale] ?? '';
+
+        if ($this->hasGetMutator($key)) {
+            return $this->mutateAttribute($key, $translation);
+        }
+
+        return $translation;
+    }
+
+    public function getTranslationWithFallback(string $key, string $locale): string
+    {
+        return $this->getTranslation($key, $locale, true);
+    }
+
+    public function getTranslationWithoutFallback(string $key, string $locale)
+    {
+        return $this->getTranslation($key, $locale, false);
+    }
+
+    public function getTranslations(string $key = null) : array
+    {
+        if ($key !== null) {
+            $this->guardAgainstNonTranslatableAttribute($key);
+
+            return array_filter(
+                json_decode($this->getAttributes()[$key] ?? '' ?: '{}', true) ?: [], function ($value) {
+                    return $value !== null && $value !== '';
+                }
             );
-
-            // Remove field hidden input
-            unset($request[$field.'_i18n']);
         }
 
-        // Remove language selector input
-        unset($request['i18n_selector']);
+        return array_reduce(
+            $this->getTranslatableAttributes(), function ($result, $item) {
+                $result[$item] = $this->getTranslations($item);
 
-        return $translations;
+                return $result;
+            }
+        );
     }
 
-    /**
-     * Prepare translations and set default locale field value.
-     *
-     * @param object $requestData
-     *
-     * @return array translations
-     */
-    public function prepareTranslationsFromArray($field, &$requestData)
+    public function setTranslation(string $key, string $locale, $value): self
     {
-        $translations = [];
+        $this->guardAgainstNonTranslatableAttribute($key);
 
-        $field = 'field_display_name_'.$field;
+        $translations = $this->getTranslations($key);
 
-        if (empty($requestData[$field.'_i18n'])) {
-            throw new Exception('Invalid Translatable field '.$field);
+        $oldValue = $translations[$locale] ?? '';
+
+        if ($this->hasSetMutator($key)) {
+            $method = 'set'.Str::studly($key).'Attribute';
+
+            $this->{$method}($value, $locale);
+
+            $value = $this->attributes[$key];
         }
 
-        $trans = json_decode($requestData[$field.'_i18n'], true);
+        $translations[$locale] = $value;
 
-        // Set the default local value
-        $requestData['display_name'] = $trans[\Illuminate\Support\Facades\Config::get('sitec.facilitador.multilingual.default', 'en')];
+        $this->attributes[$key] = $this->asJson($translations);
 
-        $translations['display_name'] = $this->setAttributeTranslations(
-            'display_name',
-            $trans
+        event(new TranslationHasBeenSet($this, $key, $locale, $oldValue, $value));
+
+        return $this;
+    }
+
+    public function setTranslations(string $key, array $translations): self
+    {
+        $this->guardAgainstNonTranslatableAttribute($key);
+
+        foreach ($translations as $locale => $translation) {
+            $this->setTranslation($key, $locale, $translation);
+        }
+
+        return $this;
+    }
+
+    public function forgetTranslation(string $key, string $locale): self
+    {
+        $translations = $this->getTranslations($key);
+
+        unset($translations[$locale]);
+
+        $this->setAttribute($key, $translations);
+
+        return $this;
+    }
+
+    public function forgetAllTranslations(string $locale): self
+    {
+        collect($this->getTranslatableAttributes())->each(
+            function (string $attribute) use ($locale) {
+                $this->forgetTranslation($attribute, $locale);
+            }
         );
 
-        // Remove field hidden input
-        unset($requestData[$field.'_i18n']);
-
-        return $translations;
+        return $this;
     }
 
-    /**
-     * Save translations.
-     *
-     * @param object $translations
-     *
-     * @return void
-     */
-    public function saveTranslations($translations)
+    public function getTranslatedLocales(string $key) : array
     {
-        foreach ($translations as $field => $locales) {
-            foreach ($locales as $locale => $translation) {
-                $translation->save();
-            }
+        return array_keys($this->getTranslations($key));
+    }
+
+    public function isTranslatableAttribute(string $key) : bool
+    {
+        return in_array($key, $this->getTranslatableAttributes());
+    }
+
+    public function hasTranslation(string $key, string $locale = null): bool
+    {
+        $locale = $locale ?: $this->getLocale();
+
+        return isset($this->getTranslations($key)[$locale]);
+    }
+
+    protected function guardAgainstNonTranslatableAttribute(string $key)
+    {
+        if (! $this->isTranslatableAttribute($key)) {
+            throw AttributeIsNotTranslatable::make($key, $this);
         }
+    }
+
+    protected function normalizeLocale(string $key, string $locale, bool $useFallbackLocale) : string
+    {
+        if (in_array($locale, $this->getTranslatedLocales($key))) {
+            return $locale;
+        }
+
+        if (! $useFallbackLocale) {
+            return $locale;
+        }
+
+        if (! is_null($fallbackLocale = Config::get('translatable.fallback_locale'))) {
+            return $fallbackLocale;
+        }
+
+        if (! is_null($fallbackLocale = Config::get('app.fallback_locale'))) {
+            return $fallbackLocale;
+        }
+
+        return $locale;
+    }
+
+    protected function getLocale() : string
+    {
+        return Config::get('app.locale');
+    }
+
+    public function getTranslatableAttributes() : array
+    {
+        return is_array($this->translatable)
+            ? $this->translatable
+            : [];
+    }
+
+    public function getCasts() : array
+    {
+        return array_merge(
+            parent::getCasts(),
+            array_fill_keys($this->getTranslatableAttributes(), 'array')
+        );
     }
 }

@@ -2,20 +2,20 @@
 
 namespace Translation\Traits;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use Translation\Services\GoogleTranslate;
-use Illuminate\Support\Facades\Config;
-use Translation\Repositories\ModelTranslationRepository;
 use Translation\Events\TranslationHasBeenSet;
 use Translation\Exceptions\AttributeIsNotTranslatable;
+use Translation\Repositories\ModelTranslationRepository;
+use Translation\Services\GoogleTranslate;
 
 /**
  * Model has Translations
- * 
+ *
  * Usage: Add in model
  *  use HasTranslations;
- *  
+ *
  *  public $translatable = ['name'];
  */
 trait HasTranslations
@@ -28,19 +28,20 @@ trait HasTranslations
 
     /**
      * From Siravel
+
      */
 
-    /**
-     * Get a translation.
-     *
-     * @param string $lang
-     *
-     * @return mixed
-     */
-    public function translation($lang)
-    {
-        return app(ModelTranslationRepository::class)->getTranslation($this->id, get_class($this), $lang);
-    }
+    // /**
+    //  * Get a translation.
+    //  *
+    //  * @param string $lang
+    //  *
+    //  * @return mixed
+    //  */
+    // public function translation($lang)
+    // {
+    //     return app(ModelTranslationRepository::class)->getTranslation($this->id, get_class($this), $lang);
+    // }
 
     /**
      * Get translation data.
@@ -281,11 +282,11 @@ trait HasTranslations
      * {
      *     $translationData = [];
      *     $translations = ModelTranslation::where('entity_id', $this->id)->where('entity_type', get_class($this))->get();
-     * 
+     *
      *     foreach ($translations as $translation) {
      *         $translationData[] = $translation->data->attributes;
      *     }
-     * 
+     *
      *     return $translationData;
      * }
      */
@@ -312,5 +313,4 @@ trait HasTranslations
 
         return $this;
     }
-
 }
