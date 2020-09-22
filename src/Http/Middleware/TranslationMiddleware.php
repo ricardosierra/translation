@@ -1,5 +1,5 @@
 <?php
-namespace Translation\Middleware;
+namespace Translation\Http\Middleware;
 
 use Closure;
 use Illuminate\Config\Repository as Config;
