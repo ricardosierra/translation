@@ -226,6 +226,9 @@ class Translator implements ArrayAccess, JsonSerializable
         return $this->attributes[$name]['modified'];
     }
 
+    /**
+     * @param array-key $key
+     */
     public function createTranslation($key, $value)
     {
         if (!isset($this->attributes[$key])) {

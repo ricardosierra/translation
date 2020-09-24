@@ -70,7 +70,7 @@ class TranslationRepository extends Repository
      * @param  array $attributes Model attributes
      * @return boolean
      */
-    public function update($id, $text)
+    public function update($id, string $text)
     {
         $translation = $this->find($id);
         if (!$translation || $translation->isLocked()) {
@@ -398,7 +398,7 @@ class TranslationRepository extends Repository
      * @param  Translation $entry
      * @return boolean
      */
-    public function flagAsUnstable($namespace, $group, $item)
+    public function flagAsUnstable(string $namespace, string $group, $item)
     {
         $this->model->whereNamespace($namespace)->whereGroup($group)->whereItem($item)->where('locale', '!=', $this->defaultLocale)->update(['unstable' => '1']);
     }

@@ -142,7 +142,7 @@ class Translation implements TranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function translate($text = '', $replacements = [], $toLocale = '', $runOnce = false)
+    public function translate($text = '', $replacements = [], $toLocale = '', bool $runOnce = false)
     {
         try {
             // Make sure $text is actually a string and not and object / int
@@ -710,7 +710,7 @@ class Translation implements TranslationInterface
      *
      * @return string
      */
-    protected function compressString($string)
+    protected function compressString(string $string)
     {
         return md5($string);
     }
@@ -724,7 +724,7 @@ class Translation implements TranslationInterface
      *
      * @return bool
      */
-    protected function validateText($text)
+    protected function validateText(string $text)
     {
         if (!is_string($text)) {
             $message = 'Invalid Argument. You must supply a string to be translated.';

@@ -97,7 +97,7 @@ class LanguageRepository extends Repository
      *
      * @return Language | null
      */
-    public function findByLocale($locale)
+    public function findByLocale(string $locale)
     {
         return $this->model->where('locale', $locale)->first();
     }

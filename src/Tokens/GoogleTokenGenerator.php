@@ -109,7 +109,7 @@ class GoogleTokenGenerator implements TokenProviderInterface
      *
      * @return number
      */
-    private function unsignedRightShift($a, $b)
+    private function unsignedRightShift(int $a, int $b)
     {
         if ($b >= 32 || $b < -32) {
             $m = (int)($b / 32);
