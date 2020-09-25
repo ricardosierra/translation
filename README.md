@@ -13,7 +13,7 @@ on your application and have it automatically translated, added to the database,
 
 Controller:
 
-    public function index()
+    public function index(Request $request)
     {
         return view('home.index');
     }
@@ -35,7 +35,7 @@ Now if we set locale to something different, such as French (fr), it'll automati
 
 Controller:
 
-    public function index()
+    public function index(Request $request)
     {
         Translation::setLocale('fr');
         
@@ -216,7 +216,7 @@ class BlogController extends Controller
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = $this->translation->translate('My Blog');
         
