@@ -114,21 +114,26 @@ trait HasTranslations
     {
         return $this->getTranslation($key, $locale, false);
     }
-
+    public function getTranslatedAttribute(string $key = null): string
+    {
+        return $this->getTranslation($key, $this->getLocale());
+    }
     public function getTranslations(string $key = null): array
     {
         if ($key !== null) {
             $this->guardAgainstNonTranslatableAttribute($key);
 
             return array_filter(
-                json_decode($this->getAttributes()[$key] ?? '' ?: '{}', true) ?: [], function ($value) {
+                json_decode($this->getAttributes()[$key] ?? '' ?: '{}', true) ?: [],
+                function ($value) {
                     return $value !== null && $value !== '';
                 }
             );
         }
 
         return array_reduce(
-            $this->getTranslatableAttributes(), function ($result, $item) {
+            $this->getTranslatableAttributes(),
+            function ($result, $item) {
                 $result[$item] = $this->getTranslations($item);
 
                 return $result;
