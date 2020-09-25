@@ -1,11 +1,23 @@
 <?php
 namespace Translation;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Translation\FileLoader as LaravelFileLoader;
 use Illuminate\Translation\TranslationServiceProvider as LaravelTranslationServiceProvider;
 use Translation\Cache\RepositoryFactory as CacheRepositoryFactory;
 use Translation\Commands\CacheFlushCommand;
 use Translation\Commands\FileLoaderCommand;
+
+use Translation\Contracts\Translation as TranslationInterface;
+use Translation\Http\Middleware\LocaleMiddleware;
 use Translation\Loaders\CacheLoader;
 use Translation\Loaders\DatabaseLoader;
 use Translation\Loaders\FileLoader;
@@ -13,22 +25,10 @@ use Translation\Loaders\MixedLoader;
 use Translation\Middleware\TranslationMiddleware;
 use Translation\Models\Translation as TranslationModel;
 use Translation\Repositories\LanguageRepository;
+
 use Translation\Repositories\TranslationRepository;
 use Translation\Routes\ResourceRegistrar;
-
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\ServiceProvider;
-use Translation\Contracts\Translation as TranslationInterface;
-
-use Illuminate\Database\Eloquent\Collection;
 use Translation\Translator\Collection as TranslatorCollection;
-use Translation\Http\Middleware\LocaleMiddleware;
 
 class TranslationServiceProvider extends LaravelTranslationServiceProvider
 {
@@ -79,7 +79,14 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
          * Provider Antigo
          */
         Blade::directive(
-            't', function ($args) {
+            't',
+            function ($args) {
+                return "<?php echo App::make('translation')->translate{$args}; ?>";
+            }
+        );
+        Blade::directive(
+            'lang',
+            function ($args) {
                 return "<?php echo App::make('translation')->translate{$args}; ?>";
             }
         );
@@ -104,7 +111,8 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         // Bind translation to the IoC.
         $this->app->bind(
-            'translation', function (Application $app) {
+            'translation',
+            function (Application $app) {
                 return new \Translation\Services\Translation($app);
             }
         );
@@ -152,7 +160,8 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
     {
         $app = $this->app;
         $this->app->singleton(
-            'translation.loader', function ($app) {
+            'translation.loader',
+            function ($app) {
                 $defaultLocale = $app['config']->get('app.locale');
                 $loader        = null;
                 $source        = $app['config']->get('translator.source');
@@ -194,7 +203,8 @@ break;
     public function registerCacheRepository()
     {
         $this->app->singleton(
-            'translation.cache.repository', function ($app) {
+            'translation.cache.repository',
+            function ($app) {
                 $cacheStore = $app['cache']->getStore();
                 return CacheRepositoryFactory::make($cacheStore, $app['config']->get('translator.cache.suffix'));
             }
@@ -237,7 +247,8 @@ break;
     protected function bootTranslatorCollectionMacros()
     {
         Collection::macro(
-            'translate', function () {
+            'translate',
+            function () {
                 $transtors = [];
 
                 foreach ($this->all() as $item) {

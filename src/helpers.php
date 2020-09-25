@@ -84,3 +84,9 @@ if (!function_exists('__')) {
         return trans($key, $par);
     }
 }
+if (!function_exists('lang')) {
+    function lang($key, array $par = [])
+    {
+        return trans($key, $par);
+    }
+}
