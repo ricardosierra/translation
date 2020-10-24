@@ -141,7 +141,7 @@ trait HasTranslations
         );
     }
 
-    public function setTranslation(string $key, string $locale, $value): HasTranslations
+    public function setTranslation(string $key, string $locale, $value)//: HasTranslations
     {
         $this->guardAgainstNonTranslatableAttribute($key);
 
@@ -166,7 +166,7 @@ trait HasTranslations
         return $this;
     }
 
-    public function setTranslations(string $key, array $translations): HasTranslations
+    public function setTranslations(string $key, array $translations)//: HasTranslations
     {
         $this->guardAgainstNonTranslatableAttribute($key);
 
@@ -177,7 +177,7 @@ trait HasTranslations
         return $this;
     }
 
-    public function forgetTranslation(string $key, string $locale): HasTranslations
+    public function forgetTranslation(string $key, string $locale)//: HasTranslations
     {
         $translations = $this->getTranslations($key);
 
@@ -191,7 +191,7 @@ trait HasTranslations
         return $this;
     }
 
-    public function forgetAllTranslations(string $locale): HasTranslations
+    public function forgetAllTranslations(string $locale)//: HasTranslations
     {
         collect($this->getTranslatableAttributes())->each(
             function (string $attribute) use ($locale) {
