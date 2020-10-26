@@ -105,9 +105,10 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/translator.php', 'translator');
         $this->mergeConfigFrom(__DIR__ . '/../config/translation.php', 'translation');
 
-        parent::register();
 
         $this->registerCacheRepository();
+
+        parent::register();
 
         // Bind translation to the IoC.
         $this->app->bind(
