@@ -885,7 +885,7 @@ class Translation implements TranslationInterface
                 // 'topnav' => true,
                 // 'topnav_user' => true,
                 'topnav_right' => true,
-                // 'access' => \App\Models\Role::$ADMIN
+                // 'access' => \Porteiro\Models\Role::$ADMIN
             ],
             $current['locale'] => [
 
