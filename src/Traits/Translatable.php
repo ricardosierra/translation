@@ -3,8 +3,9 @@
 namespace Translation\Traits;
 
 use App\Models\SiravelModel;
-use App\Models\System\Translation;
-use App\Repositories\TranslationRepository;
+use Translation\Models\Translation;
+use Translation\Models\ModelTranslation;
+use Translation\Repositories\TranslationRepository;
 use App\Services\CmsService;
 use Exception;
 use Illuminate\Support\Facades\Config;
@@ -23,7 +24,7 @@ trait Translatable
      */
     public function translation($lang)
     {
-        return Translation::where('entity_id', $this->id)
+        return ModelTranslation::where('entity_id', $this->id)
             ->where('entity_type', get_class($this))
             ->where('entity_data', 'LIKE', '%"lang":"'.$lang.'"%')
             ->first();
@@ -55,7 +56,7 @@ trait Translatable
     public function getTranslationsAttribute(): array
     {
         $translationData = [];
-        $translations = Translation::where('entity_id', $this->id)->where('entity_type', get_class($this))->get();
+        $translations = ModelTranslation::where('entity_id', $this->id)->where('entity_type', get_class($this))->get();
 
         foreach ($translations as $translation) {
             $translationData[] = $translation->data->attributes;
