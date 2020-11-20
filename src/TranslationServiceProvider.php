@@ -22,7 +22,7 @@ use Translation\Loaders\CacheLoader;
 use Translation\Loaders\DatabaseLoader;
 use Translation\Loaders\FileLoader;
 use Translation\Loaders\MixedLoader;
-use Translation\Middleware\TranslationMiddleware;
+use Translation\Http\Middleware\TranslationMiddleware;
 use Translation\Models\Translation as TranslationModel;
 use Translation\Repositories\LanguageRepository;
 

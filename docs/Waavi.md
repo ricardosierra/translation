@@ -342,7 +342,7 @@ Example:
 
 ## Uri localization
 
-You may use Translation\Middleware\TranslationMiddleware to make sure all of your urls are properly localized. The TranslationMiddleware will only redirect GET requests that do not have a locale in them.
+You may use Translation\Http\Middleware\TranslationMiddleware to make sure all of your urls are properly localized. The TranslationMiddleware will only redirect GET requests that do not have a locale in them.
 
 For example, if a user visits the url /home, the following would happen:
 
@@ -363,7 +363,7 @@ You may choose to activate this Middleware globally by adding the middleware to 
 ```php
 	protected $middleware = [
 		/* ... */
-        \Translation\Middleware\TranslationMiddleware::class,
+        \Translation\Http\Middleware\TranslationMiddleware::class,
     ]
 ```
 Or to apply it selectively through the **'localize'** route middleware, which is already registered when installing the package through the ServiceProvider.
