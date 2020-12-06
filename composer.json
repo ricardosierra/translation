@@ -43,6 +43,7 @@
         "illuminate/database": "^7.0 || ^8.0",
         "illuminate/support": "^7.0 || ^8.0",
         "spatie/laravel-translatable": ">=4.2",
+        "php-translation/extractor": "^2.0",
         "ext-json": "*",
         "ext-mbstring": "*",
         "doctrine/dbal": "*"
