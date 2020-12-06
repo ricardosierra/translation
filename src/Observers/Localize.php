@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Schema;
 use Auth;
 use Translation;
 use Translation\Services\GoogleTranslate;
+use Templeiro\Services\CmsService;
 
 /**
  * Generate a locale_group attribute for localized models if

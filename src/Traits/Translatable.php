@@ -6,7 +6,7 @@ use App\Models\SiravelModel;
 use Translation\Models\Translation;
 use Translation\Models\ModelTranslation;
 use Translation\Repositories\TranslationRepository;
-use App\Services\CmsService;
+use Templeiro\Services\CmsService;
 use Exception;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
