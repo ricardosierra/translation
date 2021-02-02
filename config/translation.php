@@ -159,6 +159,13 @@ return [
 
     'default_locale' => 'en',
 
+    'active_languages' => [
+        'en-GB',
+        'fr-FR',
+        'es-CO',
+        'pt-BR',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Locales

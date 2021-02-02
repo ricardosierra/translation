@@ -77,11 +77,11 @@ Require the translation package
 
 Add the service provider to your `config/app.php` config file (Laravel 5.8 and lower)
 
-    'Translation\TranslationServiceProvider',
+    Translation\TranslationServiceProvider::class,
     
 Add the facade to your aliases in your `config/app.php` config file (Laravel 5.8 and lower)
 
-    'Translation' => 'Translation\Facades\Translation',
+    'Translation' => Translation\Facades\Translation::class,
     
 Publish the migrations
 
@@ -371,7 +371,7 @@ the locale middleware:
     ];
 
 
-Now, in your `app/Http/routes.php` file, insert the middleware and the following Translation method in the route
+Now, in your `routes/web.php` file, insert the middleware and the following Translation method in the route
 group prefix like so:
 
 ```php

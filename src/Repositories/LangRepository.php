@@ -37,12 +37,12 @@ class LangRepository
      */
     public static function getLocale()
     {
-        return [
+        return config('translation.active_languages', [
             'en-GB',
             'fr-FR',
             'es-CO',
             'pt-BR',
-        ];
+        ]);
     }
 
     /**
