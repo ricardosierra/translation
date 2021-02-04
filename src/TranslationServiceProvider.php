@@ -16,6 +16,7 @@ use Translation\Cache\RepositoryFactory as CacheRepositoryFactory;
 use Translation\Commands\CacheFlushCommand;
 use Translation\Commands\FileLoaderCommand;
 
+use Muleta\Traits\Providers\ConsoleTools;
 use Translation\Contracts\Translation as TranslationInterface;
 use Translation\Http\Middleware\LocaleMiddleware;
 use Translation\Loaders\CacheLoader;
@@ -32,13 +33,28 @@ use Translation\Translator\Collection as TranslatorCollection;
 
 class TranslationServiceProvider extends LaravelTranslationServiceProvider
 {
+    
+    use ConsoleTools;
+
+    public $packageName = 'translation';
+    const pathVendor = 'ricardosierra/translation';
+
+    public static $aliasProviders = [
+        // 'Translation' => \Translation\Facades\Translation::class,
+    ];
+
+    public static $providers = [
+
+        // \Translation\TranslationServiceProvider::class,
+
+        
+    ];
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = false;
-    
 
     public static $menuItens = [
         
@@ -137,6 +153,19 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
         $this->app['events']->listen(
             'eloquent.saving:*',
             '\Translation\Observers\Localize'
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Register the Commands
+        |--------------------------------------------------------------------------
+        */
+        // Register commands
+        $this->registerCommandFolders(
+            [
+            base_path('vendor/ricardosierra/translation/src/Console/Commands') => '\Translation\Console\Commands',
+            ]
         );
     }
 
