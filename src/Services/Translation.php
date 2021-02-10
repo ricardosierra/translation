@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Muleta\Utils\Modificators\ArrayModificator;
 use Illuminate\Support\Facades\Cache;
 use Translation\Repositories\LangRepository;
+use Translation\Repositories\LangResourcesRepository;
 
 class Translation implements TranslationInterface
 {
@@ -259,9 +260,14 @@ class Translation implements TranslationInterface
 
     public function setLanguage($locale)
     {
+        $repository = app(LangResourcesRepository::class);
+        if (!$repository->hasLangExist($locale)) {
+            dd('oi');
+        }
+
         Cache::set('language', $locale);
         $this->request->cookies->set('locale', $locale);
-        // $this->request->session()->put('locale', $locale);
+        $this->request->session()->put('locale', $locale);
         // CacheService::get('language', $locale);
         if ($user = Auth::user()) {
             $user->language_code = $locale;
@@ -811,11 +817,11 @@ class Translation implements TranslationInterface
         $response = '<li>';
         $response .= '<a href=""><span class="'.$current['class'].'"></span></a>';
         $response .= '<ul class="sub-menu clearfix">';
-        $response .= '<li class=\'no-translation menu-item current-lang \'><a href="'.url('sitec/language/set/'.$current['locale']).'"><span class="'.$current['class'].'"></span></a></li>';
+        $response .= '<li class=\'no-translation menu-item current-lang \'><a href="'.url('language/set/'.$current['locale']).'"><span class="'.$current['class'].'"></span></a></li>';
 
         foreach ($langs as $lang) {
             if ($lang['locale'] !== $current['locale']) {
-                $response .= '<li class=\'no-translation menu-item\'><a href="'.url('sitec/language/set/'.$lang['locale']).'"><span class="'.$lang['class'].'"></span></a></li>';
+                $response .= '<li class=\'no-translation menu-item\'><a href="'.url('language/set/'.$lang['locale']).'"><span class="'.$lang['class'].'"></span></a></li>';
             }
         }
 
@@ -851,7 +857,7 @@ class Translation implements TranslationInterface
 
         foreach ($langs as $lang) {
             if ($lang['locale'] !== $current['locale']) {
-                $response .= '<a href="'.url('sitec/language/set/'.$lang['locale']).'" class="dropdown-item">
+                $response .= '<a href="'.url('language/set/'.$lang['locale']).'" class="dropdown-item">
                         <i class="'.$lang['class'].' mr-2"></i> '.$lang['locale'].'
                     </a>';
             }

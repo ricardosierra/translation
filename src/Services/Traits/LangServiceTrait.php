@@ -29,11 +29,11 @@ trait LangServiceTrait
         $response = '<li>';
         $response .= '<a href=""><span class="'.$current['class'].'"></span></a>';
         $response .= '<ul class="sub-menu clearfix">';
-        $response .= '<li class=\'no-translation menu-item current-lang \'><a href="'.url('sitec/language/set/'.$current['locale']).'"><span class="'.$current['class'].'"></span></a></li>';
+        $response .= '<li class=\'no-translation menu-item current-lang \'><a href="'.url('language/set/'.$current['locale']).'"><span class="'.$current['class'].'"></span></a></li>';
 
         foreach ($langs as $lang) {
             if ($lang['locale'] !== $current['locale']) {
-                $response .= '<li class=\'no-translation menu-item\'><a href="'.url('sitec/language/set/'.$lang['locale']).'"><span class="'.$lang['class'].'"></span></a></li>';
+                $response .= '<li class=\'no-translation menu-item\'><a href="'.url('language/set/'.$lang['locale']).'"><span class="'.$lang['class'].'"></span></a></li>';
             }
         }
 

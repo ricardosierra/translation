@@ -7,22 +7,24 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
 use Translation\Repositories\LangResourcesRepository;
+use Translation\Tasks\Builders\MagicTranslateProjectPipelineBuilder;
 
-class MergeLangCommand extends Command
+class InstallCommand extends Command
 {
+    protected $language = 'pt-BR';
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'translation:merge';
+    protected $name = 'translation:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '';
+    protected $description = 'Run to install';
 
     /**
      * Call fire function
@@ -41,15 +43,23 @@ class MergeLangCommand extends Command
      */
     public function fire()
     {
-        $repository = app(LangResourcesRepository::class);
+        // $repository = app(LangResourcesRepository::class);
+
+
+        $pipeline = MagicTranslateProjectPipelineBuilder::getPipelineWithOutput($this);
+
+        // foreach ($paths as $path) {
+            // Process Pipeline
+            $pipeline(
+                $this->language
+            );
+        // }
 
 
 
+        // $languagesOptions = $repository->mergeLangs('pt-BR', 'pt');
 
-
-        $languagesOptions = $repository->mergeLangs('pt-BR', 'pt');
-
-        dd($languagesOptions);
+        // dd($languagesOptions);
         // // Create $outputPath or empty it if already exists
         // if (File::isDirectory($outputPath)) {
         //     File::cleanDirectory($outputPath);

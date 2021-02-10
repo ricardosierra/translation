@@ -45,6 +45,7 @@
         "spatie/laravel-translatable": ">=4.2",
         "php-translation/extractor": "^2.0",
         "sierratecnologia/muleta": "dev-master",
+        "sierratecnologia/operador": "dev-master",
         "ext-json": "*",
         "ext-mbstring": "*",
         "doctrine/dbal": "*"

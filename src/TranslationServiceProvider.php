@@ -79,14 +79,7 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         $router->pushMiddlewareToGroup('web', LocaleMiddleware::class);
 
-        /**
-         * Translation Routes
-         */
-        Route::group([
-            'namespace' => '\Translation\Http\Controllers',
-        ], function (/**$router**/) {
-            require __DIR__.'/../routes/web.php';
-        });
+        $this->routes();
 
 
         $this->registerFileLoader();
@@ -110,6 +103,24 @@ class TranslationServiceProvider extends LaravelTranslationServiceProvider
 
         $this->bootTranslatorCollectionMacros();
     }
+
+    /**
+     * Register the tool's routes.
+     *
+     * @return void
+     */
+    protected function routes()
+    {
+        if ($this->app->routesAreCached()) {
+            return;
+        }
+
+        /**
+         * Transmissor; Routes
+         */
+        $this->loadRoutesForRiCa(__DIR__.'/../routes');
+    }
+
 
     /**
      * Register the service provider.

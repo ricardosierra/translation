@@ -1,4 +1,7 @@
 <?php
+/**
+ * Manipular os Arquivos de Trandução
+ */
 
 namespace Translation\Repositories;
 
@@ -119,7 +122,23 @@ class LangResourcesRepository extends Repository
 
 
 
-    public function getMissingForLang($lang)
+    public function hasLangExist(string $lang): bool
+    {
+        if (!isset($this->languages[$lang])) {
+            $allLangs = [];
+            foreach($this->languages as $value) {
+                $allLangs = $value['code'];
+            }
+            dd($allLangs, $lang);
+            return false;
+        }
+        return true;
+    }
+
+
+
+
+    public function getMissingForLang(string $lang)
     {
         if (!isset($this->languages[$lang])) {
             $allLangs = [];
@@ -159,9 +178,11 @@ class LangResourcesRepository extends Repository
         $missing = [];
         foreach($langDataFrom['options'] as $file=>$fileIndices) {
             $update = false;
-            $fileName = $langDataTo['langDir'] . DIRECTORY_SEPARATOR . $file ;
             if (!isset($langDataTo['options'][$file])) {
-                File::move($fileName. '.php', $langDataTo['langDir'] . DIRECTORY_SEPARATOR . $file . '.php');
+                File::move(
+                    $langDataFrom['langDir'] . DIRECTORY_SEPARATOR . $file. '.php',
+                    $langDataTo['langDir'] . DIRECTORY_SEPARATOR . $file . '.php'
+                );
                 $langDataTo['options'][$file] = $langDataFrom['options'][$file];
             } else {
                 foreach($fileIndices as $fileIndice=>$indiceValue) {
