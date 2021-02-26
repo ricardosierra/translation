@@ -262,7 +262,7 @@ class Translation implements TranslationInterface
     {
         $repository = app(LangResourcesRepository::class);
         if (!$repository->hasLangExist($locale)) {
-            dd('oi');
+            dd('Lang Dont Exist Translation');
         }
 
         Cache::set('language', $locale);
@@ -794,6 +794,15 @@ class Translation implements TranslationInterface
             '</a>'.$html.'</li>';
     }
 
+    public function getCurrent()
+    {
+        return LangRepository::getCurrent();
+    }
+    public function getOptionsLocales()
+    {
+        return LangRepository::get();
+    }
+
     /**
      * From FAcilitador LangServiceTrait
      */
@@ -806,13 +815,13 @@ class Translation implements TranslationInterface
      */
     public function menu_lang()
     {
-        $langs = LangRepository::get();
+        $langs = $this->getOptionsLocales();
 
         if (!$langs || empty($langs)) {
             return '';
         }
 
-        $current = LangRepository::getCurrent();
+        $current = $this->getCurrent();
 
         $response = '<li>';
         $response .= '<a href=""><span class="'.$current['class'].'"></span></a>';
@@ -837,13 +846,13 @@ class Translation implements TranslationInterface
      */
     public function menuAdminLte()
     {
-        $langs = LangRepository::get();
+        $langs = $this->getOptionsLocales();
 
         if (!$langs || empty($langs)) {
             return '';
         }
 
-        $current = LangRepository::getCurrent();
+        $current = $this->getCurrent();
         
         $response = '';
         $response .= '<li class="nav-item dropdown">
@@ -855,6 +864,8 @@ class Translation implements TranslationInterface
                 <i class="'.$current['class'].' mr-2"></i> '.$current['locale'].'
               </a>';
 
+              // @todo
+              // '.route('translation.language.change', [$lang['locale']]).'
         foreach ($langs as $lang) {
             if ($lang['locale'] !== $current['locale']) {
                 $response .= '<a href="'.url('language/set/'.$lang['locale']).'" class="dropdown-item">

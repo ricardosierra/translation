@@ -12,11 +12,12 @@ class SitecFeatureController extends Controller
      * Set the default lanugage for the session.
      *
      * @param Request $request
-     * @param string  $lang
+     * @param string  $language
      */
-    public function setLanguage(Request $request, $lang)
+    public function setLanguage(Request $request, $language)
     {
-        Translation::setLanguage($lang);
-        return back()->withCookie('language', $lang)->withCookie('locale', $lang);
+        dd($language);
+        Translation::setLanguage($language);
+        return back()->withCookie('language', $language)->withCookie('locale', $language);
     }
 }

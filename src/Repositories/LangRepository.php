@@ -5,19 +5,10 @@ namespace Translation\Repositories;
 use Translation\Models\Language;
 use Translation\Models\Locale;
 use Translation\Models\Country;
-
+use Translation;
 
 class LangRepository
 {
-    /**
-     * @var string
-     */
-    const DEFAULT_LOCALE = 'pt-BR';
-
-    /**
-     * @var string
-     */
-    const DEFAULT_COUNTRY = 'Brasil';
 
     /**
      * @var string
@@ -29,7 +20,7 @@ class LangRepository
      */
     public static function getDefaultLocale()
     {
-        return self::DEFAULT_LOCALE;
+        return Translation::getAppLocale();
     }
 
     /**
@@ -51,14 +42,17 @@ class LangRepository
      * @param  string $inLocale (optional)
      * @return array
      */
-    public static function get($locale = null, $column = null, $inLocale = self::DEFAULT_LOCALE)
+    public static function get($locale = null, $column = null, $inLocale = false)
     {
+        if (!$inLocale) {
+            $inLocale = self::getDefaultLocale();
+        }
         $allLocale = self::getLocale();
 
         if ($locale) {
             $locale = (array) $locale;
             foreach ($locale as $value) {
-                $bestLocale[] = \Locale::lookup($allLocale, $value, false, self::getDefaultLocale());
+                $bestLocale[] = \Locale::lookup($allLocale, $value, false, $inLocale);
             }
             $allLocale = $bestLocale;
         }
@@ -115,7 +109,7 @@ class LangRepository
             return current(self::get($browserLocale));
         }
 
-        return current(self::all(self::getDefaultLocale()));
+        return current(self::get(self::getDefaultLocale()));
     }
 
     /**

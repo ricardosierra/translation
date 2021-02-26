@@ -12,7 +12,7 @@ use Translation\Translator\Collection;
 
 class MultilingualTest extends TestCase
 {
-    protected function setUp(): void: void
+    protected function setUp(): void
     {
         parent::setUp();
 
